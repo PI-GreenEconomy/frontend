@@ -1,6 +1,9 @@
+import { HeaderTop } from "./HeaderTop"
 
 export const Header = () => {
   return (
-    <div>Header</div>
+    <div>
+      <HeaderTop/>
+    </div>
   )
 }
