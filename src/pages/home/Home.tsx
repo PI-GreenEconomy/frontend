@@ -1,6 +1,6 @@
 function Home() {
   return (
-    <div>Home</div>
+    <div className="w-full flex justify-center items-center h-64 bg-red-700 text-bold text-7xl">A implementar!</div>
   )
 }
 

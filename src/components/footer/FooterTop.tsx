@@ -3,15 +3,14 @@ import { Facebook, Figma, Github, Instagram, Mail, MapPin } from "lucide-react";
 export const FooterTop = () => {
   return (
       <>
-          <div className="w-screen flex justify-around">
+          <div className="w-screen flex justify-around my-6">
               <div className="flex justify-evenly">
-                
                   {/* Logo e descrição */}
-                  <div className="w-3/12 mb-6">
+                  <div className="w-3/12">
                       <img
                           src="src/assets/Logo.svg"
                           alt="Green Economy Logo"
-                          className="h-12 mb-4"
+                          className="h-12 mb-3"
                       />
                       <p className="text-sm">
                           Lorem Ipsum is simply dummy text of the printing and
@@ -23,22 +22,28 @@ export const FooterTop = () => {
                   </div>
 
                   {/* Categorias */}
-                  <div className="w-1/12 mb-6">
-                      <p className="font-bold mb-2 text-base">Categorias</p>
-                      <ul className="text-sm">
-                          <li className="py-1">Vestuário</li>
-                          <li className="py-1">Alimento</li>
-                          <li className="py-1">Higiene</li>
-                          <li className="py-1">Pets</li>
-                          <li className="py-1">Casa</li>
-                          <li className="py-1">Papelaria</li>
-                          <li className="py-1">Utensílios</li>
-                          <li className="py-1">Artesanal</li>
-                          <li className="py-1">Ofertas</li>
+                  <div className="w-[10%]">
+                      <p className="font-bold mb-3 text-base flex justify-center">
+                          Categorias
+                      </p>
+                      <ul className="flex gap-6 text-sm">
+                          <div className="">
+                              <li className="py-1">Vestuário</li>
+                              <li className="py-1">Alimento</li>
+                              <li className="py-1">Higiene</li>
+                              <li className="py-1">Pets</li>
+                              <li className="py-1">Casa</li>
+                          </div>
+                          <div>
+                              <li className="py-1">Papelaria</li>
+                              <li className="py-1">Utensílios</li>
+                              <li className="py-1">Artesanal</li>
+                              <li className="py-1">Ofertas</li>
+                          </div>
                       </ul>
                   </div>
 
-                  {/* Desenvolvedores */}
+                  {/* Desenvolvedores 
                   <div className="mb-6">
                       <p className="font-bold mb-2 text-base">
                           Desenvolvedores
@@ -54,11 +59,11 @@ export const FooterTop = () => {
                           <li className="py-1">Maria Eduarda</li>
                           <li className="py-1">Stephanie Steuernagel</li>
                       </ul>
-                  </div>
+                  </div>*/}
 
                   {/* Institucional */}
-                  <div className="mb-6">
-                      <p className="font-bold mb-2 text-base">Institucional</p>
+                  <div className="">
+                      <p className="font-bold mb-3 text-base">Institucional</p>
                       <ul className="text-sm">
                           <li className="py-1">Início</li>
                           <li className="py-1">Produtos</li>
@@ -70,8 +75,8 @@ export const FooterTop = () => {
                   </div>
 
                   {/* Contato */}
-                  <div className="mb-6">
-                      <p className="font-bold mb-2 text-base">Contato</p>
+                  <div className="">
+                      <p className="font-bold mb-3 text-base">Contato</p>
                       <div className="w-[250px] mb-8">
                           <div className="flex gap-3 mb-2 items-center justify-center w-11/12">
                               <MapPin />
@@ -83,7 +88,7 @@ export const FooterTop = () => {
                           </div>
 
                           <div className="flex gap-3 items-center justify-center">
-                              <Mail />
+                              <Mail className="pl-1"/>
                               <p className="text-sm">
                                   greenconomyofc@gmail.com
                               </p>
