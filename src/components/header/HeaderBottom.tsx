@@ -1,11 +1,20 @@
 import { CircleUser, Search, ShoppingCart } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import Logo from "../../assets/Logo.svg";
 import { links } from "../../data/linksMenu";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export const HeaderBottom = () => {
+  const navigate = useNavigate();
   const { pathname } = useLocation();
+  const { usuario, handleLogout } = useContext(AuthContext);
+  function logout() {
+    handleLogout();
+    alert("O Usuário foi desconectado com sucesso!");
+    navigate("/login");
+  }
 
   return (
     <div className="border-b border-b-border py-5">
@@ -47,19 +56,34 @@ export const HeaderBottom = () => {
           <div className="flex items-center justify-center gap-2 ">
             <CircleUser className="size-7" />
             <span className="inline-block max-w-24 leading-5">
-              <Link
-                to={"/login"}
-                className="hover:text-primary hover:underline focus-visible:text-primary focus-visible:underline"
-              >
-                Entre
-              </Link>{" "}
-              ou{" "}
-              <Link
-                to={"/cadastro"}
-                className="hover:text-primary hover:underline focus-visible:text-primary focus-visible:underline"
-              >
-                Cadastre-se
-              </Link>
+              {usuario?.token ? (
+                <>
+                  <p>Olá {usuario.nome}</p>
+                  <Link
+                    to={"/login"}
+                    onClick={logout}
+                    className="hover:text-primary hover:underline focus-visible:text-primary focus-visible:underline"
+                  >
+                    Sair
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to={"/login"}
+                    className="hover:text-primary hover:underline focus-visible:text-primary focus-visible:underline"
+                  >
+                    Entre
+                  </Link>{" "}
+                  ou{" "}
+                  <Link
+                    to={"/cadastro"}
+                    className="hover:text-primary hover:underline focus-visible:text-primary focus-visible:underline"
+                  >
+                    Cadastre-se
+                  </Link>
+                </>
+              )}
             </span>
           </div>
 

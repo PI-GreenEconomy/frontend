@@ -7,27 +7,29 @@ import { Footer } from "./components/footer/Footer";
 import { NotFound } from "./components/not-found/NotFound";
 import Login from "./pages/login/Login";
 import Cadastro from "./pages/cadastro/Cadastro";
+import { AuthProvider } from "./contexts/AuthContext";
 
 export default function App() {
   return (
     <div className="bg-background text-foreground">
-      <BrowserRouter>
-        <div className="font-roboto flex min-h-screen flex-col">
-          <Header />
-          <div>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/quem-somos" element={<About />} />
-              <Route path="/contato" element={<Contact />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/cadastro" element={<Cadastro />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+      <AuthProvider>
+        <BrowserRouter>
+          <div className="font-roboto flex min-h-screen flex-col">
+            <Header />
+            <div>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/quem-somos" element={<About />} />
+                <Route path="/contato" element={<Contact />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/cadastro" element={<Cadastro />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </div>
+            <Footer />
           </div>
-
-          <Footer />
-        </div>
-      </BrowserRouter>
+        </BrowserRouter>
+      </AuthProvider>
     </div>
   );
 }
