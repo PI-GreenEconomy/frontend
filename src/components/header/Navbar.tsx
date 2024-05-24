@@ -10,8 +10,10 @@ import {
   ShirtIcon,
   UtensilsIcon,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { categorias } from "../../data/categorias";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const icons: any = {
   vestuario: <ShirtIcon className="size-7" />,
@@ -26,6 +28,16 @@ const icons: any = {
 };
 
 export const Navbar = () => {
+  const navigate = useNavigate();
+
+  const { handleLogout } = useContext(AuthContext);
+
+  function logout() {
+    handleLogout();
+    alert("O usuário foi desconectado com sucesso!");
+    navigate("/login");
+  }
+
   return (
     <div className="border-b border-b-border py-2">
       <nav>

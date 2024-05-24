@@ -1,5 +1,4 @@
 import { createContext, ReactNode, useState } from "react";
-
 import UsuarioLogin from "../models/UsuarioLogin";
 import { login } from "../services/Service";
 
@@ -31,7 +30,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   async function handleLogin(userLogin: UsuarioLogin) {
     setIsLoading(true);
     try {
-      await login(`usuarios/logar`, userLogin, setUsuario);
+      await login(`/usuarios/logar`, userLogin, setUsuario);
       alert("Login efetuado com sucesso!");
       setIsLoading(false);
     } catch (error) {
