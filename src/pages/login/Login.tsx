@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function Login() {
   return (
     <>
-      <div className="-mb-20 mt-20 grid h-screen grid-cols-1 place-items-center">
+      <div className="my-20 grid grid-cols-1 place-items-center">
         <form
           className="flex w-1/3 flex-col justify-center gap-5 rounded-lg border border-border p-8 shadow-md"
           onSubmit={Login}
