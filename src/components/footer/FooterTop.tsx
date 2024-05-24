@@ -1,49 +1,58 @@
 import { Facebook, Figma, Github, Instagram, Mail, MapPin } from "lucide-react";
+import { categorias } from "../../data/categorias";
+import { Link } from "react-router-dom";
+import { links } from "../../data/linksMenu";
 
 export const FooterTop = () => {
   return (
-      <>
-          <div className="w-screen flex justify-around my-6">
-              <div className="flex justify-evenly">
-                  {/* Logo e descrição */}
-                  <div className="w-3/12">
-                      <img
-                          src="src/assets/Logo.svg"
-                          alt="Green Economy Logo"
-                          className="h-12 mb-3"
-                      />
-                      <p className="text-sm">
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. Lorem Ipsum has been the
-                          industry's standard dummy text ever since the 1500s,
-                          when an unknown printer took a galley of type and
-                          scrambled it to make a type specimen book
-                      </p>
-                  </div>
+    <div className="flex w-full justify-around gap-2 py-12">
+      <div className="container flex flex-wrap justify-start gap-x-6 gap-y-12 sm:justify-between sm:gap-y-8">
+        {/* Logo e descrição */}
+        <div className="flex flex-col items-start gap-3">
+          <img
+            src="src/assets/Logo.svg"
+            alt="Green Economy Logo"
+            className="mb-3 h-16"
+          />
+          <p className="max-w-[90%] text-sm leading-6 text-gray-600 sm:max-w-72">
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book
+          </p>
+        </div>
 
-                  {/* Categorias */}
-                  <div className="w-[10%]">
-                      <p className="font-bold mb-3 text-base flex justify-center">
-                          Categorias
-                      </p>
-                      <ul className="flex gap-6 text-sm">
-                          <div className="">
-                              <li className="py-1">Vestuário</li>
-                              <li className="py-1">Alimento</li>
-                              <li className="py-1">Higiene</li>
-                              <li className="py-1">Pets</li>
-                              <li className="py-1">Casa</li>
-                          </div>
-                          <div>
-                              <li className="py-1">Papelaria</li>
-                              <li className="py-1">Utensílios</li>
-                              <li className="py-1">Artesanal</li>
-                              <li className="py-1">Ofertas</li>
-                          </div>
-                      </ul>
-                  </div>
+        {/* Categorias */}
+        <div className="flex flex-col items-start gap-3">
+          <p className="text-lg font-bold">Categorias</p>
+          <ul className="flex flex-col gap-2">
+            {categorias.map((categoria) => (
+              <li key={categoria.id}>
+                <Link
+                  to={`categorias/${categoria.slug}`}
+                  className="py-2 text-sm hover:text-primary focus-visible:text-primary"
+                >
+                  {categoria.tipo}
+                </Link>
+              </li>
+            ))}
+            {/* <div className="">
+              <li className="py-1">Vestuário</li>
+              <li className="py-1">Alimento</li>
+              <li className="py-1">Higiene</li>
+              <li className="py-1">Pets</li>
+              <li className="py-1">Casa</li>
+            </div>
+            <div>
+              <li className="py-1">Papelaria</li>
+              <li className="py-1">Utensílios</li>
+              <li className="py-1">Artesanal</li>
+              <li className="py-1">Ofertas</li>
+            </div> */}
+          </ul>
+        </div>
 
-                  {/* Desenvolvedores 
+        {/* Desenvolvedores 
                   <div className="mb-6">
                       <p className="font-bold mb-2 text-base">
                           Desenvolvedores
@@ -61,51 +70,85 @@ export const FooterTop = () => {
                       </ul>
                   </div>*/}
 
-                  {/* Institucional */}
-                  <div className="">
-                      <p className="font-bold mb-3 text-base">Institucional</p>
-                      <ul className="text-sm">
-                          <li className="py-1">Início</li>
-                          <li className="py-1">Produtos</li>
-                          <li className="py-1">Sobre</li>
-                          <li className="py-1">Nossa Missão</li>
-                          <li className="py-1">Entrar</li>
-                          <li className="py-1">Cadastrar</li>
-                      </ul>
-                  </div>
+        {/* Institucional */}
+        <div className="flex flex-col items-start gap-3">
+          <p className="text-lg font-bold">Institucional</p>
+          <ul className="flex flex-col gap-2">
+            {links.map((link) => (
+              <li key={link.id}>
+                <Link
+                  to={link.path}
+                  className="py-2 text-sm hover:text-primary focus-visible:text-primary"
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Link
+                to={"/login"}
+                className="py-2 text-sm hover:text-primary focus-visible:text-primary"
+              >
+                Entrar
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={"/cadastro"}
+                className="py-2 text-sm hover:text-primary focus-visible:text-primary"
+              >
+                Cadastrar
+              </Link>
+            </li>
+          </ul>
+        </div>
 
-                  {/* Contato */}
-                  <div className="">
-                      <p className="font-bold mb-3 text-base">Contato</p>
-                      <div className="w-[250px] mb-8">
-                          <div className="flex gap-3 mb-2 items-center justify-center w-11/12">
-                              <MapPin />
-                              <p className="text-sm">
-                                  Rua nova Esperança, 700
-                                  <br />
-                                  Rio de Janeiro, Brasil 20815
-                              </p>
-                          </div>
-
-                          <div className="flex gap-3 items-center justify-center">
-                              <Mail className="pl-1"/>
-                              <p className="text-sm">
-                                  greenconomyofc@gmail.com
-                              </p>
-                          </div>
-                      </div>
-                      <div className="mt-4">
-                          <p className="font-bold mb-2">Siga-nos</p>
-                          <div className="flex gap-3">
-                              <Github />
-                              <Figma />
-                              <Instagram />
-                              <Facebook />
-                          </div>
-                      </div>
-                  </div>
+        {/* Contato */}
+        <div className="flex flex-col items-start gap-3">
+          <p className="text-lg font-bold">Contato</p>
+          <div className="flex flex-col gap-8">
+            <address className="flex w-full flex-col gap-4 not-italic">
+              <div className="flex items-center gap-3">
+                <MapPin />
+                <p className="w-full max-w-44 text-sm">
+                  Rua nova Esperança, 700 Rio de Janeiro, Brasil 20815
+                </p>
               </div>
+
+              <div className="flex items-center justify-center gap-3">
+                <Mail />
+                <Link
+                  to="mailto:greenconomyofc@gmail.com"
+                  className="w-full text-sm hover:underline focus-visible:underline"
+                >
+                  greenconomyofc@gmail.com
+                </Link>
+              </div>
+            </address>
+            <div className="flex flex-col gap-3">
+              <p className="text-lg font-bold">Siga-nos</p>
+              <div className="flex gap-3">
+                <Link
+                  to={"https://github.com/PI-GreenEconomy"}
+                  className="group"
+                  target="_blank"
+                >
+                  <Github className="group-hover:text-primary group-focus-visible:text-primary" />
+                </Link>
+                <Link to={""} className="group">
+                  <Figma className="group-hover:text-primary group-focus-visible:text-primary" />
+                </Link>
+                <Link to={""} className="group">
+                  <Instagram className="group-hover:text-primary group-focus-visible:text-primary" />
+                </Link>
+                <Link to={""} className="group">
+                  <Facebook className="group-hover:text-primary group-focus-visible:text-primary" />
+                </Link>
+              </div>
+            </div>
           </div>
-      </>
+        </div>
+      </div>
+    </div>
   );
 };

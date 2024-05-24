@@ -1,13 +1,13 @@
-import { FooterBootom } from "./FooterBottom"
-import { FooterMedium } from "./FooterMedium"
-import { FooterTop } from "./FooterTop"
+import { FooterTop } from "./FooterTop";
+import { FooterMedium } from "./FooterMedium";
+import { FooterBottom } from "./FooterBottom";
 
 export const Footer = () => {
   return (
-    <div>
-      <FooterTop/>
-      <FooterMedium/>
-      <FooterBootom/>
-    </div>
-  )
-}
+    <footer>
+      <FooterTop />
+      <FooterMedium />
+      <FooterBottom />
+    </footer>
+  );
+};
