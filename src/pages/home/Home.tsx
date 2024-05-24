@@ -1,7 +1,11 @@
 function Home() {
   return (
-    <div className="w-full flex justify-center items-center h-64 bg-red-700 text-bold text-7xl">A implementar!</div>
-  )
+    <div className="bg-red-700 py-12 md:py-16">
+      <div className="text-bold container w-full text-center text-3xl sm:text-5xl md:text-6xl">
+        A implementar - Home!
+      </div>
+    </div>
+  );
 }
 
-export default Home
+export default Home;

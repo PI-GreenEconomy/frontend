@@ -1,47 +1,82 @@
-import { Car, Search, ShoppingCart, User } from 'lucide-react'
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { CircleUser, Search, ShoppingCart } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+
+import Logo from "../../assets/Logo.svg";
+import { links } from "../../data/linksMenu";
 
 export const HeaderBottom = () => {
+  const { pathname } = useLocation();
+
   return (
-    <div className='py-6'>
-        <div className=' container flex justify-between gap-2 items-center font-semibold'>
-            <div className=' flex items-center gap-10'>
-            <Link to={"/"}>Logo</Link>
-            <ul className=' gap-4 flex'>
-                <li>
-                <Link to={"/produtos"}>Produtos</Link>
-                </li>
-                <li>
-                <Link to={"/quem-somos"}>Quem Somos</Link>
-                </li>
-                <li>
-                <Link to={"/nossa-missao"}>Nossa Missão</Link>
-                </li>
-                <li>
-                <Link to={"/contato"}>Contato</Link> 
-                </li>
-            </ul>
-            </div>
-            <div className='flex relative border  border-gray-500'>
-                <input className='py-2 px-6 placeholder:text-[#94A3B8]' type="text" placeholder='Buscar Produto' />
-                <button className='flex py-2 px-3 text-[#94A3B8] '>
-                <Search />
-                </button>
-                
-            </div>    
-            <div className='flex items-center justify-center gap-2 '>
-                <User/>
-                <span>Entre ou <br/> Cadastre-se</span>
-            </div>
-            <div className='flex items-center justify-center gap-2 '>
-                <div className='relative'>
-                <ShoppingCart className='z-10'/>
-                <span className='absolute bottom-5 left-3 text-xs flex items-center justify-center bg-[#085339] text-white font-bold rounded-full size-4 right-0'>0</span>
-                </div>
-                <span>Carrinho</span>
-            </div>   
+    <div className="border-b border-b-border py-5">
+      <div className="container flex flex-wrap items-center justify-between gap-x-2 gap-y-4 font-semibold">
+        {/* LOGO AND LINKS - MENU LEFT */}
+        <div className="flex flex-wrap items-center gap-x-10 gap-y-6">
+          <Link to={"/"}>
+            <img src={Logo} alt="Green Economy" />
+          </Link>
+
+          <ul className="gap-y- flex flex-wrap gap-x-4">
+            {links.map((link) => (
+              <li key={link.id}>
+                <Link
+                  to={link.path}
+                  className={`py-2 transition-colors hover:text-primary focus-visible:text-primary ${pathname === link.path && "text-primary"}`}
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
+
+        {/* INPUT SEARCH - MENU CENTER */}
+        <div className="relative flex w-full max-w-[22.5rem] rounded-xl">
+          <input
+            className="font-roboto w-full rounded-xl border border-solid border-border px-6 py-2 text-base font-medium outline-none placeholder:font-medium placeholder:text-muted-foreground focus:border-gray-500"
+            type="text"
+            placeholder="Buscar Produto"
+          />
+          <button className="group absolute right-0 top-0 flex rounded-xl px-3 py-2 text-muted-foreground outline-none">
+            <Search className="group-focus-visible:text-gray-500" />
+          </button>
+        </div>
+
+        {/* LOGIN AND CART - MENU RIGHT */}
+        <div className="flex gap-6">
+          <div className="flex items-center justify-center gap-2 ">
+            <CircleUser className="size-7" />
+            <span className="inline-block max-w-24 leading-5">
+              <Link
+                to={"/login"}
+                className="hover:text-primary hover:underline focus-visible:text-primary focus-visible:underline"
+              >
+                Entre
+              </Link>{" "}
+              ou{" "}
+              <Link
+                to={"/cadastro"}
+                className="hover:text-primary hover:underline focus-visible:text-primary focus-visible:underline"
+              >
+                Cadastre-se
+              </Link>
+            </span>
+          </div>
+
+          <Link
+            to={"/carrinho"}
+            className="flex items-center justify-center gap-2"
+          >
+            <div className="relative">
+              <ShoppingCart className="z-10 size-7" />
+              <span className="absolute bottom-[21px] left-4 right-0 flex size-4 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
+                0
+              </span>
+            </div>
+            <span className="sr-only md:not-sr-only">Carrinho</span>
+          </Link>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};

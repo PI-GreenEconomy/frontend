@@ -1,11 +1,13 @@
-import { HeaderBottom } from "./HeaderBottom"
-import { HeaderTop } from "./HeaderTop"
+import { HeaderBottom } from "./HeaderBottom";
+import { HeaderTop } from "./HeaderTop";
+import { Navbar } from "./Navbar";
 
 export const Header = () => {
   return (
-    <div>
-      <HeaderTop/>
-      <HeaderBottom/>
-    </div>
-  )
-}
+    <header>
+      <HeaderTop />
+      <HeaderBottom />
+      <Navbar />
+    </header>
+  );
+};

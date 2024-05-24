@@ -4,19 +4,26 @@ import Home from "./pages/home/Home";
 import About from "./pages/about/About";
 import Contact from "./pages/contact/Contact";
 import { Footer } from "./components/footer/Footer";
+import { NotFound } from "./components/not-found/NotFound";
 
 export default function App() {
   return (
-    <div>
+    <div className="bg-background text-foreground">
       <BrowserRouter>
-        <Header/>
-        <Routes>
-         <Route path="/" element={<Home/>}/>
-         <Route path="/about" element={<About/>}/>
-         <Route path="/contact" element={<Contact/>}/>
-        </Routes>
-        <Footer/>
+        <div className="font-roboto flex min-h-screen flex-col">
+          <Header />
+          <div>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/quem-somos" element={<About />} />
+              <Route path="/contato" element={<Contact />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+
+          <Footer />
+        </div>
       </BrowserRouter>
     </div>
-  )
+  );
 }
