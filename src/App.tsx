@@ -5,6 +5,7 @@ import About from "./pages/about/About";
 import Contact from "./pages/contact/Contact";
 import { Footer } from "./components/footer/Footer";
 import { NotFound } from "./components/not-found/NotFound";
+import Login from "./pages/login/Login";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
               <Route path="/" element={<Home />} />
               <Route path="/quem-somos" element={<About />} />
               <Route path="/contato" element={<Contact />} />
+              <Route path="/login" element={<Login />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
