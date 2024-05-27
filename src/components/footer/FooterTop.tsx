@@ -116,7 +116,7 @@ export const FooterTop = () => {
               </div>
 
               <div className="flex items-center justify-center gap-3">
-                <Mail />
+                <Mail className="ml-[2px]" />
                 <Link
                   to="mailto:greenconomyofc@gmail.com"
                   className="w-full text-sm hover:underline focus-visible:underline"

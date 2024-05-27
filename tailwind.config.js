@@ -22,6 +22,13 @@ export default {
       },
       fontFamily: {
         poppins: ["var(--font-poppins), sans-serif"],
+        newsreader: ["Newsreader, serif"],
+      },
+      backgroundImage: {
+        "folhas":
+          "url('src/assets/home/0ceffa3e73a9d5404679fa684dfc3dbe.png')",
+        "bemvindo":
+          "url('src/assets/home/0ceffa3e73a9d5404679fa684dfc3dbe.png')",
       },
     },
   },
