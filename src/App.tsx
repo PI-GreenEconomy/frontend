@@ -9,9 +9,9 @@ import Login from "./pages/login/Login";
 import Cadastro from "./pages/cadastro/Cadastro";
 import { AuthProvider } from "./contexts/AuthContext";
 import ScrollToTop from "./components/ScrollToTop";
-import { ListarCategoria } from "./components/categoria/listarcategoria/ListarCategoria";
 import { DeletarCategoria } from "./components/categoria/deletarcategoria/DeletarCategoria";
 import FormCategoria from "./components/categoria/formcategoria/FormCategoria";
+import ListarCategoria from "./components/categoria/listarcategoria/ListarCategoria";
 
 export default function App() {
   return (
