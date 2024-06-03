@@ -1,16 +1,21 @@
 import { Link } from "react-router-dom";
 import BemVindo2 from "../../components/home/bemvindo/BemVindo2";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 
 function Home() {
+  const { usuario } = useContext(AuthContext);
+
   return (
     <div>
-      {/* <BemVindo /> */}
-      {/* <div className="container">
-        <Slider />
-      </div> */}
-      <Link to="/cadcategoria">Adicionar Categoria</Link>
+      {usuario.token && (
+        <div>
+          <Link to="/cadcategoria">Adicionar Categoria</Link>
+          <Link to="/deletarcategoria/7">Deletar Categoria 7</Link>
+        </div>
+      )}
+
       <BemVindo2 />
-      {/* <Slider /> */}
 
       <section className="container py-16 text-foreground">
         <h1 className="mb-4 text-4xl">Título</h1>
