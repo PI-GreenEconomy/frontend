@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useContext, useEffect, ChangeEvent } from "react";
 import { RotatingLines } from "react-loader-spinner";
 import { useNavigate, useParams } from "react-router-dom";
@@ -103,10 +104,21 @@ function FormCategoria() {
           <label htmlFor="tipo">Tipo da categoria</label>
           <input
             type="text"
-            placeholder="Descreva aqui seu categoria"
+            placeholder="Exemplo: Vestuário"
             name="tipo"
             className="rounded border-2 border-slate-700 p-2"
             value={categoria.tipo}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="slug">Slug da categoria</label>
+          <input
+            type="text"
+            placeholder="Exemplo: nome-categoria"
+            name="slug"
+            className="rounded border-2 border-slate-700 p-2"
+            value={categoria.slug}
             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
           />
         </div>
