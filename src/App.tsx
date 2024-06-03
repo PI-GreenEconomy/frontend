@@ -9,6 +9,9 @@ import Login from "./pages/login/Login";
 import Cadastro from "./pages/cadastro/Cadastro";
 import { AuthProvider } from "./contexts/AuthContext";
 import ScrollToTop from "./components/ScrollToTop";
+import { ListarCategoria } from "./components/categoria/listarcategoria/ListarCategoria";
+import { FormCategoria } from "./components/categoria/formcategoria/FormCategoria";
+import { DeletarCategoria } from "./components/categoria/deletarcategoria/DeletarCategoria";
 
 export default function App() {
   return (
@@ -25,6 +28,7 @@ export default function App() {
                 <Route path="/quem-somos" element={<About />} />
                 <Route path="/contato" element={<Contact />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="/categoria" element={<ListarCategoria />} />
                 <Route path="/cadcategoria" element={<FormCategoria />} />
                 <Route
