@@ -1,3 +1,5 @@
+import tailwindcssAnimate from "tailwindcss-animate";
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
@@ -25,12 +27,10 @@ export default {
         newsreader: ["Newsreader, serif"],
       },
       backgroundImage: {
-        "folhas":
-          "url('src/assets/home/0ceffa3e73a9d5404679fa684dfc3dbe.png')",
-        "bemvindo":
-          "url('src/assets/home/0ceffa3e73a9d5404679fa684dfc3dbe.png')",
+        folhas: "url('src/assets/home/banner.jpg ')",
+        bemvindo: "url('src/assets/home/banner.jpg ')",
       },
     },
   },
-  plugins: [],
+  plugins: [tailwindcssAnimate],
 };
