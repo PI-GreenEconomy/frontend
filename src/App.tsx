@@ -25,7 +25,16 @@ export default function App() {
                 <Route path="/quem-somos" element={<About />} />
                 <Route path="/contato" element={<Contact />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/cadastro" element={<Cadastro />} />
+                <Route path="/categoria" element={<ListarCategoria />} />
+                <Route path="/cadcategoria" element={<FormCategoria />} />
+                <Route
+                  path="/editarcategoria/:id"
+                  element={<FormCategoria />}
+                />
+                <Route
+                  path="/deletarcategoria/:id"
+                  element={<DeletarCategoria />}
+                />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>
