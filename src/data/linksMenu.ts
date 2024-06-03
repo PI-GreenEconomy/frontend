@@ -10,11 +10,6 @@ export const links = [
     path: "/quem-somos",
   },
   {
-    id: "mission",
-    name: "Nossa Missão",
-    path: "/nossa-missao",
-  },
-  {
     id: "contact",
     name: "Contato",
     path: "/contato",

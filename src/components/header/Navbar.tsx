@@ -10,10 +10,9 @@ import {
   ShirtIcon,
   UtensilsIcon,
 } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { categorias } from "../../data/categorias";
-import { useContext } from "react";
-import { AuthContext } from "../../contexts/AuthContext";
+import { SheetClose } from "../ui/Sheet";
 
 const icons: any = {
   vestuario: <ShirtIcon className="size-7" />,
@@ -28,34 +27,49 @@ const icons: any = {
 };
 
 export const Navbar = () => {
-  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
-  const { handleLogout } = useContext(AuthContext);
-
-  function logout() {
-    handleLogout();
-    alert("O usuário foi desconectado com sucesso!");
-    navigate("/login");
-  }
+  if (pathname === "/login" || pathname === "/cadastro") return null;
 
   return (
-    <div className="border-b border-b-border py-2">
-      <nav>
-        <ul className="flex w-full items-center justify-center gap-6 overflow-auto py-1">
-          {categorias.map((categoria) => (
-            <li key={categoria.id}>
+    <nav className="hidden border-b border-b-border py-1 md:block">
+      <ul className="flex w-full items-center justify-center gap-1 py-1 lg:gap-6">
+        {categorias.map((categoria) => (
+          <li key={categoria.id} className="w-fit">
+            <Link
+              to={`categorias/${categoria.slug}`}
+              className="flex flex-col items-center gap-1 rounded-md bg-[#E7F0ED] bg-transparent p-1 px-3 py-2 text-[#4A695E] text-current transition-colors hover:text-primary focus-visible:text-primary lg:px-4"
+            >
+              <div>{icons[categoria.slug]}</div>
+
+              <span className="text-sm font-semibold">{categoria.tipo}</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+};
+
+export const NavbarMobile = () => {
+  return (
+    <nav>
+      <ul className="flex w-full flex-col items-start justify-center gap-2">
+        {categorias.map((categoria) => (
+          <li key={categoria.id} className="w-full">
+            <SheetClose asChild>
               <Link
                 to={`categorias/${categoria.slug}`}
-                className="flex flex-col items-center gap-1 rounded-md p-1 transition-colors hover:text-primary focus-visible:text-primary"
+                className="flex w-full flex-row items-center gap-4 rounded-md bg-[#E7F0ED] px-6 py-3 font-normal transition-colors hover:text-primary focus-visible:text-primary"
               >
-                <div>{icons[categoria.slug]}</div>
+                <div className="text-[#0A6847]">{icons[categoria.slug]}</div>
 
-                <span className="text-sm font-semibold">{categoria.tipo}</span>
+                <span className="text-sm font-medium">{categoria.tipo}</span>
               </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </div>
+            </SheetClose>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 };

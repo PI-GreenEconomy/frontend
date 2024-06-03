@@ -4,16 +4,19 @@ import Home from "./pages/home/Home";
 import About from "./pages/about/About";
 import Contact from "./pages/contact/Contact";
 import { Footer } from "./components/footer/Footer";
-import { NotFound } from "./components/not-found/NotFound";
+import { NotFound } from "./pages/not-found/NotFound";
 import Login from "./pages/login/Login";
 import Cadastro from "./pages/cadastro/Cadastro";
 import { AuthProvider } from "./contexts/AuthContext";
+import ScrollToTop from "./components/ScrollToTop";
 
 export default function App() {
   return (
     <div className="bg-background text-foreground">
       <AuthProvider>
         <BrowserRouter>
+          <ScrollToTop />
+
           <div className="font-roboto flex min-h-screen flex-col">
             <Header />
             <div>
