@@ -37,7 +37,7 @@ export const Navbar = () => {
         {categorias.map((categoria) => (
           <li key={categoria.id} className="w-fit">
             <Link
-              to={`categorias/${categoria.slug}`}
+              to={`categoria/${categoria.slug}`}
               className="flex flex-col items-center gap-1 rounded-md bg-[#E7F0ED] bg-transparent p-1 px-3 py-2 text-[#4A695E] text-current transition-colors hover:text-primary focus-visible:text-primary lg:px-4"
             >
               <div>{icons[categoria.slug]}</div>

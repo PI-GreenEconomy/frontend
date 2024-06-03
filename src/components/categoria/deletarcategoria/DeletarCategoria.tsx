@@ -70,7 +70,7 @@ export const DeletarCategoria = () => {
   }
 
   function retornar() {
-    navigate("/categorias");
+    navigate("/categoria");
   }
 
   return (
