@@ -52,7 +52,7 @@ function FormCategoria() {
   }
 
   function retornar() {
-    navigate("/categorias");
+    navigate("/categoria");
   }
 
   async function gerarNovaCategoria(e: ChangeEvent<HTMLFormElement>) {

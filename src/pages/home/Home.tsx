@@ -9,9 +9,11 @@ function Home() {
   return (
     <div>
       {usuario.token && (
-        <div>
-          <Link to="/cadcategoria">Adicionar Categoria</Link>
-          <Link to="/deletarcategoria/7">Deletar Categoria 7</Link>
+        <div className="bg-green-300">
+          <div className="container  flex justify-evenly  py-2 font-semibold text-green-950">
+            <Link to="/cadcategoria">Adicionar Categoria</Link>
+            <Link to="/categoria">Categorias</Link>
+          </div>
         </div>
       )}
 

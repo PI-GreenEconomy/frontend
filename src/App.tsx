@@ -12,11 +12,14 @@ import ScrollToTop from "./components/ScrollToTop";
 import { DeletarCategoria } from "./components/categoria/deletarcategoria/DeletarCategoria";
 import FormCategoria from "./components/categoria/formcategoria/FormCategoria";
 import ListarCategoria from "./components/categoria/listarcategoria/ListarCategoria";
+import { ToastContainer } from "react-toastify";
 
 export default function App() {
   return (
     <div className="bg-background text-foreground">
       <AuthProvider>
+        <ToastContainer />
+
         <BrowserRouter>
           <ScrollToTop />
 

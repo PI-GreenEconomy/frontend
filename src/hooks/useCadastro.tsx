@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Usuario from "../models/Usuario";
 import { cadastrarUsuario } from "../services/Service";
+import { ToastAlerta } from "../utils/ToastAlerta";
 
 export function useCadastro() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -21,9 +22,9 @@ export function useCadastro() {
     try {
       const { confirmarSenha, ...usuario } = usuarioValues;
       await cadastrarUsuario(`/usuarios/cadastrar`, usuario, setUsuario);
-      alert("Usuário cadastrado com sucesso!");
+      ToastAlerta("Usuário cadastrado com sucesso!", "sucesso");
     } catch (error) {
-      alert("Erro ao cadastrar o usuário!");
+      ToastAlerta("Erro ao cadastrar o usuário!", "erro");
     } finally {
       setIsLoading(false);
     }

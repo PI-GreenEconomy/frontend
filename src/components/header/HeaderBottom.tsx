@@ -7,6 +7,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "../ui/Sheet";
 import { NavbarMobile } from "./Navbar";
 import { links } from "../../data/linksMenu";
+import { ToastAlerta } from "../../utils/ToastAlerta";
 
 export const HeaderBottom = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ export const HeaderBottom = () => {
   const { usuario, handleLogout } = useContext(AuthContext);
   function logout() {
     handleLogout();
-    alert("O Usuário foi desconectado com sucesso!");
+    ToastAlerta("O Usuário foi desconectado com sucesso!", "sucesso");
     navigate("/login");
   }
 
