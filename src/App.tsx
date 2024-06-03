@@ -10,8 +10,8 @@ import Cadastro from "./pages/cadastro/Cadastro";
 import { AuthProvider } from "./contexts/AuthContext";
 import ScrollToTop from "./components/ScrollToTop";
 import { ListarCategoria } from "./components/categoria/listarcategoria/ListarCategoria";
-import { FormCategoria } from "./components/categoria/formcategoria/FormCategoria";
 import { DeletarCategoria } from "./components/categoria/deletarcategoria/DeletarCategoria";
+import FormCategoria from "./components/categoria/formcategoria/FormCategoria";
 
 export default function App() {
   return (
@@ -29,8 +29,8 @@ export default function App() {
                 <Route path="/contato" element={<Contact />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/cadastro" element={<Cadastro />} />
-                <Route path="/categoria" element={<ListarCategoria />} />
                 <Route path="/cadcategoria" element={<FormCategoria />} />
+                <Route path="/categoria" element={<ListarCategoria />} />
                 <Route
                   path="/editarcategoria/:id"
                   element={<FormCategoria />}

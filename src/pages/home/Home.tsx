@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import BemVindo2 from "../../components/home/bemvindo/BemVindo2";
 
 function Home() {
@@ -7,7 +8,7 @@ function Home() {
       {/* <div className="container">
         <Slider />
       </div> */}
-
+      <Link to="/cadcategoria">Adicionar Categoria</Link>
       <BemVindo2 />
       {/* <Slider /> */}
 
