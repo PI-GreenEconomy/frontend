@@ -4,7 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { useProduto } from "../../../hooks/useProduto";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
-import { categorias } from "../../../data/categorias";
 import { useCategoria } from "../../../hooks/useCategoria";
 
 function FormProduto() {
@@ -17,12 +16,29 @@ function FormProduto() {
   const {
     atualizarEstado,
     produto,
+    setProduto,
     isLoading,
     buscarProdutoPorId,
     gerarNovoProduto,
   } = useProduto();
 
-  const { categoria, buscarCategoriaPorId } = useCategoria();
+  const { categorias, categoria, buscarCategoriaPorId, buscarCategorias } =
+    useCategoria();
+
+  useEffect(() => {
+    buscarCategorias();
+
+    if (id !== undefined) {
+      buscarProdutoPorId(id);
+    }
+  }, [id]);
+
+  useEffect(() => {
+    setProduto({
+      ...produto,
+      categoria: categoria,
+    });
+  }, [categoria]);
 
   useEffect(() => {
     if (token === "") {
@@ -31,11 +47,6 @@ function FormProduto() {
     }
   }, [token]);
 
-  useEffect(() => {
-    if (id !== undefined) {
-      buscarProdutoPorId(id);
-    }
-  }, [id]);
   const carregandoCategoria = categoria.tipo === "";
 
   console.log(JSON.stringify(produto));
