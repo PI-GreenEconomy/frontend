@@ -9,12 +9,20 @@ function Home() {
   return (
     <div>
       {usuario.token && (
-        <div className="bg-green-300">
-          <div className="container  flex justify-evenly  py-2 font-semibold text-green-950">
-            <Link to="/cadcategoria">Adicionar Categoria</Link>
-            <Link to="/categoria">Categorias</Link>
+        <section>
+          <div className="border border-b-green-400 bg-green-300">
+            <div className="container  flex justify-evenly  py-2 font-semibold text-green-950">
+              <Link to="/cadcategoria">Adicionar Categoria</Link>
+              <Link to="/categoria">Categorias</Link>
+            </div>
           </div>
-        </div>
+          <div className="bg-gray-300">
+            <div className="container  flex justify-evenly  py-2 font-semibold text-green-950">
+              <Link to="/cadproduto">Adicionar Produto</Link>
+              <Link to="/produto">Produtos</Link>
+            </div>
+          </div>
+        </section>
       )}
 
       <BemVindo2 />

@@ -5,9 +5,6 @@ export const HeaderTop = () => {
         Aproveite o <span className="font-bold">FRETE GRÁTIS </span>
         em compras acima de R$ 199,00! Consulte as regiões participantes.
       </p>
-      {/* <p className="container block text-xs font-medium sm:hidden sm:text-sm">
-        <strong>FRETE GRÁTIS</strong> em compras acima de R$ 199,00!
-      </p> */}
     </div>
   );
 };

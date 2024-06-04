@@ -13,6 +13,10 @@ import { DeletarCategoria } from "./components/categoria/deletarcategoria/Deleta
 import FormCategoria from "./components/categoria/formcategoria/FormCategoria";
 import ListarCategoria from "./components/categoria/listarcategoria/ListarCategoria";
 import { ToastContainer } from "react-toastify";
+import ProtectedRouter from "./helper/ProtectedRouter";
+import { FormProduto } from "./components/produto/formproduto/FormProduto";
+import { ListarProduto } from "./components/produto/listarproduto/ListarProduto";
+import { DeletarProduto } from "./components/produto/deletarproduto/DeletarProduto";
 
 export default function App() {
   return (
@@ -32,15 +36,69 @@ export default function App() {
                 <Route path="/contato" element={<Contact />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/cadastro" element={<Cadastro />} />
-                <Route path="/cadcategoria" element={<FormCategoria />} />
-                <Route path="/categoria" element={<ListarCategoria />} />
+                <Route
+                  path="/cadcategoria"
+                  element={
+                    <ProtectedRouter>
+                      <FormCategoria />
+                    </ProtectedRouter>
+                  }
+                />
+                <Route
+                  path="/categoria"
+                  element={
+                    <ProtectedRouter>
+                      <ListarCategoria />
+                    </ProtectedRouter>
+                  }
+                />
                 <Route
                   path="/editarcategoria/:id"
-                  element={<FormCategoria />}
+                  element={
+                    <ProtectedRouter>
+                      <FormCategoria />
+                    </ProtectedRouter>
+                  }
                 />
                 <Route
                   path="/deletarcategoria/:id"
-                  element={<DeletarCategoria />}
+                  element={
+                    <ProtectedRouter>
+                      <DeletarCategoria />
+                    </ProtectedRouter>
+                  }
+                />
+                <Route
+                  path="/cadproduto"
+                  element={
+                    <ProtectedRouter>
+                      <FormProduto />
+                    </ProtectedRouter>
+                  }
+                />
+                <Route
+                  path="/produto"
+                  element={
+                    <ProtectedRouter>
+                      <ListarProduto />
+                    </ProtectedRouter>
+                  }
+                />
+                <Route
+                  path="/editarproduto/:id"
+                  element={
+                    <ProtectedRouter>
+                      <FormProduto />
+                    </ProtectedRouter>
+                  }
+                />
+                <Route
+                  path="/deletarproduto/:id"
+                  element={
+                    <ProtectedRouter>
+                      <DeletarProduto />
+                    </ProtectedRouter>
+                  }
                 />
                 <Route path="*" element={<NotFound />} />
               </Routes>
