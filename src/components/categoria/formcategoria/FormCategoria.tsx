@@ -47,7 +47,7 @@ function FormCategoria() {
             type="text"
             placeholder="Exemplo: Vestuário"
             name="tipo"
-            className="rounded-md border border-[#CBD5E1] p-2 outline-none placeholder:text-[#94A3B8] focus:border-primary"
+            className="rounded border-2 border-slate-700 p-2"
             value={categoria.tipo}
             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
           />
@@ -58,13 +58,14 @@ function FormCategoria() {
             type="text"
             placeholder="Exemplo: nome-categoria"
             name="slug"
-            className="rounded-md border border-[#CBD5E1] p-2 outline-none placeholder:text-[#94A3B8] focus:border-primary"
+            className="rounded border-2 border-slate-700 p-2"
             value={categoria.slug}
             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
           />
         </div>
         <button
-          className=" flex justify-center rounded-lg bg-primary py-2 text-white hover:bg-primary/90 focus:bg-primary/90"
+          className="mx-auto flex w-1/2 
+                               justify-center rounded bg-indigo-400 py-2 text-slate-100 hover:bg-indigo-800"
           type="submit"
         >
           {isLoading ? (
