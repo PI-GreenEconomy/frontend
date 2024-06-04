@@ -16,7 +16,9 @@ import { ToastContainer } from "react-toastify";
 import ProtectedRouter from "./helper/ProtectedRouter";
 import { FormProduto } from "./components/produto/formproduto/FormProduto";
 import { ListarProduto } from "./components/produto/listarproduto/ListarProduto";
-import { DeletarProduto } from "./components/produto/deletarproduto/DeletarProduto";
+import FormProduto from "./components/produto/formproduto/FormProduto";
+import Perfil from "./pages/perfil/Perfil";
+import DeletarProduto from "./components/produto/deletarproduto/DeletarProduto";
 
 export default function App() {
   return (

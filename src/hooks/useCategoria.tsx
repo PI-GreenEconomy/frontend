@@ -122,7 +122,7 @@ export const useCategoria = (): UseCategoriaProps => {
     }
 
     setIsLoading(false);
-    navigate("/categoria");
+    navigate("/categorias");
   }
 
   useEffect(() => {
