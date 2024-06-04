@@ -32,29 +32,27 @@ interface CardCategoriaProps {
 
 function CardCategoria({ categoria }: CardCategoriaProps) {
   return (
-    <div className="container max-w-60 items-center justify-center">
+    <div>
       <div className="flex w-full flex-col rounded-lg border border-slate-300">
-        <div className="align-center flex h-full flex-col items-center justify-center py-8">
+        <div className="align-center flex h-full flex-col items-center justify-center py-14">
           {icons[categoria.slug] || icons["default"]}
-          <p className="text-xl font-bold">{categoria.tipo}</p>
+          <p className="py-2 text-xl font-bold">{categoria.tipo}</p>
         </div>
+      </div>
+      <div className="text-lg font-semibold text-slate-100">
+        <Link
+          to={`/editarcategoria/${categoria.id}`}
+          className="flex w-full justify-center rounded-lg bg-green-800 py-4 hover:bg-primary"
+        >
+          <button>Editar</button>
+        </Link>
 
-        <div className="text-lg font-semibold text-slate-100">
-          <Link
-            to={`/editarcategoria/${categoria.id}`}
-            className="mb-px flex w-full justify-center bg-primary py-4 hover:bg-[#157554] "
-          >
-            <button>Editar</button>
-          </Link>
-
-          <Link
-            to={`/deletarcategoria/${categoria.id}`}
-            className="flex h-full w-full justify-center rounded-b-lg bg-[#B27538]
-          py-4 hover:bg-[#d17b26]"
-          >
-            <button>Deletar</button>
-          </Link>
-        </div>
+        <Link
+          to={`/deletarcategoria/${categoria.id}`}
+          className=" my-px flex w-full justify-center rounded-lg bg-red-600 py-4 hover:bg-red-700"
+        >
+          <button>Deletar</button>
+        </Link>
       </div>
     </div>
   );
