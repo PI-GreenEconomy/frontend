@@ -1,35 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useContext, useEffect, ChangeEvent } from "react";
+import { useContext, ChangeEvent, useEffect } from "react";
 import { RotatingLines } from "react-loader-spinner";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
-import Categoria from "../../../models/Categoria";
-import { buscar, atualizar, cadastrar } from "../../../services/Service";
+import { useCategoria } from "../../../hooks/useCategoria";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function FormCategoria() {
-  const navigate = useNavigate();
-
-  const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const { usuario, handleLogout } = useContext(AuthContext);
+  const { usuario } = useContext(AuthContext);
   const token = usuario.token;
 
-  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
 
-  async function buscarPorId(id: string) {
-    try {
-      await buscar(`/categorias/${id}`, setCategoria, {
-        headers: { Authorization: token },
-      });
-    } catch (error: any) {
-      if (error.toString().includes("401")) {
-        ToastAlerta("O token Expirou!", "erro");
-        handleLogout();
-      }
-    }
-  }
+  const { id } = useParams<{ id: string }>();
+  const {
+    atualizarEstado,
+    categoria,
+    isLoading,
+    buscarCategoriaPorId,
+    gerarNovaCategoria,
+  } = useCategoria();
 
   useEffect(() => {
     if (token === "") {
@@ -40,58 +30,9 @@ function FormCategoria() {
 
   useEffect(() => {
     if (id !== undefined) {
-      buscarPorId(id);
+      buscarCategoriaPorId(id);
     }
   }, [id]);
-
-  function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
-    setCategoria({
-      ...categoria,
-      [e.target.name]: e.target.value,
-    });
-  }
-
-  function retornar() {
-    navigate("/categoria");
-  }
-
-  async function gerarNovaCategoria(e: ChangeEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setIsLoading(true);
-
-    if (id !== undefined) {
-      try {
-        await atualizar(`/categorias`, categoria, setCategoria, {
-          headers: { Authorization: token },
-        });
-        ToastAlerta("A categoria foi atualizado com sucesso!", "sucesso");
-      } catch (error: any) {
-        if (error.toString().includes("403")) {
-          ToastAlerta("O Token Expirou!", "info");
-          handleLogout();
-        } else {
-          ToastAlerta("Erro ao atualizar a categoria.", "erro");
-        }
-      }
-    } else {
-      try {
-        await cadastrar(`/categorias`, categoria, setCategoria, {
-          headers: { Authorization: token },
-        });
-        ToastAlerta("A categoria foi cadastrado com sucesso!", "sucesso");
-      } catch (error: any) {
-        if (error.toString().includes("403")) {
-          ToastAlerta("O Token Expirou!", "info");
-          handleLogout();
-        } else {
-          ToastAlerta("Erro ao cadastrar a categoria.", "erro");
-        }
-      }
-    }
-
-    setIsLoading(false);
-    retornar();
-  }
 
   return (
     <div className="container mx-auto flex flex-col items-center justify-center">

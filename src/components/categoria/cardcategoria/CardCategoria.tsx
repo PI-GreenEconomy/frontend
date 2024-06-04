@@ -10,9 +10,11 @@ import {
   UtensilsIcon,
   LeafIcon,
   PercentIcon,
+  BoxIcon,
 } from "lucide-react";
 
 const icons: any = {
+  default: <BoxIcon className="size-16" />,
   vestuario: <ShirtIcon className="size-16" />,
   alimento: <SaladIcon className="size-16" />,
   higiene: <BathIcon className="size-16" />,
@@ -32,7 +34,7 @@ function CardCategoria({ categoria }: CardCategoriaProps) {
   return (
     <div className="flex w-full flex-col rounded-lg border border-slate-300">
       <div className="align-center flex h-full flex-col items-center justify-center py-14">
-        {icons[categoria.slug]}
+        {icons[categoria.slug] || icons["default"]}
         <p className="py-2 text-xl font-bold">{categoria.tipo}</p>
       </div>
 

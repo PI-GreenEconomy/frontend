@@ -1,78 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { AuthContext } from "../../../contexts/AuthContext";
-import { buscar, deletar } from "../../../services/Service";
 import { RotatingLines } from "react-loader-spinner";
-import Categoria from "../../../models/Categoria";
-import { ToastAlerta } from "../../../utils/ToastAlerta";
+import { useCategoria } from "../../../hooks/useCategoria";
 
 export const DeletarCategoria = () => {
   const navigate = useNavigate();
 
-  const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const { usuario, handleLogout } = useContext(AuthContext);
-
-  const token = usuario.token;
+  const { buscarCategoriaPorId, deletarCategoria, categoria, isLoading } =
+    useCategoria();
 
   const { id } = useParams<{ id: string }>();
 
-  async function buscarPorId(id: string) {
-    try {
-      await buscar(`/categorias/${id}`, setCategoria, {
-        headers: {
-          Authorization: token,
-        },
-      });
-    } catch (error: any) {
-      if (error.toString().includes("403")) {
-        handleLogout();
-      }
-    }
-  }
-
-  useEffect(() => {
-    if (token === "") {
-      ToastAlerta("Você precisa estar logado", "erro");
-      navigate("/");
-    }
-  }, [token]);
-
   useEffect(() => {
     if (id !== undefined) {
-      buscarPorId(id);
+      buscarCategoriaPorId(id);
     }
   }, [id]);
 
-  async function DeletarCategoria() {
-    setIsLoading(true);
-
-    try {
-      await deletar(`/categorias/${id}`, {
-        headers: {
-          Authorization: token,
-        },
-      });
-
-      ToastAlerta("Categoria apagada com sucesso", "sucesso");
-    } catch (error: any) {
-      if (error.toString().includes("403")) {
-        handleLogout();
-      } else {
-        ToastAlerta("Erro ao deletar a categoria.", "erro");
-      }
-    }
-
-    setIsLoading(false);
-    retornar();
-  }
-
-  function retornar() {
-    navigate("/categoria");
-  }
-
+  if (!id) return;
   return (
     <div className="container mx-auto w-1/3">
       <h1 className="my-4 text-center text-4xl">Deletar Categoria</h1>
@@ -87,14 +33,14 @@ export const DeletarCategoria = () => {
         <div className="flex">
           <button
             className="w-full bg-red-600 py-2 text-slate-100 hover:bg-red-500"
-            onClick={retornar}
+            onClick={() => navigate("/categoria")}
           >
             Não
           </button>
           <button
             className="flex w-full items-center 
                                    justify-center bg-green-400 text-slate-100 hover:bg-green-600"
-            onClick={DeletarCategoria}
+            onClick={() => deletarCategoria(id)}
           >
             {isLoading ? (
               <RotatingLines
