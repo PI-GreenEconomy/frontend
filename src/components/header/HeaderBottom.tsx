@@ -148,12 +148,11 @@ export const HeaderBottom = () => {
 
             {usuario?.token ? (
               <div>
-                <p className="max-w-64 text-wrap break-words">
-                  Olá {usuario.nome}
-                </p>
-                <div className="hover:text-primary hover:underline focus-visible:text-primary focus-visible:underline">
-                  <Link to={"/perfil"}>Perfil</Link>
-                </div>
+                <Link to={"/perfil"}>
+                  <p className="max-w-64 text-wrap break-words underline hover:text-primary hover:underline focus-visible:text-primary focus-visible:underline">
+                    Olá {usuario.nome}
+                  </p>
+                </Link>
                 <Link
                   to={"/login"}
                   onClick={logout}
