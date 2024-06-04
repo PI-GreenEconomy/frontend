@@ -100,6 +100,7 @@ export default function App() {
                     </ProtectedRouter>
                   }
                 />
+                <Route path="/perfil" element={<Perfil />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>
