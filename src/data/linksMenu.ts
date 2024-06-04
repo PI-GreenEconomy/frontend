@@ -2,7 +2,7 @@ export const links = [
   {
     id: "products",
     name: "Produtos",
-    path: "/produtos",
+    path: "/produto",
   },
   {
     id: "about",
