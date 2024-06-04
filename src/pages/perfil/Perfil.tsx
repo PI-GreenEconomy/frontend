@@ -4,7 +4,6 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { ToastAlerta } from "../../utils/ToastAlerta";
 import home from "../../assets/home/banner.jpg";
 import { GithubLogo, InstagramLogo, LinkedinLogo } from "@phosphor-icons/react";
-import { LinkedinIcon } from "lucide-react";
 
 function Perfil() {
   let navigate = useNavigate();
