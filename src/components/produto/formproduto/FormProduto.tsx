@@ -36,9 +36,6 @@ function FormProduto() {
       buscarProdutoPorId(id);
     }
   }, [id]);
-  const carregandoCategoria = categoria.tipo === "";
-
-  console.log(JSON.stringify(produto));
 
   return (
     <div className="container mx-auto flex flex-col items-center">
@@ -64,7 +61,7 @@ function FormProduto() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="slug">Slug</label>
+          <label htmlFor="slug">Slug do Produto</label>
           <input
             value={produto.slug}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -167,7 +164,6 @@ function FormProduto() {
         </div>
         <button
           type="submit"
-          disabled={carregandoCategoria}
           className=" flex justify-center rounded-lg bg-primary py-2 text-white hover:bg-primary/90 focus:bg-primary/90"
         >
           {isLoading ? (
@@ -179,7 +175,7 @@ function FormProduto() {
               visible={true}
             />
           ) : (
-            <span>{id !== undefined ? "Atualizar" : "Cadastrar"}</span>
+            <span>{id === undefined ? "Cadastrar" : "Atualizar"}</span>
           )}
         </button>
       </form>
