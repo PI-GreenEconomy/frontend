@@ -17,6 +17,7 @@ import ProtectedRouter from "./helper/ProtectedRouter";
 import { FormProduto } from "./components/produto/formproduto/FormProduto";
 import { ListarProduto } from "./components/produto/listarproduto/ListarProduto";
 import { DeletarProduto } from "./components/produto/deletarproduto/DeletarProduto";
+import Perfil from "./pages/perfil/Perfil";
 
 export default function App() {
   return (
@@ -100,6 +101,7 @@ export default function App() {
                     </ProtectedRouter>
                   }
                 />
+                <Route path="/perfil" element={<Perfil />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>
