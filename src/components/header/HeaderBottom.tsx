@@ -1,5 +1,5 @@
 import { CircleUser, MenuIcon, Search, ShoppingCart } from "lucide-react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import Logo from "../../assets/Logo.svg";
 import { useContext } from "react";
@@ -7,18 +7,11 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "../ui/Sheet";
 import { NavbarMobile } from "./Navbar";
 import { links } from "../../data/linksMenu";
-import { ToastAlerta } from "../../utils/ToastAlerta";
 import NavTabs from "./NavTabs";
 
 export const HeaderBottom = () => {
-  const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { usuario, handleLogout } = useContext(AuthContext);
-  function logout() {
-    handleLogout();
-    ToastAlerta("O Usuário foi desconectado com sucesso!", "sucesso");
-    navigate("/login");
-  }
+  const { usuario } = useContext(AuthContext);
 
   return (
     <div className="border-b border-b-border py-5">
@@ -41,16 +34,10 @@ export const HeaderBottom = () => {
                   {usuario?.token ? (
                     <div className="flex-colflex-wrap flex w-full justify-between">
                       <p className="max-w-64 text-wrap break-words">
-                        Olá {usuario.nome}
+                        Olá, {usuario.nome}
                       </p>
                       <SheetClose asChild>
-                        <Link
-                          to={"/login"}
-                          onClick={logout}
-                          className="text-destructive hover:text-primary hover:underline focus-visible:text-primary focus-visible:underline "
-                        >
-                          Sair
-                        </Link>
+                        <NavTabs />
                       </SheetClose>
                     </div>
                   ) : (
@@ -148,19 +135,13 @@ export const HeaderBottom = () => {
             <CircleUser className="size-7" />
 
             {usuario?.token ? (
-              <div>
+              <div className="flex flex-row">
                 <Link to={"/perfil"}>
-                  <p className="max-w-64 text-wrap break-words underline hover:text-primary hover:underline focus-visible:text-primary focus-visible:underline">
-                    Olá {usuario.nome}
+                  <p className="max-w-64 text-wrap break-words py-4 underline hover:text-primary hover:underline focus-visible:text-primary focus-visible:underline">
+                    Olá, {usuario.nome}
                   </p>
                 </Link>
-                <Link
-                  to={"/login"}
-                  onClick={logout}
-                  className="hover:text-primary hover:underline focus-visible:text-primary focus-visible:underline"
-                >
-                  Sair
-                </Link>
+                <NavTabs />
               </div>
             ) : (
               <div className="max-w-24">
@@ -179,7 +160,6 @@ export const HeaderBottom = () => {
                 </Link>
               </div>
             )}
-            <NavTabs />
           </div>
 
           <Link
