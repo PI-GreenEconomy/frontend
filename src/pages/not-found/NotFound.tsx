@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import NotFound404 from "../../assets/404.svg";
 
-export const NotFound = () => {
+function NotFound() {
   return (
     <section className="flex w-full items-center bg-gray-50 py-4">
       <div className="container mx-auto my-8 flex flex-col items-center justify-center px-5">
@@ -27,4 +27,6 @@ export const NotFound = () => {
       </div>
     </section>
   );
-};
+}
+
+export default NotFound;

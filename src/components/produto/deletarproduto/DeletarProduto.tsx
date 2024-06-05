@@ -33,7 +33,7 @@ function DeletarProduto() {
         <div className="flex">
           <button
             className="w-full bg-red-400 py-2 text-slate-100 hover:bg-red-600"
-            onClick={() => navigate("/produto")}
+            onClick={() => navigate("/produtos")}
           >
             Não
           </button>

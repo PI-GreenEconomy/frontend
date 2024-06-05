@@ -77,7 +77,7 @@ export const useCategoria = (): UseCategoriaProps => {
     }
 
     setIsLoading(false);
-    navigate("/categoria");
+    navigate("/categorias");
   }
 
   function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {

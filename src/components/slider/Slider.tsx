@@ -28,13 +28,16 @@ export const Slider = () => {
       }}
       navigation={true}
       modules={[Autoplay, EffectFade, Pagination, Navigation]}
-      className="flex h-screen max-h-[380px] flex-col items-center justify-between"
     >
       {slides.map((image) => (
         <SwiperSlide key={image}>
           <Link to="/produtos">
             <picture className="h-full w-full">
-              <img src={image} alt="" className="h-full w-full object-cover" />
+              <img
+                src={image}
+                alt=""
+                className="block h-full w-full object-cover md:rounded-lg"
+              />
             </picture>
           </Link>
         </SwiperSlide>

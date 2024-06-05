@@ -35,7 +35,7 @@ function FormCategoria() {
   }, [id]);
 
   return (
-    <div className="container mx-auto flex flex-col items-center justify-center">
+    <div className="container mx-auto flex flex-col items-center justify-center pb-16 pt-4">
       <h1 className="my-8 text-center text-4xl">
         {id === undefined ? "Cadastrar categoria" : "Editar categoria"}
       </h1>
@@ -48,6 +48,8 @@ function FormCategoria() {
             placeholder="Exemplo: Vestuário"
             name="tipo"
             className="rounded-md border border-[#CBD5E1] p-2 outline-none placeholder:text-[#94A3B8] focus:border-primary"
+            maxLength={255}
+            required
             value={categoria.tipo}
             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
           />
@@ -59,6 +61,8 @@ function FormCategoria() {
             placeholder="Exemplo: nome-categoria"
             name="slug"
             className="rounded-md border border-[#CBD5E1] p-2 outline-none placeholder:text-[#94A3B8] focus:border-primary"
+            maxLength={255}
+            required
             value={categoria.slug}
             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
           />

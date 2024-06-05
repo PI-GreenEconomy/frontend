@@ -1,23 +1,25 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Header } from "./components/header/Header";
-import Home from "./pages/home/Home";
-import About from "./pages/about/About";
-import Contact from "./pages/contact/Contact";
-import { Footer } from "./components/footer/Footer";
-import { NotFound } from "./pages/not-found/NotFound";
-import Login from "./pages/login/Login";
-import Cadastro from "./pages/cadastro/Cadastro";
 import { AuthProvider } from "./contexts/AuthContext";
+import { Footer } from "./components/footer/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import { DeletarCategoria } from "./components/categoria/deletarcategoria/DeletarCategoria";
 import FormCategoria from "./components/categoria/formcategoria/FormCategoria";
 import ListarCategoria from "./components/categoria/listarcategoria/ListarCategoria";
 import { ToastContainer } from "react-toastify";
-import ProtectedRouter from "./helper/ProtectedRouter";
-import { ListarProduto } from "./components/produto/listarproduto/ListarProduto";
-import Perfil from "./pages/perfil/Perfil";
 import DeletarProduto from "./components/produto/deletarproduto/DeletarProduto";
 import FormProduto from "./components/produto/formproduto/FormProduto";
+import ProtectedRouterAdmin from "./helper/ProtectedRouterAdmin";
+import ProtectedRouterUser from "./helper/ProtectedRouterUser";
+
+import Home from "./pages/home/Home";
+import Perfil from "./pages/perfil/Perfil";
+import Contact from "./pages/contact/Contact";
+import NotFound from "./pages/not-found/NotFound";
+import Login from "./pages/login/Login";
+import Cadastro from "./pages/cadastro/Cadastro";
+import QuemSomos from "./pages/quem-somos/QuemSomos";
+import { Produtos } from "./pages/produtos/Produtos";
 
 export default function App() {
   return (
@@ -33,75 +35,75 @@ export default function App() {
             <div>
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/quem-somos" element={<About />} />
+                <Route path="/quem-somos" element={<QuemSomos />} />
                 <Route path="/contato" element={<Contact />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/cadastro" element={<Cadastro />} />
                 <Route
-                  path="/cadcategoria"
+                  path="/cadastrarcategoria"
                   element={
-                    <ProtectedRouter>
+                    <ProtectedRouterAdmin>
                       <FormCategoria />
-                    </ProtectedRouter>
+                    </ProtectedRouterAdmin>
                   }
                 />
                 <Route
-                  path="/categoria"
+                  path="/categorias"
                   element={
-                    <ProtectedRouter>
+                    <ProtectedRouterAdmin>
                       <ListarCategoria />
-                    </ProtectedRouter>
+                    </ProtectedRouterAdmin>
                   }
                 />
                 <Route
                   path="/editarcategoria/:id"
                   element={
-                    <ProtectedRouter>
+                    <ProtectedRouterAdmin>
                       <FormCategoria />
-                    </ProtectedRouter>
+                    </ProtectedRouterAdmin>
                   }
                 />
                 <Route
                   path="/deletarcategoria/:id"
                   element={
-                    <ProtectedRouter>
+                    <ProtectedRouterAdmin>
                       <DeletarCategoria />
-                    </ProtectedRouter>
+                    </ProtectedRouterAdmin>
                   }
                 />
                 <Route
-                  path="/cadproduto"
+                  path="/cadastrarproduto"
                   element={
-                    <ProtectedRouter>
+                    <ProtectedRouterAdmin>
                       <FormProduto />
-                    </ProtectedRouter>
+                    </ProtectedRouterAdmin>
                   }
                 />
-                <Route
-                  path="/produtos"
-                  element={
-                    <ProtectedRouter>
-                      <ListarProduto />
-                    </ProtectedRouter>
-                  }
-                />
+                <Route path="/produtos" element={<Produtos />} />
                 <Route
                   path="/editarproduto/:id"
                   element={
-                    <ProtectedRouter>
+                    <ProtectedRouterAdmin>
                       <FormProduto />
-                    </ProtectedRouter>
+                    </ProtectedRouterAdmin>
                   }
                 />
                 <Route
                   path="/deletarproduto/:id"
                   element={
-                    <ProtectedRouter>
+                    <ProtectedRouterAdmin>
                       <DeletarProduto />
-                    </ProtectedRouter>
+                    </ProtectedRouterAdmin>
                   }
                 />
-                <Route path="/perfil" element={<Perfil />} />
+                <Route
+                  path="/perfil"
+                  element={
+                    <ProtectedRouterUser>
+                      <Perfil />
+                    </ProtectedRouterUser>
+                  }
+                />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>

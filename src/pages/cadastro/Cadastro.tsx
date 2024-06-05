@@ -3,11 +3,13 @@ import { RotatingLines } from "react-loader-spinner";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import Usuario from "../../models/Usuario";
+import Usuario, { FuncaoUsuario } from "../../models/Usuario";
 import { formSchema } from "./validacaoCadastro";
 
 import { useCadastro } from "../../hooks/useCadastro";
 import InputField from "../../components/ui/InputField";
+
+const opcoesTipoUsuario: FuncaoUsuario[] = ["USUARIO", "VENDEDOR"];
 
 function Cadastro() {
   const {
@@ -22,6 +24,7 @@ function Cadastro() {
       senha: "",
       confirmarSenha: "",
       foto: "",
+      funcao: "USUARIO",
     },
   });
 
@@ -79,6 +82,29 @@ function Cadastro() {
             register={register}
             errors={errors}
           />
+
+          <div className="flex w-full flex-col gap-1">
+            <label
+              className={`text-sm font-medium after:ml-1 after:text-destructive after:content-['*'] sm:text-base`}
+              htmlFor="funcao"
+            >
+              Tipo de Usuário
+            </label>
+            <select
+              id="funcao"
+              className="rounded-md border border-[#CBD5E1] p-2 outline-none placeholder:text-[#94A3B8] focus:border-primary"
+              {...register("funcao")}
+            >
+              <option value="" disabled>
+                Tipo de usuário
+              </option>
+              {opcoesTipoUsuario.map((tipo) => (
+                <option key={tipo} value={tipo} className="capitalize">
+                  {tipo === "VENDEDOR" ? "Vendedor" : "Cliente"}
+                </option>
+              ))}
+            </select>
+          </div>
 
           <button
             type="submit"

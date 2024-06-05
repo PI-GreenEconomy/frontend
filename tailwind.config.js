@@ -21,6 +21,7 @@ export default {
         border: "hsl(var(--border))",
         "muted-foreground": "hsl(var(--muted-foreground))",
         link: "hsl(var(--link))",
+        terra: "hsl(var(--terra))",
       },
       fontFamily: {
         poppins: ["var(--font-poppins), sans-serif"],

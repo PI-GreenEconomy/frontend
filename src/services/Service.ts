@@ -50,3 +50,24 @@ export const atualizar = async (
 export const deletar = async (url: string, header: Object) => {
   await api.delete(url, header);
 };
+
+export const avaliarProduto = async (
+  url: string,
+  novaAvaliacao: number,
+  setDados: Function,
+  header: Object,
+) => {
+  try {
+    // Verifique se a nova avaliação está dentro do intervalo correto
+    if (novaAvaliacao < 0 || novaAvaliacao > 5) {
+      throw new Error("Avaliação inválida. A nota deve estar entre 0 e 5.");
+    }
+
+    const resposta = await api.put(url, { novaAvaliacao }, header);
+    setDados(resposta.data);
+  } catch (error) {
+    // Trate os erros aqui, se necessário
+    console.error("Erro ao avaliar o produto:", error);
+    throw error;
+  }
+};

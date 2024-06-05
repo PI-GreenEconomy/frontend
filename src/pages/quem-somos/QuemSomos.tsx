@@ -1,4 +1,4 @@
-function Contact() {
+function QuemSomos() {
   return (
     <div className="bg-red-700 py-12 md:py-16">
       <div className="text-bold container w-full text-center text-3xl sm:text-5xl md:text-6xl">
@@ -8,4 +8,4 @@ function Contact() {
   );
 }
 
-export default Contact;
+export default QuemSomos;

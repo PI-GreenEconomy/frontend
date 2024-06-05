@@ -53,7 +53,7 @@ function FormProduto() {
   console.log(JSON.stringify(produto));
 
   return (
-    <div className="container mx-auto flex flex-col items-center">
+    <div className="container mx-auto flex flex-col items-center pb-16 pt-4">
       <h1 className="my-8 text-center text-4xl">
         {id !== undefined ? "Editar Produto" : "Cadastrar Produto"}
       </h1>

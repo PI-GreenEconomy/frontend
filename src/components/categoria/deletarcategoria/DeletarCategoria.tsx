@@ -33,7 +33,7 @@ export const DeletarCategoria = () => {
         <div className="flex">
           <button
             className="w-full bg-red-600 py-2 text-slate-100 hover:bg-red-500"
-            onClick={() => navigate("/categoria")}
+            onClick={() => navigate("/categorias")}
           >
             Não
           </button>

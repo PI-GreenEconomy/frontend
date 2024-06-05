@@ -9,6 +9,8 @@ export default interface Produto {
   porcentagemDesconto: number;
   descricao: string;
   foto: string;
+  notaMedia: number;
+  numeroDeAvaliacoes: number;
   categoria: Categoria | null;
   usuario: Usuario | null;
 }

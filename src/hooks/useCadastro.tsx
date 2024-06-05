@@ -13,6 +13,7 @@ export function useCadastro() {
     usuario: "",
     senha: "",
     foto: "",
+    funcao: "USUARIO",
   });
 
   const navigate = useNavigate();

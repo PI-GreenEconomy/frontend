@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link } from "react-router-dom";
 import Categoria from "../../../models/Categoria";
 import {
@@ -49,7 +50,7 @@ function CardCategoria({ categoria }: CardCategoriaProps) {
 
         <Link
           to={`/deletarcategoria/${categoria.id}`}
-          className="flex h-full w-full justify-center rounded-b-lg bg-[#B27538]
+          className="flex h-full w-full justify-center rounded-b-lg bg-terra
           py-4 hover:bg-[#d17b26]"
         >
           <button>Deletar</button>

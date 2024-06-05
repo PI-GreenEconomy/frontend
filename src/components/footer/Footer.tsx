@@ -4,7 +4,7 @@ import { FooterBottom } from "./FooterBottom";
 
 export const Footer = () => {
   return (
-    <footer>
+    <footer className="border-t border-t-border">
       <FooterTop />
       <FooterMedium />
       <FooterBottom />

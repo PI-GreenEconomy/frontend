@@ -12,6 +12,9 @@ export const formSchema = z
       .email("Deve ser um e-mail válido")
       .max(100, "E-mail não pode conter mais de 100 caracteres"),
     foto: z.string().max(5000, "URL da foto inválida"),
+    funcao: z.enum(["USUARIO", "VENDEDOR"], {
+      errorMap: () => ({ message: "Tipo de usuário inválido" }),
+    }),
     senha: z
       .string()
       .min(1, "Senha é obrigatória")
