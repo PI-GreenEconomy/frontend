@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { useProduto } from "../../../hooks/useProduto";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
+import { categorias } from "../../../data/categorias";
 import { useCategoria } from "../../../hooks/useCategoria";
 
 function FormProduto() {
@@ -16,8 +17,8 @@ function FormProduto() {
   const {
     atualizarEstado,
     produto,
-    setProduto,
     isLoading,
+    setProduto,
     buscarProdutoPorId,
     gerarNovoProduto,
   } = useProduto();
@@ -75,7 +76,7 @@ function FormProduto() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="slug">Slug</label>
+          <label htmlFor="slug">Slug do produto</label>
           <input
             value={produto.slug}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>

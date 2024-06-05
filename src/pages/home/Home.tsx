@@ -19,7 +19,7 @@ function Home() {
           <div className="bg-gray-300">
             <div className="container  flex justify-evenly  py-2 font-semibold text-green-950">
               <Link to="/cadproduto">Adicionar Produto</Link>
-              <Link to="/produto">Produtos</Link>
+              <Link to="/produtos">Produtos</Link>
             </div>
           </div>
         </section>

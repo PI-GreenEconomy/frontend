@@ -87,7 +87,6 @@ export const useProduto = (): UseProdutoProps => {
         });
 
         ToastAlerta("Produto atualizado com sucesso", "sucesso");
-        handleLogout();
       } catch (error: any) {
         if (error.toString().includes("403")) {
           navigate("/");
@@ -100,9 +99,7 @@ export const useProduto = (): UseProdutoProps => {
         await cadastrar(`/produtos`, produto, setProduto, {
           headers: { Authorization: token },
         });
-
         ToastAlerta("Produto cadastrado com sucesso", "sucesso");
-        handleLogout();
       } catch (error: any) {
         if (error.toString().includes("403")) {
           navigate("/");

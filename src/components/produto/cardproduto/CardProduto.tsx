@@ -26,7 +26,7 @@ export function CardProduto({ produto }: CardProdutoProps) {
       <div className="flex">
         <Link
           to={`/editarproduto/${produto.id}`}
-          className="flex w-full items-center justify-center bg-indigo-400 py-2 text-white hover:bg-indigo-800"
+          className="flex w-full items-center justify-center  bg-indigo-400 py-2 text-white hover:bg-indigo-800"
         >
           <button>Editar</button>
         </Link>
