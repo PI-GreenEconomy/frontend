@@ -27,7 +27,7 @@ function ListarCategorias() {
       <div className="flex w-full justify-center py-8">
         <div className="container flex flex-col">
           <h2 className="flex justify-center text-3xl font-bold">Categorias</h2>
-          <div className="grid grid-cols-1 gap-8 py-8 ps-10 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid w-[80%] grid-cols-1 gap-8 self-center py-8 md:grid-cols-2 lg:grid-cols-3">
             {categorias.map((categoria) => (
               <CardCategoria key={categoria.id} categoria={categoria} />
             ))}
