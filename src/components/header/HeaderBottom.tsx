@@ -162,10 +162,7 @@ export const HeaderBottom = () => {
             )}
           </div>
 
-          <Link
-            to={"/carrinho"}
-            className="flex items-center justify-center gap-2"
-          >
+          <Link to={"/cart"} className="flex items-center justify-center gap-2">
             <div className="relative">
               <ShoppingCart className="z-10 size-7" />
               <span className="absolute bottom-[21px] left-4 right-0 flex size-4 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">

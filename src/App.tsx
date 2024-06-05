@@ -20,96 +20,101 @@ import Login from "./pages/login/Login";
 import Cadastro from "./pages/cadastro/Cadastro";
 import QuemSomos from "./pages/quem-somos/QuemSomos";
 import { Produtos } from "./pages/produtos/Produtos";
+import { CartProvider } from "./contexts/CartContext";
+import Cart from "./components/carrinho/cart/Cart";
 
 export default function App() {
   return (
     <div className="bg-background text-foreground">
       <AuthProvider>
-        <ToastContainer />
+        <CartProvider>
+          <ToastContainer />
 
-        <BrowserRouter>
-          <ScrollToTop />
+          <BrowserRouter>
+            <ScrollToTop />
 
-          <div className="font-roboto flex min-h-screen flex-col">
-            <Header />
-            <div>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/quem-somos" element={<QuemSomos />} />
-                <Route path="/contato" element={<Contact />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/cadastro" element={<Cadastro />} />
-                <Route
-                  path="/cadastrarcategoria"
-                  element={
-                    <ProtectedRouterAdmin>
-                      <FormCategoria />
-                    </ProtectedRouterAdmin>
-                  }
-                />
-                <Route
-                  path="/categorias"
-                  element={
-                    <ProtectedRouterAdmin>
-                      <ListarCategoria />
-                    </ProtectedRouterAdmin>
-                  }
-                />
-                <Route
-                  path="/editarcategoria/:id"
-                  element={
-                    <ProtectedRouterAdmin>
-                      <FormCategoria />
-                    </ProtectedRouterAdmin>
-                  }
-                />
-                <Route
-                  path="/deletarcategoria/:id"
-                  element={
-                    <ProtectedRouterAdmin>
-                      <DeletarCategoria />
-                    </ProtectedRouterAdmin>
-                  }
-                />
-                <Route
-                  path="/cadastrarproduto"
-                  element={
-                    <ProtectedRouterAdmin>
-                      <FormProduto />
-                    </ProtectedRouterAdmin>
-                  }
-                />
-                <Route path="/produtos" element={<Produtos />} />
-                <Route
-                  path="/editarproduto/:id"
-                  element={
-                    <ProtectedRouterAdmin>
-                      <FormProduto />
-                    </ProtectedRouterAdmin>
-                  }
-                />
-                <Route
-                  path="/deletarproduto/:id"
-                  element={
-                    <ProtectedRouterAdmin>
-                      <DeletarProduto />
-                    </ProtectedRouterAdmin>
-                  }
-                />
-                <Route
-                  path="/perfil"
-                  element={
-                    <ProtectedRouterUser>
-                      <Perfil />
-                    </ProtectedRouterUser>
-                  }
-                />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+            <div className="font-roboto flex min-h-screen flex-col">
+              <Header />
+              <div>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/quem-somos" element={<QuemSomos />} />
+                  <Route path="/contato" element={<Contact />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/cadastro" element={<Cadastro />} />
+                  <Route
+                    path="/cadastrarcategoria"
+                    element={
+                      <ProtectedRouterAdmin>
+                        <FormCategoria />
+                      </ProtectedRouterAdmin>
+                    }
+                  />
+                  <Route
+                    path="/categorias"
+                    element={
+                      <ProtectedRouterAdmin>
+                        <ListarCategoria />
+                      </ProtectedRouterAdmin>
+                    }
+                  />
+                  <Route
+                    path="/editarcategoria/:id"
+                    element={
+                      <ProtectedRouterAdmin>
+                        <FormCategoria />
+                      </ProtectedRouterAdmin>
+                    }
+                  />
+                  <Route
+                    path="/deletarcategoria/:id"
+                    element={
+                      <ProtectedRouterAdmin>
+                        <DeletarCategoria />
+                      </ProtectedRouterAdmin>
+                    }
+                  />
+                  <Route
+                    path="/cadastrarproduto"
+                    element={
+                      <ProtectedRouterAdmin>
+                        <FormProduto />
+                      </ProtectedRouterAdmin>
+                    }
+                  />
+                  <Route path="/produtos" element={<Produtos />} />
+                  <Route
+                    path="/editarproduto/:id"
+                    element={
+                      <ProtectedRouterAdmin>
+                        <FormProduto />
+                      </ProtectedRouterAdmin>
+                    }
+                  />
+                  <Route
+                    path="/deletarproduto/:id"
+                    element={
+                      <ProtectedRouterAdmin>
+                        <DeletarProduto />
+                      </ProtectedRouterAdmin>
+                    }
+                  />
+                  <Route
+                    path="/perfil"
+                    element={
+                      <ProtectedRouterUser>
+                        <Perfil />
+                      </ProtectedRouterUser>
+                    }
+                  />
+                  <Route path="/cart" element={<Cart />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </div>
+              <Footer />
             </div>
-            <Footer />
-          </div>
-        </BrowserRouter>
+          </BrowserRouter>
+        </CartProvider>
       </AuthProvider>
     </div>
   );
