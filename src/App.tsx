@@ -23,6 +23,7 @@ import Produtos from "./pages/produtos/Produtos";
 import { CartProvider } from "./contexts/CartContext";
 import Cart from "./components/carrinho/cart/Cart";
 import { Avaliacao } from "./pages/avaliacao/Avaliacao";
+import { NewsLetter } from "./components/newsletter/NewsLetter";
 
 export default function App() {
   return (
@@ -121,6 +122,7 @@ export default function App() {
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </div>
+              <NewsLetter />
               <Footer />
             </div>
           </BrowserRouter>
