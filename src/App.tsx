@@ -20,6 +20,7 @@ import Login from "./pages/login/Login";
 import Cadastro from "./pages/cadastro/Cadastro";
 import QuemSomos from "./pages/quem-somos/QuemSomos";
 import { Produtos } from "./pages/produtos/Produtos";
+import { NewsLetter } from "./components/newsletter/NewsLetter";
 
 export default function App() {
   return (
@@ -107,6 +108,7 @@ export default function App() {
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>
+            <NewsLetter />
             <Footer />
           </div>
         </BrowserRouter>
