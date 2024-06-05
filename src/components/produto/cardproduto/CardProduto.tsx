@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { ArrowDown } from "lucide-react";
 import Produto from "../../../models/Produto";
 
 interface CardProdutoProps {
@@ -7,35 +7,33 @@ interface CardProdutoProps {
 
 export function CardProduto({ produto }: CardProdutoProps) {
   return (
-    <div className="flex flex-col justify-between overflow-hidden rounded border border-slate-900">
-      <div>
-        <div className="flex w-full items-center gap-4 bg-indigo-400 px-4 py-2">
-          <img src={produto.foto} className="h-12 rounded-full" alt="" />
-          <h3 className="text-center text-lg font-bold uppercase ">
-            {produto.nome}
-          </h3>
+    <div className="flex justify-center">
+      <div className="flex w-64 flex-col gap-4 rounded-md px-4 py-4 shadow-md">
+        <div className="absolute flex items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
+          <div className="flex w-14 rounded border-solid bg-primary font-poppins text-sm text-white">
+            <p className="w-5 p-1.5">
+              <ArrowDown size={14} color="#ffffff" />
+            </p>
+            <p className="p-1">{produto.porcentagemDesconto}%</p>
+          </div>
         </div>
-        <div className="p-4 ">
-          <h4 className="text-lg font-semibold uppercase">
+        <div>
+          <img
+            src={produto.foto}
+            className="h-50 items-center rounded"
+            alt=""
+          />
+        </div>
+        <div>
+          <p className="text-sm">avaliações</p>
+          <h3 className="text-left">{produto.nome}</h3>
+          <h4 className="text-left text-base font-semibold uppercase">
             R$ {produto.basePreco}
           </h4>
-          <p>{produto.descricao}</p>
-          <p>Tema: {produto.categoria?.tipo}</p>
+          <p className="text-xs">
+            em até 10x de R$ {produto.porcentagemDesconto} sem juros
+          </p>
         </div>
-      </div>
-      <div className="flex">
-        <Link
-          to={`/editarproduto/${produto.id}`}
-          className="flex w-full items-center justify-center  bg-indigo-400 py-2 text-white hover:bg-indigo-800"
-        >
-          <button>Editar</button>
-        </Link>
-        <Link
-          to={`/deletarproduto/${produto.id}`}
-          className="flex w-full items-center justify-center bg-red-400 text-white hover:bg-red-700"
-        >
-          <button>Deletar</button>
-        </Link>
       </div>
     </div>
   );

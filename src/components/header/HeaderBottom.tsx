@@ -8,6 +8,7 @@ import { Sheet, SheetClose, SheetContent, SheetTrigger } from "../ui/Sheet";
 import { NavbarMobile } from "./Navbar";
 import { links } from "../../data/linksMenu";
 import { ToastAlerta } from "../../utils/ToastAlerta";
+import NavTabs from "./NavTabs";
 
 export const HeaderBottom = () => {
   const navigate = useNavigate();
@@ -178,6 +179,7 @@ export const HeaderBottom = () => {
                 </Link>
               </div>
             )}
+            <NavTabs />
           </div>
 
           <Link
