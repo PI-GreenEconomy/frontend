@@ -1,15 +1,12 @@
-import { useProduto } from "../../../hooks/useProduto";
-import { useEffect } from "react";
 import { DNA } from "react-loader-spinner";
 import { CardProduto } from "../cardproduto/CardProduto";
+import Produto from "../../../models/Produto";
 
-export const ListarProduto = () => {
-  const { buscarProdutos, produtos } = useProduto();
+interface ListarProdutoProps {
+  produtos: Produto[];
+}
 
-  useEffect(() => {
-    buscarProdutos();
-  }, [produtos.length]);
-
+export const ListarProduto = ({ produtos }: ListarProdutoProps) => {
   return (
     <>
       {produtos.length === 0 && (

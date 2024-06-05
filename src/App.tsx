@@ -19,9 +19,10 @@ import NotFound from "./pages/not-found/NotFound";
 import Login from "./pages/login/Login";
 import Cadastro from "./pages/cadastro/Cadastro";
 import QuemSomos from "./pages/quem-somos/QuemSomos";
-import { Produtos } from "./pages/produtos/Produtos";
+import Produtos from "./pages/produtos/Produtos";
 import { CartProvider } from "./contexts/CartContext";
 import Cart from "./components/carrinho/cart/Cart";
+import { Avaliacao } from "./pages/avaliacao/Avaliacao";
 
 export default function App() {
   return (
@@ -83,6 +84,15 @@ export default function App() {
                     }
                   />
                   <Route path="/produtos" element={<Produtos />} />
+                  <Route path="/produtos/:id" element={<Produtos />} />
+                  <Route
+                    path="/produtos/:id/:slug/avaliar"
+                    element={
+                      <ProtectedRouterUser>
+                        <Avaliacao />
+                      </ProtectedRouterUser>
+                    }
+                  />
                   <Route
                     path="/editarproduto/:id"
                     element={
