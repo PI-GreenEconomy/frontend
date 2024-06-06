@@ -12,7 +12,7 @@ import {
   BoxIcon,
 } from "lucide-react";
 
-export const icons: any = {
+export const iconsCategoria: any = {
   default: <BoxIcon className="size-7" />,
   vestuario: <ShirtIcon className="size-7" />,
   alimento: <SaladIcon className="size-7" />,
