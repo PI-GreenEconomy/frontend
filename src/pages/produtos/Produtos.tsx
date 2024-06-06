@@ -1,10 +1,10 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { ListarProduto } from "../../components/produto/listarproduto/ListarProduto";
 import Paginacao from "./components/Paginacao";
 import { useState } from "react";
 import { useProduto } from "../../hooks/useProduto";
 import { calcularValorTotalProduto } from "../../utils/preco";
 import { ChevronRightIcon } from "lucide-react";
+import { ListarProdutoCategoria } from "../../components/produto/listarprodutocategoria/ListarProdutoCategoria";
 
 const tiposDeFiltros = [
   {
@@ -30,7 +30,7 @@ const tiposDeFiltros = [
 ];
 
 function Produtos() {
-  const { id } = useParams();
+  const { id, tipo } = useParams();
   const navegar = useNavigate();
 
   const { produtos } = useProduto();
@@ -40,6 +40,12 @@ function Produtos() {
   const [paginaAtual, setPaginaAtual] = useState(idAtual);
   const [tipoFiltro, setTipoFiltro] = useState("default");
   const itensPorPagina = 5;
+
+  const produtosCategoria = tipo
+    ? produtos.filter((produto) => tipo === produto.categoria?.slug)
+    : produtos;
+
+  console.log(produtosCategoria);
 
   const mudarPagina = (numeroPagina: number) => {
     setPaginaAtual(numeroPagina);
@@ -54,7 +60,7 @@ function Produtos() {
   };
 
   const proximaPagina = () => {
-    if (paginaAtual < Math.ceil(produtos.length / itensPorPagina)) {
+    if (paginaAtual < Math.ceil(produtosCategoria.length / itensPorPagina)) {
       const novaPaginaAtual = paginaAtual + 1;
       setPaginaAtual(novaPaginaAtual);
       navegar(`/produtos/${novaPaginaAtual}`);
@@ -67,7 +73,10 @@ function Produtos() {
 
   const indiceUltimoItem = paginaAtual * itensPorPagina;
   const indicePrimeiroItem = indiceUltimoItem - itensPorPagina;
-  const produtosAtuais = produtos.slice(indicePrimeiroItem, indiceUltimoItem);
+  const produtosAtuais = produtosCategoria.slice(
+    indicePrimeiroItem,
+    indiceUltimoItem,
+  );
 
   const produtosFiltrados = [...produtosAtuais].sort((produtoA, produtoB) => {
     const precoProdutoA = calcularValorTotalProduto(produtoA);
@@ -106,7 +115,7 @@ function Produtos() {
       </div>
       <h2 className="mb-12 text-3xl">Todos os Produtos</h2>
       <div className="mb-14 flex items-center justify-between">
-        <p>Foram encontrados no total 48 produtos</p>
+        <p>Foram encontrados no total {produtosFiltrados.length} produtos</p>
         <div className="flex items-center gap-4">
           <label htmlFor="filtro">Ordenar por</label>
           <select
@@ -127,10 +136,10 @@ function Produtos() {
           </select>
         </div>
       </div>
-      <ListarProduto produtos={produtosFiltrados} />
+      <ListarProdutoCategoria produtos={produtosFiltrados} />
       <Paginacao
         itemsPorPagina={itensPorPagina}
-        totalItens={produtos.length}
+        totalItens={produtosFiltrados.length}
         paginaAtual={paginaAtual}
         irPaginaSeguinte={proximaPagina}
         irPaginaAnterior={paginaAnterior}

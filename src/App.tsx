@@ -92,7 +92,7 @@ export default function App() {
                     element={<Produto />}
                   />
                   <Route
-                    path="/produtos/categoria/:id"
+                    path="/produtos/categoria/:tipo"
                     element={<Produtos />}
                   />
 

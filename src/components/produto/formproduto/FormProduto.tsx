@@ -50,10 +50,6 @@ function FormProduto() {
 
   const carregandoCategoria = !categoria.tipo;
 
-  useEffect(() => {
-    console.log(categoria.tipo);
-  }, [categoria]);
-
   // console.log(JSON.stringify(produto));
 
   return (

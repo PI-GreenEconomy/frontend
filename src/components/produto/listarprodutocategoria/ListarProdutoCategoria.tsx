@@ -1,25 +1,33 @@
 import { useParams } from "react-router-dom";
 import { ListarProduto } from "../listarproduto/ListarProduto";
 import Produto from "../../../models/Produto";
-import Categoria from "../../../models/Categoria";
 
 interface ListarProdutoCategoriaProps {
   produtos: Produto[];
-  categoria?: Categoria;
+  tipoCategoria?: string;
 }
 
 export const ListarProdutoCategoria = ({
   produtos,
+  tipoCategoria,
 }: ListarProdutoCategoriaProps) => {
   const { categoria } = useParams();
 
-  const produtosCategoria = categoria
-    ? produtos.filter((produto) => categoria === produto.categoria?.slug)
-    : produtos;
+  let produtosFiltrados = produtos;
+
+  if (categoria) {
+    produtosFiltrados = produtos.filter(
+      (produto) => categoria === produto.categoria?.slug,
+    );
+  } else if (tipoCategoria) {
+    produtosFiltrados = produtos.filter(
+      (produto) => tipoCategoria === produto.categoria?.slug,
+    );
+  }
 
   return (
     <div>
-      <ListarProduto produtos={produtosCategoria} />
+      <ListarProduto produtos={produtosFiltrados} />
     </div>
   );
 };

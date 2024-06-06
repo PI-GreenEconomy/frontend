@@ -9,15 +9,19 @@ import { ToastAlerta } from "../utils/ToastAlerta";
 interface UseCategoriaProps {
   buscarCategorias(): Promise<void>;
   buscarCategoriaPorId(id: string): Promise<void>;
+  buscarCategoriaPorTipo(tipo: string): Promise<void>;
   deletarCategoria(id: string): Promise<void>;
   atualizarEstado(e: ChangeEvent<HTMLInputElement>): void;
   gerarNovaCategoria(e: ChangeEvent<HTMLFormElement>): Promise<void>;
   categorias: Categoria[];
   categoria: Categoria;
+  categoriasProduto: Categoria[];
+
   isLoading: boolean;
   setCategorias: React.Dispatch<React.SetStateAction<Categoria[]>>;
   setCategoria: React.Dispatch<React.SetStateAction<Categoria>>;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setCategoriasProduto: React.Dispatch<React.SetStateAction<Categoria[]>>;
 }
 
 export const useCategoria = (): UseCategoriaProps => {
@@ -25,6 +29,8 @@ export const useCategoria = (): UseCategoriaProps => {
   const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const [categoriasProduto, setCategoriasProduto] = useState<Categoria[]>([]);
 
   const { id } = useParams<{ id: string }>();
   const { usuario, handleLogout } = useContext(AuthContext);
@@ -57,9 +63,9 @@ export const useCategoria = (): UseCategoriaProps => {
     }
   }
 
-  async function buscarCategoriaPorId(tipo: string) {
+  async function buscarCategoriaPorTipo(tipo: string) {
     try {
-      await buscar(`/categorias/${tipo}`, setCategoria, {
+      await buscar(`/categorias/tipo/${tipo}`, setCategoriasProduto, {
         headers: {
           Authorization: token,
         },
@@ -146,6 +152,7 @@ export const useCategoria = (): UseCategoriaProps => {
   return {
     buscarCategorias,
     buscarCategoriaPorId,
+    buscarCategoriaPorTipo,
     deletarCategoria,
     atualizarEstado,
     gerarNovaCategoria,
@@ -155,5 +162,7 @@ export const useCategoria = (): UseCategoriaProps => {
     setCategorias,
     setCategoria,
     setIsLoading,
+    categoriasProduto,
+    setCategoriasProduto,
   };
 };
