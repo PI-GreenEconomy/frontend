@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface Participante {
   id: number;
@@ -103,14 +103,30 @@ function QuemSomos() {
                 }`}
                 onMouseEnter={() => setHoveredCard(index)}
                 onMouseLeave={() => setHoveredCard(null)}
+                style={{
+                  transform: hoveredCard === index ? "scale(1.05)" : "scale(1)",
+                  transition: "transform 0.3s ease",
+                  boxShadow:
+                    hoveredCard === index
+                      ? "0 10px 20px rgba(0,0,0,0.2)"
+                      : "0 4px 8px rgba(0,0,0,0.1)",
+                }}
               >
-                <div className="flex">
+                {/* Container de coluna flexível */}
+                <div className="flex flex-col items-center">
+                  {/* Imagem do participante em preto e branco com borda branca */}
                   <img
                     src={participante.foto}
                     alt={participante.nome}
-                    className="h-auto w-3/4 transform object-cover transition-transform duration-300 hover:scale-105"
+                    className="h-auto w-3/4 rounded-lg object-cover grayscale transition-transform duration-300 hover:scale-105"
+                    style={{
+                      border: "4px solid white",
+                      filter:
+                        hoveredCard === index ? "none" : "grayscale(100%)",
+                    }}
                   />
-                  <div className="w-1/4 p-6">
+                  {/* Informações do participante */}
+                  <div className="w-3/4 p-6 text-center">
                     <h3 className="mb-2 text-xl font-bold text-gray-800">
                       {participante.nome}
                     </h3>

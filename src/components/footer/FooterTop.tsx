@@ -5,7 +5,7 @@ import { links } from "../../data/linksMenu";
 
 export const FooterTop = () => {
   return (
-    <div className="flex w-full justify-around gap-2 py-16">
+    <div className="flex w-full justify-around gap-2 bg-yellow-900 py-16">
       <div className="container flex flex-wrap justify-start gap-x-6 gap-y-12 sm:justify-between sm:gap-y-8">
         {/* Logo e descrição */}
         <div className="flex flex-col items-start gap-3">
@@ -14,7 +14,7 @@ export const FooterTop = () => {
             alt="Green Economy Logo"
             className="mb-3 h-16"
           />
-          <p className="max-w-[90%] text-sm leading-6 text-gray-600 sm:max-w-72">
+          <p className="text-white-600 max-w-[90%] text-sm leading-6 sm:max-w-72">
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry's standard dummy text
             ever since the 1500s, when an unknown printer took a galley of type
