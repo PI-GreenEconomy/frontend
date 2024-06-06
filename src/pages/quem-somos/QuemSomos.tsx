@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import QuemSomosBody from "./QuemSomosBody";
 
 interface Participante {
   id: number;
@@ -134,76 +135,83 @@ function QuemSomos() {
   );
 
   return (
-    <div className="bg-green-800 py-12 md:py-16">
-      <div className="container mx-auto">
-        <h2 className="text-bold mb-8 text-center text-3xl text-white sm:text-5xl md:text-6xl">
-          Quem Somos
-        </h2>
-        <div className="grid grid-cols-1 justify-center gap-6 md:grid-cols-3">
-          {participantes
-            .slice(currentSlide, currentSlide + 3)
-            .map((participante, index) => (
-              <div
-                key={participante.id}
-                className={`overflow-hidden rounded-lg border border-gray-300 bg-white ${
-                  hoveredCard === index ? "hovered" : ""
-                }`}
-                onMouseEnter={() => setHoveredCard(index)}
-                onMouseLeave={() => setHoveredCard(null)}
-                style={{
-                  transform:
-                    hoveredCard === index
-                      ? "scale(1.05) rotate(2deg)"
-                      : "scale(1)",
-                  transition: "transform 0.3s ease",
-                  boxShadow:
-                    hoveredCard === index
-                      ? "0 10px 20px rgba(0,0,0,0.4)" // Alteração na sombra para um tom mais escuro
-                      : "0 4px 8px rgba(0,0,0,0.1)",
-                }}
-              >
-                <div className="flex flex-col items-center">
-                  <img
-                    src={participante.foto}
-                    alt={`${participante.nome} Foto`}
-                    className="h-auto w-3/4 rounded-lg object-cover grayscale transition-transform duration-300 hover:scale-105"
+    <>
+      {/*<QuemSomosBody/> */}
+      <div>
+        <div className="bg-green-800 py-12 md:py-16">
+          <div className="container mx-auto">
+            <h2 className="text-bold mb-8 text-center text-3xl text-white sm:text-5xl md:text-6xl">
+              Quem Somos
+            </h2>
+            <div className="grid grid-cols-1 justify-center gap-6 md:grid-cols-3">
+              {participantes
+                .slice(currentSlide, currentSlide + 3)
+                .map((participante, index) => (
+                  <div
+                    key={participante.id}
+                    className={`overflow-hidden rounded-lg border border-gray-300 bg-white ${
+                      hoveredCard === index ? "hovered" : ""
+                    }`}
+                    onMouseEnter={() => setHoveredCard(index)}
+                    onMouseLeave={() => setHoveredCard(null)}
                     style={{
-                      border: "4px solid #3E2723", // Alteração da cor da borda para cinza
-                      filter:
-                        hoveredCard === index ? "none" : "grayscale(100%)",
+                      transform:
+                        hoveredCard === index
+                          ? "scale(1.05) rotate(2deg)"
+                          : "scale(1)",
+                      transition: "transform 0.3s ease",
                       boxShadow:
                         hoveredCard === index
-                          ? "0 15px 30px rgba(0,0,0,0.5)"
-                          : "none", // Adicionando sombra para dar profundidade quando o mouse está sobre a imagem
+                          ? "0 10px 20px rgba(0,0,0,0.4)" // Alteração na sombra para um tom mais escuro
+                          : "0 4px 8px rgba(0,0,0,0.1)",
                     }}
-                  />
-                  <div className="w-3/4 p-6 text-center">
-                    <h3 className="mb-2 text-xl font-bold text-gray-900">
-                      {participante.nome}
-                    </h3>
-                    <p className="mb-2 text-gray-900">{participante.cargo}</p>
-                    {generateSocialLinks(participante)}
+                  >
+                    <div className="flex flex-col items-center">
+                      <img
+                        src={participante.foto}
+                        alt={`${participante.nome} Foto`}
+                        className="h-auto w-3/4 rounded-lg object-cover grayscale transition-transform duration-300 hover:scale-105"
+                        style={{
+                          border: "4px solid #3E2723", // Alteração da cor da borda para cinza
+                          filter:
+                            hoveredCard === index ? "none" : "grayscale(100%)",
+                          boxShadow:
+                            hoveredCard === index
+                              ? "0 15px 30px rgba(0,0,0,0.5)"
+                              : "none", // Adicionando sombra para dar profundidade quando o mouse está sobre a imagem
+                        }}
+                      />
+                      <div className="w-3/4 p-6 text-center">
+                        <h3 className="mb-2 text-xl font-bold text-gray-900">
+                          {participante.nome}
+                        </h3>
+                        <p className="mb-2 text-gray-900">
+                          {participante.cargo}
+                        </p>
+                        {generateSocialLinks(participante)}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            ))}
-        </div>
-        <div className="mt-6 flex justify-center">
-          <button
-            onClick={handlePrevSlide}
-            className="bg-yellow mr-4 rounded px-4 py-2 text-white hover:bg-green-900"
-          >
-            Anterior
-          </button>
-          <button
-            onClick={handleNextSlide}
-            className="bg-yellow rounded px-4 py-2 text-white hover:bg-green-900"
-          >
-            Próximo
-          </button>
+                ))}
+            </div>
+            <div className="mt-6 flex justify-center">
+              <button
+                onClick={handlePrevSlide}
+                className="bg-yellow mr-4 rounded px-4 py-2 text-white hover:bg-green-900"
+              >
+                Anterior
+              </button>
+              <button
+                onClick={handleNextSlide}
+                className="bg-yellow rounded px-4 py-2 text-white hover:bg-green-900"
+              >
+                Próximo
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
