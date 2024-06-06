@@ -1,6 +1,6 @@
 export const FooterMedium = () => {
   return (
-    <div className="flex w-full justify-around bg-yellow-700 py-8 text-foreground">
+    <div className="flex w-full justify-around bg-white py-8 text-foreground">
       <div className="container flex w-full flex-wrap justify-between gap-x-4 gap-y-6">
         {/* Formas de Pagamento */}
         <div className="flex flex-col gap-3">

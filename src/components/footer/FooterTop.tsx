@@ -5,7 +5,7 @@ import { links } from "../../data/linksMenu";
 
 export const FooterTop = () => {
   return (
-    <div className="flex w-full justify-around gap-2 bg-yellow-900 py-16">
+    <div className="flex w-full justify-around gap-2 bg-white py-16">
       <div className="container flex flex-wrap justify-start gap-x-6 gap-y-12 sm:justify-between sm:gap-y-8">
         {/* Logo e descrição */}
         <div className="flex flex-col items-start gap-3">
