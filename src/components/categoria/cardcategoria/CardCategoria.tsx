@@ -1,31 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link } from "react-router-dom";
 import Categoria from "../../../models/Categoria";
-import {
-  ShirtIcon,
-  SaladIcon,
-  BathIcon,
-  BoneIcon,
-  HomeIcon,
-  BookOpenIcon,
-  UtensilsIcon,
-  LeafIcon,
-  PercentIcon,
-  BoxIcon,
-} from "lucide-react";
-
-const icons: any = {
-  default: <BoxIcon className="size-8" />,
-  vestuario: <ShirtIcon className="size-8" />,
-  alimento: <SaladIcon className="size-8" />,
-  higiene: <BathIcon className="size-8" />,
-  pets: <BoneIcon className="size-8" />,
-  casa: <HomeIcon className="size-8" />,
-  papelaria: <BookOpenIcon className="size-8" />,
-  utensilios: <UtensilsIcon className="size-8" />,
-  artesanal: <LeafIcon className="size-8" />,
-  ofertas: <PercentIcon className="size-8" />,
-};
+import { iconsCategoria } from "../../../data/iconCategorias";
 
 interface CardCategoriaProps {
   categoria: Categoria;
@@ -36,7 +12,7 @@ function CardCategoria({ categoria }: CardCategoriaProps) {
     <div className="container max-w-60 items-center justify-center">
       <div className="flex w-full flex-col rounded-lg border border-slate-300">
         <div className="align-center flex h-full flex-col items-center justify-center py-8">
-          {icons[categoria.slug] || icons["default"]}
+          {iconsCategoria[categoria.slug] || iconsCategoria["default"]}
           <p className="text-xl font-bold">{categoria.tipo}</p>
         </div>
       </div>

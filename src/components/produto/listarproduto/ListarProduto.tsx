@@ -19,7 +19,7 @@ export const ListarProduto = ({ produtos }: ListarProdutoProps) => {
           wrapperClass="dna-wrapper mx-auto"
         />
       )}
-      <div className="my-4 grid grid-cols-4">
+      <div className="my-4 grid grid-cols-4 gap-8">
         {produtos.map((produto) => (
           <CardProduto key={produto.id} produto={produto} />
         ))}
