@@ -48,9 +48,13 @@ function FormProduto() {
     }
   }, [token]);
 
-  const carregandoCategoria = categoria.tipo === "";
+  const carregandoCategoria = !categoria.tipo;
 
-  console.log(JSON.stringify(produto));
+  useEffect(() => {
+    console.log(categoria.tipo);
+  }, [categoria]);
+
+  // console.log(JSON.stringify(produto));
 
   return (
     <div className="container mx-auto flex flex-col items-center pb-16 pt-4">
@@ -171,16 +175,16 @@ function FormProduto() {
               Selecione uma Categoria
             </option>
             {categorias.map((categoria) => (
-              <>
-                <option value={categoria.id}>{categoria.tipo}</option>
-              </>
+              <option key={categoria.id} value={categoria.id}>
+                {categoria.tipo}
+              </option>
             ))}
           </select>
         </div>
         <button
           type="submit"
           disabled={carregandoCategoria}
-          className=" flex justify-center rounded-lg bg-primary py-2 text-white hover:bg-primary/90 focus:bg-primary/90"
+          className=" flex cursor-pointer justify-center rounded-lg bg-primary py-2 text-white hover:bg-primary/90 focus:bg-primary/90 disabled:cursor-default disabled:bg-primary/50"
         >
           {isLoading ? (
             <RotatingLines

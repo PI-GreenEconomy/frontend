@@ -13,6 +13,8 @@ export const EstrelaProdutos = ({
   const fullStars = Math.floor(notaMedia);
   const hasHalfStar = notaMedia - fullStars >= 0.05;
 
+  const novaNotaMedia = notaMedia ? notaMedia.toFixed(1) : "0.0";
+
   return (
     <div className="flex items-center">
       {[...Array(totalStars)].map((_, index) => {
@@ -37,7 +39,7 @@ export const EstrelaProdutos = ({
         }
       })}
       <div className="ml-1 text-sm text-muted-foreground">
-        <span className="mx-1">{notaMedia > 0 && notaMedia.toFixed(1)}</span>
+        <span className="mx-1">{novaNotaMedia}</span>
         <span>({numeroDeAvaliacoes} avaliações)</span>
       </div>
     </div>
