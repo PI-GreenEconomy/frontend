@@ -24,7 +24,7 @@ import { CartProvider } from "./contexts/CartContext";
 import Cart from "./components/carrinho/cart/Cart";
 import { Avaliacao } from "./pages/avaliacao/Avaliacao";
 import { Produto } from "./pages/produto/Produto";
-import { NewsLetter } from "./components/newsletter/NewsLetter2";
+import { NewsLetter } from "./components/newsletter/NewsLetter";
 
 export default function App() {
   return (
