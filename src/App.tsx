@@ -24,6 +24,7 @@ import { CartProvider } from "./contexts/CartContext";
 import Cart from "./components/carrinho/cart/Cart";
 import { Avaliacao } from "./pages/avaliacao/Avaliacao";
 import { NewsLetter } from "./components/newsletter/NewsLetter";
+import Produto from "./pages/produto/Produto";
 
 export default function App() {
   return (
@@ -118,6 +119,7 @@ export default function App() {
                       </ProtectedRouterUser>
                     }
                   />
+                  <Route path="/produto" element={<Produto />} />
                   <Route path="/cart" element={<Cart />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
