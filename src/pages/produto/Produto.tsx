@@ -149,14 +149,17 @@ export const Produto = () => {
           <div className="flex flex-col gap-8">
             <div className="my-3 mt-6 flex font-poppins">
               <p className="mr-2 font-semibold">Compartilhe:</p>
-              <Link className="ml-1 mr-2 text-slate-500" to={"/"}>
+              <Link
+                className="ml-1 mr-2 text-slate-500"
+                to={"https://linktr.ee/Greenconomy"}
+              >
                 <Facebook />
               </Link>
-              <Link className="ml-1 mr-2 text-slate-500" to={"/"}>
+              <Link
+                className="ml-1 mr-2 text-slate-500"
+                to={"https://linktr.ee/Greenconomy"}
+              >
                 <Instagram />
-              </Link>
-              <Link className="ml-1 text-slate-500" to={"/"}>
-                <Twitter />
               </Link>
             </div>
             <ul className="flex gap-2">

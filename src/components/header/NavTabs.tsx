@@ -48,7 +48,7 @@ const NavTabs = () => {
             {usuarioAdministrador && (
               <>
                 <Link
-                  to={"/produtos"}
+                  to={"/seusprodutos"}
                   className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                 >
                   Seus Produtos
@@ -57,7 +57,19 @@ const NavTabs = () => {
                   to={"/cadastrarproduto"}
                   className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                 >
-                  Cadastrar Produtos
+                  Cadastrar Produto
+                </Link>
+                <Link
+                  to={"/categorias"}
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                >
+                  Categorias
+                </Link>
+                <Link
+                  to={"/cadastrarcategoria"}
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                >
+                  Cadastrar Categoria
                 </Link>
               </>
             )}
@@ -67,7 +79,7 @@ const NavTabs = () => {
               onClick={logout}
               className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
             >
-              Sair - implementar
+              Sair
             </Link>
           </div>
         )}
