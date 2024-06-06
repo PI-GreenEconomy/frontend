@@ -151,11 +151,14 @@ function QuemSomos() {
                 onMouseEnter={() => setHoveredCard(index)}
                 onMouseLeave={() => setHoveredCard(null)}
                 style={{
-                  transform: hoveredCard === index ? "scale(1.05)" : "scale(1)",
+                  transform:
+                    hoveredCard === index
+                      ? "scale(1.05) rotate(2deg)"
+                      : "scale(1)",
                   transition: "transform 0.3s ease",
                   boxShadow:
                     hoveredCard === index
-                      ? "0 10px 20px rgba(0,0,0,0.2)"
+                      ? "0 10px 20px rgba(0,0,0,0.4)" // Alteração na sombra para um tom mais escuro
                       : "0 4px 8px rgba(0,0,0,0.1)",
                 }}
               >
@@ -165,9 +168,13 @@ function QuemSomos() {
                     alt={`${participante.nome} Foto`}
                     className="h-auto w-3/4 rounded-lg object-cover grayscale transition-transform duration-300 hover:scale-105"
                     style={{
-                      border: "4px solid white",
+                      border: "4px solid #3E2723", // Alteração da cor da borda para cinza
                       filter:
                         hoveredCard === index ? "none" : "grayscale(100%)",
+                      boxShadow:
+                        hoveredCard === index
+                          ? "0 15px 30px rgba(0,0,0,0.5)"
+                          : "none", // Adicionando sombra para dar profundidade quando o mouse está sobre a imagem
                     }}
                   />
                   <div className="w-3/4 p-6 text-center">
@@ -184,13 +191,13 @@ function QuemSomos() {
         <div className="mt-6 flex justify-center">
           <button
             onClick={handlePrevSlide}
-            className="bg-dark-green mr-4 rounded px-4 py-2 text-white hover:bg-green-900"
+            className="bg-yellow mr-4 rounded px-4 py-2 text-white hover:bg-green-900"
           >
             Anterior
           </button>
           <button
             onClick={handleNextSlide}
-            className="bg-dark-green rounded px-4 py-2 text-white hover:bg-green-900"
+            className="bg-yellow rounded px-4 py-2 text-white hover:bg-green-900"
           >
             Próximo
           </button>
