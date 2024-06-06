@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useProduto } from "../../hooks/useProduto";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { EstrelaProdutos } from "../../components/EstrelaProdutos";
 import { calcularValorTotalProduto, formatarMoeda } from "../../utils/preco";
 import { BotaoQuantidade } from "../../components/BotaoQuantidade";

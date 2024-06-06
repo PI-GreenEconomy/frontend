@@ -4,7 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { useProduto } from "../../../hooks/useProduto";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
-import { categorias } from "../../../data/categorias";
 import { useCategoria } from "../../../hooks/useCategoria";
 
 function FormProduto() {

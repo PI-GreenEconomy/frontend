@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { ToastAlerta } from "../../utils/ToastAlerta";
 import home from "../../assets/home/banner.jpg";
@@ -18,9 +18,6 @@ function Perfil() {
       navigate("/login");
     }
   }, [usuario.token]);
-
-  const usuarioAdministrador =
-    usuario.funcao === "VENDEDOR" || usuario.funcao === "ADMIN";
 
   return (
     <div className="overflow-hidden bg-primary">
