@@ -1,77 +1,100 @@
-import { ArrowDown } from "lucide-react";
-import Produto from "../../../models/Produto";
 import { useContext } from "react";
+import Produto from "../../../models/Produto";
 import { CartContext } from "../../../contexts/CartContext";
-import { Link } from "react-router-dom";
 import { calcularValorTotalProduto, formatarMoeda } from "../../../utils/preco";
+import { Link } from "react-router-dom";
+import { EstrelaProdutos } from "../../EstrelaProdutos";
+import { ArrowDownIcon, ShoppingCartIcon } from "lucide-react";
+import { BotaoQuantidade } from "../../BotaoQuantidade";
 
 interface CardProdutoProps {
   produto: Produto;
 }
 
-export function CardProduto({ produto }: CardProdutoProps) {
-  const existeDesconto = produto.porcentagemDesconto > 0;
+export const CardProduto = ({ produto }: CardProdutoProps) => {
   const { adicionarProduto } = useContext(CartContext);
+
+  const existeDesconto = produto.porcentagemDesconto > 0;
   const frete = produto.basePreco >= 100;
   const precoAtual = calcularValorTotalProduto(produto);
+  const podeParcelar = produto.basePreco >= 50;
+
+  const fotoProduto =
+    produto.foto.length > 30
+      ? produto.foto
+      : "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png";
 
   return (
-    <Link
-      className="relative block"
-      to={`/produtos/${produto.id}/${produto.slug}`}
-    >
-      <div className="flex flex-col justify-center ">
-        <div className="flex flex-col gap-4 rounded-md px-4 py-4 shadow-md">
-          {existeDesconto && (
-            <div className="absolute flex items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
-              <div className="flex w-14 rounded border-solid bg-primary font-poppins text-sm text-white">
-                <p className="w-5 p-1.5">
-                  <ArrowDown size={14} color="#ffffff" />
-                </p>
+    <div className="group relative flex w-full flex-col gap-2 rounded-md border border-border bg-white p-4 text-foreground outline-none transition-colors hover:border-border focus-visible:border-primary">
+      <Link
+        to={`/produto/${produto.categoria?.slug}/${produto.id}/${produto.slug}`}
+        className="flex flex-1 flex-col gap-2"
+      >
+        <div>
+          <img
+            src={fotoProduto}
+            alt={produto.nome}
+            className="h-64 w-full rounded object-contain"
+          />
+        </div>
 
-                <p className="p-1">{produto.porcentagemDesconto}%</p>
-              </div>
-            </div>
-          )}
+        {existeDesconto && (
+          <div className="absolute top-4 flex max-w-[60px] items-center justify-center gap-1 rounded bg-primary px-2 py-1 text-white">
+            <ArrowDownIcon className="size-4 flex-shrink-0" />
+            <span className="text-sm font-medium">
+              {produto.porcentagemDesconto}%
+            </span>
+          </div>
+        )}
 
-          <div>
-            <img
-              src={produto.foto}
-              className="h-50 size-72 items-center rounded object-contain"
-              alt=""
+        <div>
+          <div className="mb-2">
+            <EstrelaProdutos
+              notaMedia={produto.notaMedia}
+              numeroDeAvaliacoes={produto.numeroDeAvaliacoes}
             />
           </div>
-          <div>
-            <p className="mb-1 text-xs">
-              {produto.notaMedia.toFixed(1)} ({produto.numeroDeAvaliacoes}{" "}
-              avaliações)
+
+          <div className="mb-4">
+            <p className="mb-1 w-full truncate text-left text-base text-[#00100D]">
+              {produto.nome}
             </p>
-            <h3 className="w-full truncate text-left">{produto.nome}</h3>
-            <h4 className="text-left text-base font-semibold uppercase">
-              {formatarMoeda(precoAtual)}
-            </h4>
-            <p className="text-xs">
-              em até 10x de R$ {(precoAtual / 10).toFixed(2).replace(".", ",")}{" "}
-              sem juros
-            </p>
+            <div className="mb-2 flex items-center gap-1">
+              <p className="text-lg font-semibold text-[#042419]">
+                {formatarMoeda(precoAtual)}
+              </p>
+              <del className="inline-block text-[12px] text-[#575757]">
+                {formatarMoeda(produto.basePreco)}
+              </del>
+            </div>
+            {podeParcelar && (
+              <p className="self-end text-xs text-[#575757]">
+                em até 10x de{" "}
+                <strong>
+                  R$ {(precoAtual / 10).toFixed(2).replace(".", ",")}{" "}
+                </strong>
+                sem juros
+              </p>
+            )}
           </div>
 
           {frete && (
-            <div className="-my-2">
-              <div className="flex w-20 items-center justify-center rounded-md bg-primary p-1 text-xs font-bold text-white">
-                <p>Frete grátis</p>
-              </div>
-            </div>
+            <span className="rounded bg-[#B3D0C6] px-2 py-1 text-[10px] font-semibold uppercase text-[#042419]">
+              frete grátis!
+            </span>
           )}
-
-          <button
-            className="flex w-full items-center justify-center rounded-md bg-primary py-1.5 text-white hover:bg-green-800"
-            onClick={() => adicionarProduto(produto)}
-          >
-            Comprar
-          </button>
         </div>
+      </Link>
+
+      <div className="z-20 flex w-full items-end justify-center gap-1 font-medium">
+        <BotaoQuantidade />
+        <button
+          className="flex items-center justify-center gap-3 rounded-md bg-primary px-4 py-2 font-medium uppercase text-white hover:bg-[#084E35]"
+          onClick={() => adicionarProduto(produto)}
+        >
+          <ShoppingCartIcon className="size-6" /> Adicionar
+        </button>
       </div>
-    </Link>
+    </div>
   );
-}
+};

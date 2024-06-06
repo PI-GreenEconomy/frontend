@@ -1,131 +1,150 @@
 import {
-  ArrowDown,
-  ChevronRight,
+  ArrowDownIcon,
   ChevronRightIcon,
   Facebook,
-  Heart,
+  HeartIcon,
   Instagram,
-  ShoppingCart,
+  ShoppingCartIcon,
   Twitter,
 } from "lucide-react";
-import { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { ListarProduto } from "../../components/produto/listarproduto/ListarProduto";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useProduto } from "../../hooks/useProduto";
+import { useContext, useEffect } from "react";
+import { EstrelaProdutos } from "../../components/EstrelaProdutos";
+import { calcularValorTotalProduto, formatarMoeda } from "../../utils/preco";
+import { BotaoQuantidade } from "../../components/BotaoQuantidade";
 import { CartContext } from "../../contexts/CartContext";
+import { IMAGES } from "../../data/imageIcons";
+import ImagemDescricao from "../../assets/descricao/save-nature.svg";
+import { ListarProduto } from "../../components/produto/listarproduto/ListarProduto";
+import { ListarProdutoCategoria } from "../../components/produto/listarprodutocategoria/ListarProdutoCategoria";
 
-function Produto() {
-  const [valor, setValor] = useState(0);
+const pagamentos = [
+  IMAGES.Visa,
+  IMAGES.MasterCard,
+  IMAGES.Elo,
+  IMAGES.Caixa,
+  IMAGES.BancoDoBrasil,
+  IMAGES.Bradesco,
+  IMAGES.Boleto,
+  IMAGES.Pix,
+];
 
-  /* const { categoria} = useParams(); */
+export const Produto = () => {
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
 
-  function soma() {
-    setValor(valor + 1);
-  }
-  function subtracao() {
-    if (valor > 0) {
-      setValor(valor - 1);
-    }
-  }
+  const { adicionarProduto } = useContext(CartContext);
 
-  /* const { adicionarProduto } = useContext(CartContext);  */
+  const { produtos, produto, buscarProdutoPorId } = useProduto();
 
-  const { produtos } = useProduto();
+  if (!produto) navigate("/");
 
-  /*const produtosCategoria = produtos.filter((produto) => {
-  produto.categoria?.slug == categoria
-})*/
+  const existeDesconto = produto.porcentagemDesconto > 0;
+  const frete = produto.basePreco >= 100;
+  const precoAtual = calcularValorTotalProduto(produto);
+  const podeParcelar = produto.basePreco >= 50;
+
+  useEffect(() => {
+    buscarProdutoPorId(id!);
+  }, []);
 
   return (
-    <>
-      <div className="container py-2">
-        <div className="mb-10 mt-6 flex rounded bg-[#E7F0ED] p-3 text-[#4A695E]">
-          <div className="flex">
-            <Link to={"/"}>Início</Link>
-            <ChevronRightIcon className="size-6" />
-          </div>
-          <div className="flex">
-            <Link to={"/produtos"}>Produtos</Link>
-            <ChevronRightIcon className="size-6" />
-          </div>
-          <div className="flex">
-            <Link to={"/"}>'Categoria'</Link>
-            <ChevronRightIcon className="size-6" />
-          </div>
-          <span className="inline-block font-medium  text-primary">
-            'Produto'
-          </span>
+    <div className="container py-12">
+      <div className="mb-12 flex rounded bg-[#E7F0ED] p-3 text-[#4A695E]">
+        <div className="flex">
+          <Link to={"/"}>Início</Link>
+          <ChevronRightIcon className="size-6" />
         </div>
-        <div className="container flex grid-cols-2">
-          <div className="size-85 mx-5 my-3 rounded border-x border-y ">
-            <img
-              className="rounded"
-              src="https://ik.imagekit.io/GreenEconomy/CATEGORIA%201%20-%20Vestu%C3%A1rio/T-ShirtPureCotton.jpg?updatedAt=1716562502783"
-              alt="imagem produto"
+        <div className="flex">
+          <Link to={"/produtos"}>Produtos</Link>
+          <ChevronRightIcon className="size-6" />
+        </div>
+        <div className="flex">
+          <Link
+            className="capitalize"
+            to={`/categoria/${produto.categoria?.tipo}`}
+          >
+            {produto.categoria?.tipo}
+          </Link>
+          <ChevronRightIcon className="size-6" />
+        </div>
+        <span className="inline-block font-medium text-primary">
+          {produto.nome}
+        </span>
+      </div>
+
+      <article className="grid grid-cols-2 items-center justify-between gap-14">
+        <div className="h-full rounded-md border border-border">
+          <img
+            src={produto.foto}
+            alt={produto.nome}
+            className="h-[600px] w-full rounded-md object-contain"
+          />
+        </div>
+        <div className="flex max-w-[520px] flex-col gap-8">
+          <div>
+            <h1 className="mb-2 text-[28px] font-medium text-[#042419]">
+              {produto.nome}
+            </h1>
+            <EstrelaProdutos
+              notaMedia={produto.notaMedia}
+              numeroDeAvaliacoes={produto.numeroDeAvaliacoes}
             />
           </div>
-          <div className=" container mx-5  my-3">
-            <h2 className="mb-4 mt-10 font-poppins font-semibold ">
-              'NOME DO PRODUTO AQUI'
-            </h2>
-            <div className="flex ">
-              <p className=" mr-1 font-poppins">'estrelas aqui'</p>
-              <p className=" ml-1 mr-2 font-poppins">'Media'</p>
-              <p className=" mr-1 font-poppins">'Nº avaliação'</p>
-            </div>
-            <Link to={"/"} className="font-poppins text-[#4A695E] underline">
-              Avaliar Produto
-            </Link>
-            <div className="mb-2 mt-6 flex">
-              <p className=" mx-1 font-poppins">'R$ 0,00'</p>
-              <p className=" mx-1 font-poppins text-slate-600 line-through">
-                'R$ 0,00'
+
+          <div>
+            <div className="mb-2 flex items-center gap-3">
+              <p className="text-2xl font-semibold text-[#042419]">
+                {formatarMoeda(precoAtual)}
               </p>
-              <div className="mx-1 flex w-14 rounded border-solid bg-primary font-poppins text-sm text-white">
-                <p className="w-5 p-1.5">
-                  <ArrowDown size={14} color="#ffffff" />
-                </p>
-                <p className="p-1 font-poppins">'0%'</p>
-              </div>
+              <del className="inline-block text-lg text-[#575757]">
+                {formatarMoeda(produto.basePreco)}
+              </del>
+
+              {existeDesconto && (
+                <div className="top-4 flex max-w-[60px] items-center justify-center gap-1 rounded bg-primary px-2 py-1 text-white">
+                  <ArrowDownIcon className="size-4 flex-shrink-0" />
+                  <span className="text-sm font-medium">
+                    {produto.porcentagemDesconto}%
+                  </span>
+                </div>
+              )}
             </div>
-            <div className="mb-8 mt-2">
-              <p className="font-poppins">
-                {" "}
-                em até "10x" de 'R$0,00' sem juros
+            {podeParcelar && (
+              <p className="self-end text-xs text-[#575757]">
+                em até 10x de{" "}
+                <strong>
+                  R$ {(precoAtual / 10).toFixed(2).replace(".", ",")}{" "}
+                </strong>
+                sem juros
               </p>
-            </div>
-            <div className="mb-10 mt-8 flex gap-8 font-semibold">
-              <div className="ml-1 mr-2 flex w-auto rounded border-2 font-poppins  text-black">
-                <button className=" w-4 font-poppins" onClick={subtracao}>
-                  -
-                </button>
-                <p className="border-1 bottom-2 top-2 mx-2 my-1 border-x border-y border-secondary font-poppins">
-                  {" "}
-                  {valor}{" "}
-                </p>
-                <button className=" w-4 font-poppins" onClick={soma}>
-                  +
-                </button>
-              </div>
-              <div className="flex rounded  bg-[#DAE8E3] p-2 text-primary">
-                <button className="align-center mx-3 flex gap-2 px-6 font-poppins">
-                  <ShoppingCart />
-                  ADICIONAR AO CARRINHO
-                </button>
-              </div>
-            </div>
-            <div className=" my-3 flex font-poppins">
-              <button
-                className="flex w-full justify-center rounded bg-primary 
-              px-1 py-1.5 text-center font-poppins text-white"
-                /*onClick={() => adicionarProduto(produto)}*/
-              >
-                COMPRAR
-              </button>
-              <button className="mx-2 rounded border-x border-y border-primary px-2 text-primary">
-                <Heart />
-              </button>
-            </div>
+            )}
+            {frete && (
+              <span className="rounded bg-[#B3D0C6] px-2 py-1 text-[10px] font-semibold uppercase text-[#042419]">
+                frete grátis!
+              </span>
+            )}
+          </div>
+          <div className="flex items-center gap-8">
+            <BotaoQuantidade />
+            <button
+              className="flex items-center gap-4 rounded bg-[#DAE8E3] px-4 py-2 font-semibold uppercase text-primary hover:bg-[#9abeb2]"
+              onClick={() => adicionarProduto(produto)}
+            >
+              <ShoppingCartIcon />
+              Adicionar ao carrinho
+            </button>
+          </div>
+          <div className="flex items-center gap-[10px]">
+            <button className="flex-1 rounded bg-primary px-10 py-4 uppercase text-white hover:bg-primary/90 focus:bg-primary/90">
+              Comprar
+            </button>
+            <button className="group flex h-[54px]  w-[60px] items-center justify-center rounded-lg border border-primary px-3 py-5 hover:bg-primary/80">
+              <HeartIcon className="group-hover:bg-border-primary/80 text-primary group-hover:text-white" />
+            </button>
+          </div>
+          <div className="flex flex-col gap-8">
             <div className="my-3 mt-6 flex font-poppins">
               <p className="mr-2 font-semibold">Compartilhe:</p>
               <Link className="ml-1 mr-2 text-slate-500" to={"/"}>
@@ -138,55 +157,34 @@ function Produto() {
                 <Twitter />
               </Link>
             </div>
-            <div className="mt-8 flex size-11">
-              <img
-                className="mr-2"
-                src="src\assets\formaspagamento\icon-visa.svg"
-                alt="Aceita Pagamento bandeira Visa"
-              />
-              <img
-                className=" ml-1 mr-2"
-                src="src\assets\formaspagamento\icon-mastercard.svg"
-                alt="Aceita Pagamento bandeira MasterCard"
-              />
-              <img
-                className=" ml-1 mr-2"
-                src="src\assets\formaspagamento\icon-elo.svg"
-                alt="Aceita Pagamento bandeira Elo"
-              />
-              <img
-                className=" ml-1 mr-2"
-                src="src\assets\formaspagamento\icon-pix.svg"
-                alt="Aceita Pagamento por Pix"
-              />
-            </div>
+            <ul className="flex gap-2">
+              {pagamentos.map((pagamento) => (
+                <li key={pagamento}>
+                  <img className="h-7" src={pagamento} alt={pagamento} />
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
-        <div className="container my-2.5 flex w-full grid-cols-2 items-center bg-white">
-          <div className="container my-5 h-52 w-4/5 ">
-            <h1 className="my-5 font-poppins text-3xl font-semibold">
-              DESCRIÇÃO DO PRODUTO
-            </h1>
-            <p className="font-poppins">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex
-              perferendis possimus illum, voluptatem iste harum sit earum illo!
-              Similique numquam ab illo ratione iusto dignissimos a assumenda
-              autem eaque consequuntur?
-            </p>
-          </div>
+      </article>
+
+      <section className="flex items-center justify-between gap-4 py-16">
+        <div className="max-w-[800px] text-[#00100D]">
+          <h2 className="mb-8 text-4xl font-semibold">Descrição do produto</h2>
+          <p className="text-lg">{produto.descricao}</p>
+        </div>
+        <div>
           <img
-            className=" mx-5 my-3 size-1/4"
-            src="src\assets\descricao\Save the Earth-bro 1.svg"
-            alt="imagem produto"
+            src={ImagemDescricao}
+            alt="Planeta sendo reconstruido com um consumo consciente"
           />
         </div>
-        <div className="">
-          <h1 className="font-poppins">Produtos Relacionados:</h1>
-          <ListarProduto produtos={produtos} />
-        </div>
-      </div>
-    </>
-  );
-}
+      </section>
 
-export default Produto;
+      <section>
+        <h2 className="mb-8 text-4xl font-semibold">Produtos Relacionados</h2>
+        <ListarProdutoCategoria produtos={produtos} />
+      </section>
+    </div>
+  );
+};

@@ -57,6 +57,20 @@ export const useCategoria = (): UseCategoriaProps => {
     }
   }
 
+  async function buscarCategoriaPorId(tipo: string) {
+    try {
+      await buscar(`/categorias/${tipo}`, setCategoria, {
+        headers: {
+          Authorization: token,
+        },
+      });
+    } catch (error: any) {
+      if (error.toString().includes("403")) {
+        handleLogout();
+      }
+    }
+  }
+
   async function deletarCategoria() {
     setIsLoading(true);
 

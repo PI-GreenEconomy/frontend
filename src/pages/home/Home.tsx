@@ -1,4 +1,4 @@
-import { ListarProduto } from "../../components/produto/listarproduto/ListarProduto";
+import { ListarProdutoCategoria } from "../../components/produto/listarprodutocategoria/ListarProdutoCategoria";
 import { useProduto } from "../../hooks/useProduto";
 import BemVindo from "./components/BemVindo";
 
@@ -9,9 +9,8 @@ function Home() {
     <div>
       <BemVindo />
       <section className="container py-16 text-foreground">
-        <h1 className="mb-4 text-4xl">Mais Vendidos</h1>
-        <p className="max-w-4xl">Pequena descrição dessa seção</p>
-        <ListarProduto produtos={produtos} />
+        <h1 className="mb-4 text-4xl">Produtos de Higiene</h1>
+        <ListarProdutoCategoria produtos={produtos} />
       </section>
     </div>
   );

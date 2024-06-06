@@ -1,6 +1,6 @@
 import { DNA } from "react-loader-spinner";
-import { CardProduto } from "../cardproduto/CardProduto";
 import Produto from "../../../models/Produto";
+import { CardProduto } from "../cardproduto/CardProduto";
 
 interface ListarProdutoProps {
   produtos: Produto[];
@@ -19,7 +19,7 @@ export const ListarProduto = ({ produtos }: ListarProdutoProps) => {
           wrapperClass="dna-wrapper mx-auto"
         />
       )}
-      <div className="my-4 grid grid-cols-4 gap-8">
+      <div className="my-4 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-8">
         {produtos.map((produto) => (
           <CardProduto key={produto.id} produto={produto} />
         ))}
