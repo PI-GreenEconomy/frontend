@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link, useLocation } from "react-router-dom";
 import { SheetClose } from "../ui/Sheet";
 import { useCategoria } from "../../hooks/useCategoria";

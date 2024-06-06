@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from "react";
 import { DNA } from "react-loader-spinner";
 import CardCategoria from "../cardcategoria/CardCategoria";
