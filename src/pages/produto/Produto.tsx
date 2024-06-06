@@ -89,10 +89,19 @@ export const Produto = () => {
             <h1 className="mb-2 text-[28px] font-medium text-[#042419]">
               {produto.nome}
             </h1>
-            <EstrelaProdutos
-              notaMedia={produto.notaMedia}
-              numeroDeAvaliacoes={produto.numeroDeAvaliacoes}
-            />
+            <div className="mb-2">
+              <EstrelaProdutos
+                notaMedia={produto.notaMedia}
+                numeroDeAvaliacoes={produto.numeroDeAvaliacoes}
+              />
+            </div>
+
+            <Link
+              to={`/produto/${produto.categoria}/${produto.id}/${produto.slug}/avaliar`}
+              className="text-sm text-primary underline hover:text-primary/90"
+            >
+              Avaliar produto
+            </Link>
           </div>
 
           <div>

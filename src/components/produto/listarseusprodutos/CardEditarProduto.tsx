@@ -1,40 +1,73 @@
 import { Link } from "react-router-dom";
 import Produto from "../../../models/Produto";
+import { calcularValorTotalProduto, formatarMoeda } from "../../../utils/preco";
+import { ArrowDownIcon } from "lucide-react";
 
 interface CardEditarProdutoProps {
   produto: Produto;
 }
 
 export function CardEditarProduto({ produto }: CardEditarProdutoProps) {
+  const existeDesconto = produto.porcentagemDesconto > 0;
+  const precoAtual = calcularValorTotalProduto(produto);
+
+  const fotoProduto =
+    produto.foto.length > 30
+      ? produto.foto
+      : "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png";
+
   return (
-    <div className="flex flex-col justify-between overflow-hidden rounded border border-slate-900">
-      <div>
-        <div className="flex w-full items-center gap-4 bg-indigo-400 px-4 py-2">
-          <img src={produto.foto} className="h-12 rounded-full" alt="" />
-          <h3 className="text-center text-lg font-bold uppercase ">
-            {produto.nome}
-          </h3>
+    <div className="group relative flex w-full flex-col gap-2 rounded-md border border-border bg-white p-4 text-foreground outline-none transition-colors hover:border-border focus-visible:border-primary">
+      <div className="flex flex-1 flex-col gap-2">
+        <div>
+          <img
+            src={fotoProduto}
+            alt={produto.nome}
+            className="h-64 w-full rounded object-contain"
+          />
         </div>
-        <div className="p-4 ">
-          <h4 className="text-lg font-semibold uppercase">
-            R$ {produto.basePreco}
-          </h4>
+
+        {existeDesconto && (
+          <div className="absolute top-4 flex max-w-[60px] items-center justify-center gap-1 rounded bg-primary px-2 py-1 text-white">
+            <ArrowDownIcon className="size-4 flex-shrink-0" />
+            <span className="text-sm font-medium">
+              {produto.porcentagemDesconto}%
+            </span>
+          </div>
+        )}
+
+        <div>
+          <div className="mb-4">
+            <p className="mb-1 w-full truncate text-left text-base text-[#00100D]">
+              {produto.nome}
+            </p>
+            <div className="mb-2 flex items-center gap-1">
+              <p className="text-lg font-semibold text-[#042419]">
+                {formatarMoeda(precoAtual)}
+              </p>
+              <del className="inline-block text-[12px] text-[#575757]">
+                {formatarMoeda(produto.basePreco)}
+              </del>
+            </div>
+          </div>
+
           <p>{produto.descricao}</p>
-          <p>Tema: {produto.categoria?.tipo}</p>
         </div>
       </div>
-      <div className="flex">
+
+      <div className="z-20 flex w-full items-end justify-center gap-1 font-medium">
         <Link
           to={`/editarproduto/${produto.id}`}
-          className="flex w-full items-center justify-center bg-indigo-400 py-2 text-white hover:bg-indigo-800"
+          className="flex flex-1 items-center justify-center gap-3 rounded-md bg-primary px-4 py-2 font-medium uppercase text-white hover:bg-[#084E35]"
         >
-          <button>Editar</button>
+          Editar
         </Link>
+
         <Link
-          to={`/deletarproduto/${produto.id}`}
-          className="flex w-full items-center justify-center bg-red-400 text-white hover:bg-red-700"
+          to={`/editarproduto/${produto.id}`}
+          className="flex flex-1 items-center justify-center gap-3 rounded-md bg-primary bg-red-700 px-4 py-2 font-medium uppercase text-white hover:bg-red-600"
         >
-          <button>Deletar</button>
+          Remover
         </Link>
       </div>
     </div>

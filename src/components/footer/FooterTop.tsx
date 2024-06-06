@@ -2,6 +2,7 @@ import { Facebook, Figma, Github, Instagram, Mail, MapPin } from "lucide-react";
 import { categorias } from "../../data/categorias";
 import { Link } from "react-router-dom";
 import { links } from "../../data/linksMenu";
+import { IMAGES } from "../../data/imageIcons";
 
 export const FooterTop = () => {
   return (
@@ -10,15 +11,14 @@ export const FooterTop = () => {
         {/* Logo e descrição */}
         <div className="flex flex-col items-start gap-3">
           <img
-            src="src/assets/Logo.svg"
+            src={IMAGES.Logo}
             alt="Green Economy Logo"
             className="mb-3 h-16"
           />
-          <p className="text-white-600 max-w-[90%] text-sm leading-6 sm:max-w-72">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book
+          <p className="text-white-600 w-full max-w-[90%] text-base leading-6 sm:max-w-72">
+            Economia <span className="font-semibold text-[#126447]">verde</span>{" "}
+            para um futuro sustentável e de consumo responsável. Uma nova forma
+            de ver o mundo, o mercado e a economia
           </p>
         </div>
 
@@ -36,39 +36,8 @@ export const FooterTop = () => {
                 </Link>
               </li>
             ))}
-            {/* <div className="">
-              <li className="py-1">Vestuário</li>
-              <li className="py-1">Alimento</li>
-              <li className="py-1">Higiene</li>
-              <li className="py-1">Pets</li>
-              <li className="py-1">Casa</li>
-            </div>
-            <div>
-              <li className="py-1">Papelaria</li>
-              <li className="py-1">Utensílios</li>
-              <li className="py-1">Artesanal</li>
-              <li className="py-1">Ofertas</li>
-            </div> */}
           </ul>
         </div>
-
-        {/* Desenvolvedores 
-                  <div className="mb-6">
-                      <p className="font-bold mb-2 text-base">
-                          Desenvolvedores
-                      </p>
-                      <ul className="text-sm">
-                          <li className="py-1">Caio Pereira</li>
-                          <li className="py-1">Filipe Santiago</li>
-                          <li className="py-1">Ingrid Alves</li>
-                          <li className="py-1">Jorge Flávio</li>
-                          <li className="py-1">Joyce Ramos</li>
-                          <li className="py-1">Lucas Ramires</li>
-                          <li className="py-1">Luiz Henrique</li>
-                          <li className="py-1">Maria Eduarda</li>
-                          <li className="py-1">Stephanie Steuernagel</li>
-                      </ul>
-                  </div>*/}
 
         {/* Institucional */}
         <div className="flex flex-col items-start gap-3">
