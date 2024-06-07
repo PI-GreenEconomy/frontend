@@ -5,7 +5,7 @@ export default function QuemSomosBody() {
       {/* container1 */}
       <div>
         {/* TESTE INICIO */}
-        <div className="absolute left-0 top-20 z-20 mx-5 my-20 rounded-lg backdrop-blur-sm  md:p-20 ">
+        <div className="absolute left-0 top-20 z-20 mx-5 my-20 rounded-lg md:p-20 ">
           <h1 className="my-8 font-poppins font-bold  md:text-6xl">
             Compre com Consciência,
             <br />
@@ -16,12 +16,6 @@ export default function QuemSomosBody() {
             ajudam a reduzir seu impacto ecológico. Vamos juntos construir um
             futuro sustentável!
           </p>
-          <button
-            className="flex w-1/2 justify-center rounded-md bg-[#B27538] py-3
-                                      font-semibold  uppercase hover:bg-[#b17d4a]"
-          >
-            Explore nossos produtos
-          </button>
         </div>
         <img
           className="relative z-10"
