@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useProduto } from "../../hooks/useProduto";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { EstrelaProdutos } from "../../components/EstrelaProdutos";
 import { calcularValorTotalProduto, formatarMoeda } from "../../utils/preco";
 import { BotaoQuantidade } from "../../components/BotaoQuantidade";
@@ -89,10 +89,19 @@ export const Produto = () => {
             <h1 className="mb-2 text-[28px] font-medium text-[#042419]">
               {produto.nome}
             </h1>
-            <EstrelaProdutos
-              notaMedia={produto.notaMedia}
-              numeroDeAvaliacoes={produto.numeroDeAvaliacoes}
-            />
+            <div className="mb-2">
+              <EstrelaProdutos
+                notaMedia={produto.notaMedia}
+                numeroDeAvaliacoes={produto.numeroDeAvaliacoes}
+              />
+            </div>
+
+            <Link
+              to={`/produto/${produto.categoria}/${produto.id}/${produto.slug}/avaliar`}
+              className="text-sm text-primary underline hover:text-primary/90"
+            >
+              Avaliar produto
+            </Link>
           </div>
 
           <div>
@@ -149,14 +158,17 @@ export const Produto = () => {
           <div className="flex flex-col gap-8">
             <div className="my-3 mt-6 flex font-poppins">
               <p className="mr-2 font-semibold">Compartilhe:</p>
-              <Link className="ml-1 mr-2 text-slate-500" to={"/"}>
+              <Link
+                className="ml-1 mr-2 text-slate-500"
+                to={"https://linktr.ee/Greenconomy"}
+              >
                 <Facebook />
               </Link>
-              <Link className="ml-1 mr-2 text-slate-500" to={"/"}>
+              <Link
+                className="ml-1 mr-2 text-slate-500"
+                to={"https://linktr.ee/Greenconomy"}
+              >
                 <Instagram />
-              </Link>
-              <Link className="ml-1 text-slate-500" to={"/"}>
-                <Twitter />
               </Link>
             </div>
             <ul className="flex gap-2">

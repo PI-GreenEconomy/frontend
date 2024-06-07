@@ -1,3 +1,5 @@
+import { IMAGES } from "../../data/imageIcons";
+
 export const FooterMedium = () => {
   return (
     <div className="flex w-full justify-around bg-white py-8 text-foreground">
@@ -7,60 +9,32 @@ export const FooterMedium = () => {
           <p className="text-lg font-bold">Formas de Pagamento</p>
           <ul className="flex gap-1">
             <li>
-              <img
-                className="h-7"
-                src="src/assets/formaspagamento/icon-visa.svg"
-                alt="Visa"
-              />
+              <img className="h-7" src={IMAGES.Visa} alt="Visa" />
+            </li>
+            <li>
+              <img className="h-7" src={IMAGES.MasterCard} alt="Mastercard" />
+            </li>
+            <li>
+              <img className="h-7" src={IMAGES.Elo} alt="Elo" />
+            </li>
+            <li>
+              <img className="h-7" src={IMAGES.Caixa} alt="Caixa" />
             </li>
             <li>
               <img
                 className="h-7"
-                src="src/assets/formaspagamento/icon-mastercard.svg"
-                alt="Mastercard"
-              />
-            </li>
-            <li>
-              <img
-                className="h-7"
-                src="src/assets/formaspagamento/icon-elo.svg"
-                alt="Elo"
-              />
-            </li>
-            <li>
-              <img
-                className="h-7"
-                src="src/assets/formaspagamento/icon-caixa.svg"
-                alt="Caixa"
-              />
-            </li>
-            <li>
-              <img
-                className="h-7"
-                src="src/assets/formaspagamento/icon-banco-do-brasil.svg"
+                src={IMAGES.BancoDoBrasil}
                 alt="Banco do Brasil"
               />
             </li>
             <li>
-              <img
-                className="h-7"
-                src="src/assets/formaspagamento/icon-bradesco.svg"
-                alt="Bradesco"
-              />
+              <img className="h-7" src={IMAGES.Bradesco} alt="Bradesco" />
             </li>
             <li>
-              <img
-                className="h-7"
-                src="src/assets/formaspagamento/icon-boleto-barcode.svg"
-                alt="Boleto"
-              />
+              <img className="h-7" src={IMAGES.Boleto} alt="Boleto" />
             </li>
             <li>
-              <img
-                className="h-7"
-                src="src/assets/formaspagamento/icon-pix.svg"
-                alt="Pix"
-              />
+              <img className="h-7" src={IMAGES.Pix} alt="Pix" />
             </li>
           </ul>
         </div>
@@ -70,19 +44,13 @@ export const FooterMedium = () => {
           <p className="text-lg font-bold">Formas de Entrega</p>
           <ul className="flex items-center gap-3">
             <li>
-              <img
-                src="src/assets/formasentregas/correios.svg"
-                alt="Correios"
-              />
+              <img src={IMAGES.Correios} alt="Correios" />
             </li>
             <li>
-              <img src="src/assets/formasentregas/sedex.svg" alt="Sedex" />
+              <img src={IMAGES.Sedex} alt="Sedex" />
             </li>
             <li>
-              <img
-                src="src/assets/formasentregas/Frame.svg"
-                alt="Retire na loja"
-              />
+              <img src={IMAGES.RetireLoja} alt="Retire na loja" />
             </li>
           </ul>
         </div>
@@ -92,16 +60,10 @@ export const FooterMedium = () => {
           <p className="text-lg font-bold">Selos de Segurança</p>
           <ul className="flex flex-col gap-3">
             <li>
-              <img
-                src="src/assets/selosseguranca/google-loja-segura.svg"
-                alt="Loja Segura com Google"
-              />
+              <img src={IMAGES.GoogleSeguro} alt="Loja Segura com Google" />
             </li>
             <li>
-              <img
-                src="src/assets/selosseguranca/ssl-secured.svg"
-                alt="SSL Seguro"
-              />
+              <img src={IMAGES.SSLSecurity} alt="SSL Seguro" />
             </li>
           </ul>
         </div>

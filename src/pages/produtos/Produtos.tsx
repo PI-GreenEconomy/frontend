@@ -1,10 +1,10 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { ListarProduto } from "../../components/produto/listarproduto/ListarProduto";
 import Paginacao from "./components/Paginacao";
 import { useState } from "react";
 import { useProduto } from "../../hooks/useProduto";
 import { calcularValorTotalProduto } from "../../utils/preco";
 import { ChevronRightIcon } from "lucide-react";
-import { ListarProdutoCategoria } from "../../components/produto/listarprodutocategoria/ListarProdutoCategoria";
 
 const tiposDeFiltros = [
   {
@@ -31,7 +31,6 @@ const tiposDeFiltros = [
 
 function Produtos() {
   const { id, tipo } = useParams();
-  const navegar = useNavigate();
 
   const { produtos } = useProduto();
 
@@ -39,13 +38,11 @@ function Produtos() {
 
   const [paginaAtual, setPaginaAtual] = useState(idAtual);
   const [tipoFiltro, setTipoFiltro] = useState("default");
-  const itensPorPagina = 5;
+  const itensPorPagina = 8;
 
   const produtosCategoria = tipo
     ? produtos.filter((produto) => tipo === produto.categoria?.slug)
     : produtos;
-
-  console.log(produtosCategoria);
 
   const mudarPagina = (numeroPagina: number) => {
     setPaginaAtual(numeroPagina);
@@ -55,7 +52,6 @@ function Produtos() {
     if (paginaAtual > 1) {
       const novaPaginaAtual = paginaAtual - 1;
       setPaginaAtual(novaPaginaAtual);
-      navegar(`/produtos/${novaPaginaAtual}`);
     }
   };
 
@@ -63,7 +59,6 @@ function Produtos() {
     if (paginaAtual < Math.ceil(produtosCategoria.length / itensPorPagina)) {
       const novaPaginaAtual = paginaAtual + 1;
       setPaginaAtual(novaPaginaAtual);
-      navegar(`/produtos/${novaPaginaAtual}`);
     }
   };
 
@@ -115,7 +110,7 @@ function Produtos() {
       </div>
       <h2 className="mb-12 text-3xl">Todos os Produtos</h2>
       <div className="mb-14 flex items-center justify-between">
-        <p>Foram encontrados no total {produtosFiltrados.length} produtos</p>
+        <p>Foram encontrados no total {produtosCategoria.length} produtos</p>
         <div className="flex items-center gap-4">
           <label htmlFor="filtro">Ordenar por</label>
           <select
@@ -136,10 +131,10 @@ function Produtos() {
           </select>
         </div>
       </div>
-      <ListarProdutoCategoria produtos={produtosFiltrados} />
+      <ListarProduto produtos={produtosFiltrados} />
       <Paginacao
         itemsPorPagina={itensPorPagina}
-        totalItens={produtosFiltrados.length}
+        totalItens={produtosCategoria.length}
         paginaAtual={paginaAtual}
         irPaginaSeguinte={proximaPagina}
         irPaginaAnterior={paginaAnterior}

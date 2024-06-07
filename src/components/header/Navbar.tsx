@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link, useLocation } from "react-router-dom";
 import { SheetClose } from "../ui/Sheet";
 import { useCategoria } from "../../hooks/useCategoria";
@@ -46,7 +45,7 @@ export const NavbarMobile = () => {
           <li key={categoria.id} className="w-full">
             <SheetClose asChild>
               <Link
-                to={`categorias/${categoria.slug}`}
+                to={`produtos/categoria/${categoria.slug}`}
                 className="flex w-full flex-row items-center gap-4 rounded-md bg-[#E7F0ED] px-6 py-3 font-normal transition-colors hover:text-primary focus-visible:text-primary"
               >
                 <div className="text-[#0A6847]">

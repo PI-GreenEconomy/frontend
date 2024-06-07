@@ -61,7 +61,7 @@ export const useProduto = (): UseProdutoProps => {
     }
 
     setIsLoading(false);
-    navigate("/produtos");
+    navigate("/seusprodutos");
   }
 
   async function buscarProdutos() {
@@ -110,7 +110,7 @@ export const useProduto = (): UseProdutoProps => {
     }
 
     setIsLoading(false);
-    navigate("/produtos");
+    navigate("/seusprodutos");
   }
 
   const atualizarEstado = (
@@ -121,6 +121,7 @@ export const useProduto = (): UseProdutoProps => {
       ...produto,
       [e.target.name]: e.target.value,
       categoria: categoria,
+      usuario: usuario,
     });
   };
 

@@ -23,8 +23,9 @@ import Produtos from "./pages/produtos/Produtos";
 import { CartProvider } from "./contexts/CartContext";
 import Cart from "./components/carrinho/cart/Cart";
 import { Avaliacao } from "./pages/avaliacao/Avaliacao";
-import { NewsLetter } from "./components/newsletter/NewsLetter";
 import { Produto } from "./pages/produto/Produto";
+import { NewsLetter } from "./components/newsletter/NewsLetter";
+import ListarSeusProdutos from "./components/produto/listarseusprodutos/ListarSeusProdutos";
 
 export default function App() {
   return (
@@ -96,6 +97,17 @@ export default function App() {
                     element={<Produtos />}
                   />
 
+                  <Route path="/busca/:query" element={<Produtos />} />
+
+                  <Route
+                    path="/seusprodutos"
+                    element={
+                      <ProtectedRouterAdmin>
+                        <ListarSeusProdutos />
+                      </ProtectedRouterAdmin>
+                    }
+                  />
+
                   <Route
                     path="/produto/:categoria/:id/:slug/avaliar"
                     element={
@@ -104,6 +116,7 @@ export default function App() {
                       </ProtectedRouterUser>
                     }
                   />
+
                   <Route
                     path="/editarproduto/:id"
                     element={

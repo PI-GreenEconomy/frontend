@@ -37,7 +37,7 @@ export function CartProvider({ children }: CartProviderProps) {
   // Função para Remover um produto especifico do Carrinho
   function removerProduto(produtoId: number) {
     const indice = items.findIndex((items) => items.id === produtoId);
-    let novoCart = [...items];
+    const novoCart = [...items];
 
     if (indice >= 0) {
       novoCart.splice(indice, 1);

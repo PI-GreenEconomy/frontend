@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { EstrelaProdutos } from "../../EstrelaProdutos";
 import { ArrowDownIcon, ShoppingCartIcon } from "lucide-react";
 import { BotaoQuantidade } from "../../BotaoQuantidade";
-
 interface CardProdutoProps {
   produto: Produto;
 }
@@ -63,9 +62,11 @@ export const CardProduto = ({ produto }: CardProdutoProps) => {
               <p className="text-lg font-semibold text-[#042419]">
                 {formatarMoeda(precoAtual)}
               </p>
-              <del className="inline-block text-[12px] text-[#575757]">
-                {formatarMoeda(produto.basePreco)}
-              </del>
+              {existeDesconto && (
+                <del className="inline-block text-[12px] text-[#575757]">
+                  {formatarMoeda(produto.basePreco)}
+                </del>
+              )}
             </div>
             {podeParcelar && (
               <p className="self-end text-xs text-[#575757]">

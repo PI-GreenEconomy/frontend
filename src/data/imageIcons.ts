@@ -17,6 +17,9 @@ import Visa from "../assets/formaspagamento/icon-visa.svg";
 import GoogleSeguro from "../assets/selosseguranca/google-loja-segura.svg";
 import SSLSecurity from "../assets/selosseguranca/ssl-secured.svg";
 
+// LOGO
+import Logo from "../assets/Logo.svg";
+
 export const IMAGES = {
   Correios,
   Sedex,
@@ -31,4 +34,5 @@ export const IMAGES = {
   Visa,
   GoogleSeguro,
   SSLSecurity,
+  Logo,
 };

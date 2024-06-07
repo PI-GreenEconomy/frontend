@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link } from "react-router-dom";
 import Categoria from "../../../models/Categoria";
 import { iconsCategoria } from "../../../data/iconCategorias";
