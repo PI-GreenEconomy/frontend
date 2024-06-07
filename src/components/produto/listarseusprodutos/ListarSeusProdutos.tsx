@@ -8,19 +8,23 @@ import { Link } from "react-router-dom";
 function ListarSeusProdutos() {
   const { buscarProdutos, produtos } = useProduto();
 
-  const { usuario } = useContext(AuthContext);
+  const { usuario, isLoading } = useContext(AuthContext);
 
   useEffect(() => {
     buscarProdutos();
   }, [produtos.length]);
 
-  const produtosUsuario = produtos.filter(
-    (produto) => produto.usuario?.usuario === usuario.usuario,
-  );
+  const usuarioAdmin = usuario.funcao === "ADMIN";
+
+  const produtosUsuario = usuarioAdmin
+    ? produtos
+    : produtos.filter(
+        (produto) => produto.usuario?.usuario === usuario.usuario,
+      );
 
   return (
     <>
-      {produtos.length === 0 && (
+      {produtosUsuario.length === 0 && (
         <DNA
           visible={true}
           height="200"

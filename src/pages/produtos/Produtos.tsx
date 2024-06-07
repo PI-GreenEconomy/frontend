@@ -44,8 +44,6 @@ function Produtos() {
     ? produtos.filter((produto) => tipo === produto.categoria?.slug)
     : produtos;
 
-  console.log(produtosCategoria);
-
   const mudarPagina = (numeroPagina: number) => {
     setPaginaAtual(numeroPagina);
   };

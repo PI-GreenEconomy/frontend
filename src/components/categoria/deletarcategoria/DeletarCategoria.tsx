@@ -19,7 +19,7 @@ export const DeletarCategoria = () => {
 
   if (!id) return;
   return (
-    <div className="container mx-auto w-1/3">
+    <div className="container mx-auto w-1/3 py-8">
       <h1 className="my-4 text-center text-4xl">Deletar Categoria</h1>
       <p className="mb-4 text-center font-semibold">
         Você tem certeza de que deseja apagar a categoria a seguir?
