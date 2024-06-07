@@ -27,7 +27,7 @@ function CardCart({ item }: CardProdutosProps) {
             }).format(item.basePreco)}
           </h3>
           <p className="text-center text-sm font-bold text-primary">
-            Categoria: Tipo{" "}
+            Categoria: {item.categoria?.tipo}
           </p>
         </div>
       </div>
