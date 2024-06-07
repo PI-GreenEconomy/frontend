@@ -28,8 +28,8 @@ export default {
         newsreader: ["var(--font-newsreader)"],
       },
       backgroundImage: {
-        folhas: "url('src/assets/home/banner.jpg ')",
-        bemvindo: "url('src/assets/home/banner.jpg ')",
+        folhas: "url('../src/assets/home/banner.jpg')",
+        bemvindo: "url('../src/assets/home/banner.jpg')",
       },
     },
   },
