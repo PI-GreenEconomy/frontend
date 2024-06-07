@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import QuemSomosBody2 from "./QuemSomosBody2";
 
 interface Participante {
   id: number;
@@ -138,87 +139,90 @@ function QuemSomos() {
 
   // Renderização do componente
   return (
-    <div className="bg-green-800 py-12 md:py-8">
-      <div className="container mx-auto">
-        {/* Título */}
-        <h2 className="text-bold text-shadow mb-8 text-center font-poppins text-3xl text-white sm:text-5xl md:text-6xl">
-          Quem Somos
-        </h2>
+    <>
+      <QuemSomosBody2 />
+      <div className="bg-green-800 py-12 md:py-8">
+        <div className="container mx-auto">
+          {/* Título */}
+          <h2 className="text-bold text-shadow mb-8 text-center font-poppins text-3xl text-white sm:text-5xl md:text-6xl">
+            Quem Somos
+          </h2>
 
-        {/* Grid de participantes */}
-        <div className="grid grid-cols-1 justify-center gap-6 md:grid-cols-3">
-          {participantes
-            .slice(currentSlide, currentSlide + 3)
-            .map((participante, index) => (
-              <div
-                key={participante.id}
-                className={`overflow-hidden rounded-lg border border-gray-700 bg-green-600 ${
-                  hoveredCard === index ? "hovered" : ""
-                }`}
-                onMouseEnter={() => setHoveredCard(index)}
-                onMouseLeave={() => setHoveredCard(null)}
-                style={{
-                  transform:
-                    hoveredCard === index
-                      ? "scale(1.05) rotate(2deg)"
-                      : "scale(1)",
-                  transition: "transform 0.3s ease",
-                  boxShadow:
-                    hoveredCard === index
-                      ? "0 10px 20px rgba(0,0,0,0.4)"
-                      : "0 4px 8px rgba(0,0,0,0.1)",
-                }}
-              >
-                <div className="flex flex-col items-center">
-                  {/* Imagem do participante */}
-                  <img
-                    src={participante.foto}
-                    alt={`${participante.nome} Foto`}
-                    className="mt-7 h-auto w-3/4 rounded-lg object-cover grayscale transition-transform duration-300 hover:scale-105"
-                    style={{
-                      border: "4px solid #239e1a",
-                      filter:
-                        hoveredCard === index ? "none" : "grayscale(100%)",
-                      boxShadow:
-                        hoveredCard === index
-                          ? "0 15px 30px rgba(0,0,0,0.5)"
-                          : "none", // Adicionando sombra para dar profundidade quando o mouse está sobre a imagem
-                    }}
-                  />
+          {/* Grid de participantes */}
+          <div className="grid grid-cols-1 justify-center gap-6 md:grid-cols-3">
+            {participantes
+              .slice(currentSlide, currentSlide + 3)
+              .map((participante, index) => (
+                <div
+                  key={participante.id}
+                  className={`overflow-hidden rounded-lg border border-gray-700 bg-green-600 ${
+                    hoveredCard === index ? "hovered" : ""
+                  }`}
+                  onMouseEnter={() => setHoveredCard(index)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                  style={{
+                    transform:
+                      hoveredCard === index
+                        ? "scale(1.05) rotate(2deg)"
+                        : "scale(1)",
+                    transition: "transform 0.3s ease",
+                    boxShadow:
+                      hoveredCard === index
+                        ? "0 10px 20px rgba(0,0,0,0.4)"
+                        : "0 4px 8px rgba(0,0,0,0.1)",
+                  }}
+                >
+                  <div className="flex flex-col items-center">
+                    {/* Imagem do participante */}
+                    <img
+                      src={participante.foto}
+                      alt={`${participante.nome} Foto`}
+                      className="mt-7 h-auto w-3/4 rounded-lg object-cover grayscale transition-transform duration-300 hover:scale-105"
+                      style={{
+                        border: "4px solid #239e1a",
+                        filter:
+                          hoveredCard === index ? "none" : "grayscale(100%)",
+                        boxShadow:
+                          hoveredCard === index
+                            ? "0 15px 30px rgba(0,0,0,0.5)"
+                            : "none", // Adicionando sombra para dar profundidade quando o mouse está sobre a imagem
+                      }}
+                    />
 
-                  {/* Informações do participante */}
-                  <div className="w-3/4 p-6 text-center">
-                    <h3 className="mb-3 font-newsreader text-xl font-bold text-white">
-                      {participante.nome}
-                    </h3>
-                    <p className="mb-5 text-white">{participante.cargo}</p>
-                    {generateSocialLinks(participante)}
+                    {/* Informações do participante */}
+                    <div className="w-3/4 p-6 text-center">
+                      <h3 className="mb-3 font-newsreader text-xl font-bold text-white">
+                        {participante.nome}
+                      </h3>
+                      <p className="mb-5 text-white">{participante.cargo}</p>
+                      {generateSocialLinks(participante)}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-        </div>
+              ))}
+          </div>
 
-        {/* Botões de navegação */}
-        <div
-          className="mt-6 flex justify-center"
-          style={{ backgroundColor: "#01c88c" }}
-        >
-          <button
-            onClick={handlePrevSlide}
-            className="bg-yellow mr-4 rounded px-4 py-2 text-white hover:bg-green-900"
+          {/* Botões de navegação */}
+          <div
+            className="mt-6 flex justify-center"
+            style={{ backgroundColor: "#01c88c" }}
           >
-            Anterior
-          </button>
-          <button
-            onClick={handleNextSlide}
-            className="bg-yellow rounded px-4 py-2 text-white hover:bg-green-900"
-          >
-            Próximo
-          </button>
+            <button
+              onClick={handlePrevSlide}
+              className="bg-yellow mr-4 rounded px-4 py-2 text-white hover:bg-green-900"
+            >
+              Anterior
+            </button>
+            <button
+              onClick={handleNextSlide}
+              className="bg-yellow rounded px-4 py-2 text-white hover:bg-green-900"
+            >
+              Próximo
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 /*       ___________________

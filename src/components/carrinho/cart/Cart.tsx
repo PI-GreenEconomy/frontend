@@ -4,7 +4,7 @@ import CardCart from "../cardcart/CardCart";
 import { Dialog, DialogTrigger, DialogContent } from "../../ui/Dialog";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
 import { AuthContext } from "../../../contexts/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
   const { items, limparCart } = useContext(CartContext);
