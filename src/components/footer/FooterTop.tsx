@@ -1,10 +1,12 @@
 import { Facebook, Figma, Github, Instagram, Mail, MapPin } from "lucide-react";
-import { categorias } from "../../data/categorias";
 import { Link } from "react-router-dom";
 import { links } from "../../data/linksMenu";
 import { IMAGES } from "../../data/imageIcons";
+import { useCategoria } from "../../hooks/useCategoria";
 
 export const FooterTop = () => {
+  const { categorias } = useCategoria();
+
   return (
     <div className="flex w-full justify-around gap-2 bg-white py-16">
       <div className="container flex flex-wrap justify-start gap-x-6 gap-y-12 sm:justify-between sm:gap-y-8">
@@ -29,7 +31,7 @@ export const FooterTop = () => {
             {categorias.map((categoria) => (
               <li key={categoria.id}>
                 <Link
-                  to={`categorias/${categoria.slug}`}
+                  to={`/produtos/categoria/${categoria.slug}`}
                   className="py-2 text-sm hover:text-primary focus-visible:text-primary"
                 >
                   {categoria.tipo}
