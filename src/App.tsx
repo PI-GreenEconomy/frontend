@@ -97,6 +97,8 @@ export default function App() {
                     element={<Produtos />}
                   />
 
+                  <Route path="/busca/:query" element={<Produtos />} />
+
                   <Route
                     path="/seusprodutos"
                     element={
@@ -114,6 +116,7 @@ export default function App() {
                       </ProtectedRouterUser>
                     }
                   />
+
                   <Route
                     path="/editarproduto/:id"
                     element={

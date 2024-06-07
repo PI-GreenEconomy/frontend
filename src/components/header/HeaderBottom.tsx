@@ -8,6 +8,7 @@ import { Sheet, SheetClose, SheetContent, SheetTrigger } from "../ui/Sheet";
 import { NavbarMobile } from "./Navbar";
 import { links } from "../../data/linksMenu";
 import NavTabs from "./NavTabs";
+import { InputBuscaProduto } from "./InputBuscaProduto";
 
 export const HeaderBottom = () => {
   const { pathname } = useLocation();
@@ -118,16 +119,7 @@ export const HeaderBottom = () => {
         </div>
 
         {/* INPUT SEARCH - MENU CENTER */}
-        <div className="relative order-1 flex w-full rounded-xl lg:order-none lg:flex-1">
-          <input
-            className="font-roboto w-full rounded-xl border border-solid border-border px-6 py-2 text-base font-medium outline-none placeholder:font-medium placeholder:text-muted-foreground focus:border-gray-500"
-            type="text"
-            placeholder="Buscar Produto"
-          />
-          <button className="group absolute right-0 top-0 flex rounded-xl px-3 py-2 text-muted-foreground outline-none">
-            <Search className="group-focus-visible:text-gray-500" />
-          </button>
-        </div>
+        <InputBuscaProduto />
 
         {/* LOGIN AND CART - MENU RIGHT */}
         <div className="hidden w-full items-center justify-between gap-6 md:flex md:w-fit">
