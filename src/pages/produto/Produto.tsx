@@ -113,17 +113,19 @@ export const Produto = () => {
               <p className="text-2xl font-semibold text-[#042419]">
                 {formatarMoeda(precoAtual)}
               </p>
-              <del className="inline-block text-lg text-[#575757]">
-                {formatarMoeda(produto.basePreco)}
-              </del>
 
               {existeDesconto && (
-                <div className="top-4 flex max-w-[60px] items-center justify-center gap-1 rounded bg-primary px-2 py-1 text-white">
-                  <ArrowDownIcon className="size-4 flex-shrink-0" />
-                  <span className="text-sm font-medium">
-                    {produto.porcentagemDesconto}%
-                  </span>
-                </div>
+                <>
+                  <del className="inline-block text-lg text-[#575757]">
+                    {formatarMoeda(produto.basePreco)}
+                  </del>
+                  <div className="top-4 flex max-w-[60px] items-center justify-center gap-1 rounded bg-primary px-2 py-1 text-white">
+                    <ArrowDownIcon className="size-4 flex-shrink-0" />
+                    <span className="text-sm font-medium">
+                      {produto.porcentagemDesconto}%
+                    </span>
+                  </div>
+                </>
               )}
             </div>
             {podeParcelar && (
