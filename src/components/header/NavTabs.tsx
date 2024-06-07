@@ -8,8 +8,10 @@ const NavTabs = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   const { usuario, handleLogout } = useContext(AuthContext);
-  const usuarioAdministrador =
+  const usuarioVendedor =
     usuario.funcao === "VENDEDOR" || usuario.funcao === "ADMIN";
+
+  const usuarioAdministrador = usuario.funcao === "ADMIN";
 
   function logout() {
     handleLogout();
@@ -45,7 +47,7 @@ const NavTabs = () => {
             >
               Perfil
             </Link>
-            {usuarioAdministrador && (
+            {usuarioVendedor && (
               <>
                 <Link
                   to={"/seusprodutos"}
@@ -59,6 +61,10 @@ const NavTabs = () => {
                 >
                   Cadastrar Produto
                 </Link>
+              </>
+            )}
+            {usuarioAdministrador && (
+              <>
                 <Link
                   to={"/categorias"}
                   className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
