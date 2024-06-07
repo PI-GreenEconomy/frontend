@@ -4,6 +4,7 @@
 
 :root {
   --font-poppins: "Poppins", sans-serif;
+  --font-newsreader: "Newsreader", serif;
 
   --primary: 159 82% 18%; /* #085339 */
   --secondary: 160 23% 92%; /* #e7f0ed */

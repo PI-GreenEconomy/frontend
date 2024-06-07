@@ -25,10 +25,12 @@ export const BotaoQuantidade = () => {
         />
       </button>
       <div className="inline-block w-8 text-center text-base">{quantidade}</div>
-      <button className="border-l border-l-border p-2">
+      <button
+        className="border-l border-l-border p-2"
+        onClick={aumentarQuantidade}
+      >
         <PlusIcon
           className="size-4 text-foreground"
-          onClick={aumentarQuantidade}
           aria-label="adicionar quantidade"
         />
       </button>

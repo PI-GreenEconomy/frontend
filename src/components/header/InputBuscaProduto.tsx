@@ -1,9 +1,9 @@
 import { SearchIcon } from "lucide-react";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useBusca } from "../../hooks/useBusca";
 
 export const InputBuscaProduto = () => {
-  const [keyword, setKeyWord] = useState("");
+  const { keyword, setKeyWord } = useBusca();
   const navigate = useNavigate();
 
   const searchHandler = (e: React.FormEvent<HTMLFormElement>) => {

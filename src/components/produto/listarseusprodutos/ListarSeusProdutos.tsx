@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 function ListarSeusProdutos() {
   const { buscarProdutos, produtos } = useProduto();
 
-  const { usuario, isLoading } = useContext(AuthContext);
+  const { usuario } = useContext(AuthContext);
 
   useEffect(() => {
     buscarProdutos();

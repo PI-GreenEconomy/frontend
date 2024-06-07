@@ -5,7 +5,6 @@ import {
   HeartIcon,
   Instagram,
   ShoppingCartIcon,
-  Twitter,
 } from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useProduto } from "../../hooks/useProduto";
@@ -35,6 +34,11 @@ export const Produto = () => {
   const navigate = useNavigate();
 
   const { adicionarProduto } = useContext(CartContext);
+
+  const handleCompraProduto = () => {
+    adicionarProduto(produto);
+    navigate("/cart");
+  };
 
   const { produtos, produto, buscarProdutoPorId } = useProduto();
 
@@ -148,7 +152,10 @@ export const Produto = () => {
             </button>
           </div>
           <div className="flex items-center gap-[10px]">
-            <button className="flex-1 rounded bg-primary px-10 py-4 uppercase text-white hover:bg-primary/90 focus:bg-primary/90">
+            <button
+              className="flex-1 rounded bg-primary px-10 py-4 uppercase text-white hover:bg-primary/90 focus:bg-primary/90"
+              onClick={() => handleCompraProduto()}
+            >
               Comprar
             </button>
             <button className="group flex h-[54px]  w-[60px] items-center justify-center rounded-lg border border-primary px-3 py-5 hover:bg-primary/80">

@@ -43,12 +43,15 @@ function Perfil() {
             <p>
               Email: <span className="ml-1 font-medium">{usuario.usuario}</span>
             </p>
-            <p>
-              Função:{" "}
-              <span className="ml-1 font-medium lowercase">
-                {usuario.funcao}
-              </span>
-            </p>
+            {usuario.funcao === "ADMIN" ||
+              (usuario.funcao === "VENDEDOR" && (
+                <p>
+                  Função:{" "}
+                  <span className="ml-1 font-medium lowercase">
+                    {usuario.funcao}
+                  </span>
+                </p>
+              ))}
           </div>
         </div>
       </div>

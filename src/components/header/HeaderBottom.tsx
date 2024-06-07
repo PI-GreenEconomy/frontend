@@ -1,4 +1,4 @@
-import { CircleUser, MenuIcon, Search, ShoppingCart } from "lucide-react";
+import { CircleUser, MenuIcon, ShoppingCart } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 import Logo from "../../assets/Logo.svg";
@@ -9,10 +9,12 @@ import { NavbarMobile } from "./Navbar";
 import { links } from "../../data/linksMenu";
 import NavTabs from "./NavTabs";
 import { InputBuscaProduto } from "./InputBuscaProduto";
+import { CartContext } from "../../contexts/CartContext";
 
 export const HeaderBottom = () => {
   const { pathname } = useLocation();
   const { usuario } = useContext(AuthContext);
+  const { quantidadeItems } = useContext(CartContext);
 
   return (
     <div className="border-b border-b-border py-5">
@@ -90,13 +92,13 @@ export const HeaderBottom = () => {
             <img src={Logo} alt="Green Economy" />
           </Link>
           <Link
-            to={"/carrinho"}
+            to={"/cart"}
             className="flex items-center justify-center gap-2 md:hidden"
           >
             <div className="relative">
               <ShoppingCart className="z-10 size-7" />
               <span className="absolute bottom-[21px] left-4 right-0 flex size-4 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
-                0
+                {quantidadeItems}
               </span>
             </div>
             <span className="sr-only md:not-sr-only">Carrinho</span>
@@ -158,7 +160,7 @@ export const HeaderBottom = () => {
             <div className="relative">
               <ShoppingCart className="z-10 size-7" />
               <span className="absolute bottom-[21px] left-4 right-0 flex size-4 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
-                0
+                {quantidadeItems}
               </span>
             </div>
             <span className="sr-only md:not-sr-only">Carrinho</span>

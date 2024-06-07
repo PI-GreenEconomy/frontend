@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useProduto } from "../../hooks/useProduto";
 import { calcularValorTotalProduto } from "../../utils/preco";
 import { ChevronRightIcon } from "lucide-react";
+import Produto from "../../models/Produto";
 
 const tiposDeFiltros = [
   {
@@ -30,9 +31,7 @@ const tiposDeFiltros = [
 ];
 
 function Produtos() {
-  const { id, tipo } = useParams();
-
-  const { produtos } = useProduto();
+  const { id, tipo, query } = useParams();
 
   const idAtual = id ? Number(id) : 1;
 
@@ -40,9 +39,19 @@ function Produtos() {
   const [tipoFiltro, setTipoFiltro] = useState("default");
   const itensPorPagina = 8;
 
-  const produtosCategoria = tipo
-    ? produtos.filter((produto) => tipo === produto.categoria?.slug)
+  const { produtos } = useProduto();
+
+  const produtosPorBusca = query
+    ? produtos.filter((produto: Produto) =>
+        produto.nome.toLowerCase().includes(query.toLowerCase()),
+      )
     : produtos;
+
+  const produtosCategoria = tipo
+    ? produtosPorBusca.filter(
+        (produto: Produto) => tipo === produto.categoria?.slug,
+      )
+    : produtosPorBusca;
 
   const mudarPagina = (numeroPagina: number) => {
     setPaginaAtual(numeroPagina);
@@ -79,7 +88,7 @@ function Produtos() {
 
     switch (tipoFiltro) {
       case "popularidade":
-        return produtoA.notaMedia - produtoB.notaMedia;
+        return produtoB.notaMedia - produtoA.notaMedia;
       case "preco-maior":
         return precoProdutoB - precoProdutoA;
       case "preco-menor":
@@ -120,7 +129,7 @@ function Produtos() {
             onChange={mudarFiltro}
             className="rounded-md border border-[#CBD5E1] p-2 outline-none placeholder:text-[#94A3B8] focus:border-primary"
           >
-            <option value="" selected disabled>
+            <option value="" selected>
               Selecione uma Categoria
             </option>
             {tiposDeFiltros.map((filtro) => (
@@ -132,14 +141,17 @@ function Produtos() {
         </div>
       </div>
       <ListarProduto produtos={produtosFiltrados} />
-      <Paginacao
-        itemsPorPagina={itensPorPagina}
-        totalItens={produtosCategoria.length}
-        paginaAtual={paginaAtual}
-        irPaginaSeguinte={proximaPagina}
-        irPaginaAnterior={paginaAnterior}
-        irPaginaAtual={mudarPagina}
-      />
+
+      <div className="mt-10">
+        <Paginacao
+          itemsPorPagina={itensPorPagina}
+          totalItens={produtosCategoria.length}
+          paginaAtual={paginaAtual}
+          irPaginaSeguinte={proximaPagina}
+          irPaginaAnterior={paginaAnterior}
+          irPaginaAtual={mudarPagina}
+        />
+      </div>
     </div>
   );
 }

@@ -24,8 +24,8 @@ export default {
         terra: "hsl(var(--terra))",
       },
       fontFamily: {
-        poppins: ["var(--font-poppins), sans-serif"],
-        newsreader: ["Newsreader, serif"],
+        poppins: ["var(--font-poppins)"],
+        newsreader: ["var(--font-newsreader)"],
       },
       backgroundImage: {
         folhas: "url('src/assets/home/banner.jpg ')",

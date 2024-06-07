@@ -31,7 +31,7 @@ const Paginacao: React.FC<PaginacaoProps> = ({
   return (
     <nav className="mt-4">
       <ul className="flex items-center justify-center space-x-2">
-        <span className="text-sm text-gray-600">
+        <span className="mr-5 text-sm text-gray-600">
           {itemInicial} - {itemFinal} de {totalItens} produtos
         </span>
         <li>
