@@ -25,8 +25,8 @@ const tiposDeFiltros = [
     acao: "desconto-maior",
   },
   {
-    nome: "Menor desconto",
-    acao: "desconto-menor",
+    nome: "Ordem alfabética (A-Z)",
+    acao: "alfabetica-asc",
   },
 ];
 
@@ -75,34 +75,36 @@ function Produtos() {
     setTipoFiltro(evento.target.value);
   };
 
+  const produtosFiltrados = [...produtosCategoria].sort(
+    (produtoA, produtoB) => {
+      const precoProdutoA = calcularValorTotalProduto(produtoA);
+      const precoProdutoB = calcularValorTotalProduto(produtoB);
+
+      switch (tipoFiltro) {
+        case "popularidade":
+          return produtoB.notaMedia - produtoA.notaMedia;
+        case "preco-maior":
+          return precoProdutoB - precoProdutoA;
+        case "preco-menor":
+          return precoProdutoA - precoProdutoB;
+        case "desconto-maior":
+          return produtoB.porcentagemDesconto - produtoA.porcentagemDesconto;
+        case "desconto-menor":
+          return produtoA.porcentagemDesconto - produtoB.porcentagemDesconto;
+        case "alfabetica-asc":
+          return produtoA.nome.localeCompare(produtoB.nome);
+        default:
+          return 0;
+      }
+    },
+  );
+
   const indiceUltimoItem = paginaAtual * itensPorPagina;
   const indicePrimeiroItem = indiceUltimoItem - itensPorPagina;
-  const produtosAtuais = produtosCategoria.slice(
+  const produtosAtuais = produtosFiltrados.slice(
     indicePrimeiroItem,
     indiceUltimoItem,
   );
-
-  const produtosFiltrados = [...produtosAtuais].sort((produtoA, produtoB) => {
-    const precoProdutoA = calcularValorTotalProduto(produtoA);
-    const precoProdutoB = calcularValorTotalProduto(produtoB);
-
-    switch (tipoFiltro) {
-      case "popularidade":
-        return produtoB.notaMedia - produtoA.notaMedia;
-      case "preco-maior":
-        return precoProdutoB - precoProdutoA;
-      case "preco-menor":
-        return precoProdutoA - precoProdutoB;
-      case "desconto-maior":
-        return produtoB.porcentagemDesconto - produtoA.porcentagemDesconto;
-
-      case "desconto-menor":
-        return produtoA.porcentagemDesconto - produtoB.porcentagemDesconto;
-
-      default:
-        return 0;
-    }
-  });
 
   return (
     <div className="container py-16">
@@ -152,7 +154,7 @@ function Produtos() {
           </select>
         </div>
       </div>
-      <ListarProduto produtos={produtosFiltrados} />
+      <ListarProduto produtos={produtosAtuais} />
 
       <div className="mt-10">
         <Paginacao
