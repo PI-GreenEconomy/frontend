@@ -89,7 +89,7 @@ export function CardEditarProduto({ produto }: CardEditarProdutoProps) {
                 <strong>Descrição:</strong> <span>{produto.descricao}</span>
               </DialogDescription>
 
-              <div className="z-20 mb-2 flex w-full items-end justify-center gap-1 font-medium">
+              <div className="z-20 mb-2 flex w-full flex-wrap items-end justify-center gap-1 font-medium">
                 <Link
                   to={`/editarproduto/${produto.id}`}
                   className="flex flex-1 items-center justify-center gap-3 rounded-md bg-primary px-4 py-2 font-medium uppercase text-white hover:bg-[#084E35]"
@@ -112,7 +112,7 @@ export function CardEditarProduto({ produto }: CardEditarProdutoProps) {
         </div>
       </div>
 
-      <div className="z-20 mb-2 flex w-full items-end justify-center gap-1 font-medium">
+      <div className="z-20 mb-2 flex w-full flex-wrap items-end justify-center gap-1 font-medium">
         <Link
           to={`/editarproduto/${produto.id}`}
           className="flex flex-1 items-center justify-center gap-3 rounded-md bg-primary px-4 py-2 font-medium uppercase text-white hover:bg-[#084E35]"

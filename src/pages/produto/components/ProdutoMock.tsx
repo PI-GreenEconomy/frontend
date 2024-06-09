@@ -3,7 +3,7 @@ import { Skeleton } from "../../../components/ui/Skeleton";
 export const ProdutoMock = () => {
   return (
     <div className="container py-12">
-      <div className="mb-12 flex rounded bg-[#E7F0ED] p-3 text-[#4A695E]">
+      <div className="mb-12 flex flex-wrap gap-y-1 rounded bg-[#E7F0ED] p-3 text-[#4A695E]">
         <div className="flex">
           <Skeleton className="h-[40px] w-full rounded-xl" />{" "}
           <Skeleton className="h-[40px] w-full rounded-xl" />{" "}
@@ -19,7 +19,7 @@ export const ProdutoMock = () => {
         <Skeleton className="h-[40px] w-full rounded-xl" />
       </div>
 
-      <article className="grid grid-cols-2 items-center justify-between gap-14">
+      <article className="grid grid-cols-1 items-center justify-between gap-14 md:grid-cols-2">
         <div className="h-full rounded-md border border-border">
           <Skeleton className="h-[600px] w-[600px]" />
         </div>
@@ -62,7 +62,7 @@ export const ProdutoMock = () => {
         </div>
       </article>
 
-      <section className="flex items-center justify-between gap-4 py-16">
+      <section className="flex flex-wrap items-center gap-3 md:gap-8">
         <div className="max-w-[800px] text-[#00100D]">
           <Skeleton className="h-[40px] w-full rounded-xl" />
           <Skeleton className="h-[40px] w-full rounded-xl" />

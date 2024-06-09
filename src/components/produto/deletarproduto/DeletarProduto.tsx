@@ -24,21 +24,25 @@ function DeletarProduto() {
   if (!id) return;
 
   return (
-    <div className="container mx-auto w-1/3 py-8">
+    <div className="container mx-auto w-full max-w-3xl py-8">
       <h1 className="py-4 text-center text-4xl">Deletar Produto</h1>
       <p className="mb-4 text-center font-semibold">
         Você tem certeza de que deseja apagar o produto a seguir?
       </p>
       <div className="flex flex-col justify-between overflow-hidden rounded-2xl border">
-        <div className="container py-2">
+        <div className="container mb-4 py-2">
           <h2 className="py-2 text-lg font-medium text-foreground">
             {produto.nome}
           </h2>
-          <img
-            src={produto.foto}
-            alt={produto.nome}
-            className="h-48 w-full rounded object-contain"
-          />
+
+          <div className="mb-4">
+            <img
+              src={produto.foto}
+              alt={produto.nome}
+              className="max-h-[200px] rounded object-contain"
+            />
+          </div>
+
           <div>
             <div className="mb-2 flex items-center gap-1">
               <p className="text-lg font-semibold text-[#042419]">
@@ -55,15 +59,15 @@ function DeletarProduto() {
             Criado por {produto.usuario?.usuario}
           </p>
         </div>
-        <div className="flex">
+        <div className="flex flex-wrap">
           <button
-            className="w-full bg-red-700 py-2 text-slate-100 hover:bg-red-600"
+            className="w-full flex-none bg-red-700 py-2 text-slate-100 hover:bg-red-600 sm:flex-1"
             onClick={() => navigate("/seusprodutos")}
           >
             Não
           </button>
           <button
-            className="flex w-full items-center justify-center bg-primary text-slate-100 hover:bg-green-700"
+            className="flex w-full flex-none items-center justify-center bg-primary py-2 text-slate-100 hover:bg-green-700 sm:flex-1"
             onClick={() => deletarProduto(id)}
           >
             {isLoading ? (

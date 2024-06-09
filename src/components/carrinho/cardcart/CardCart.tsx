@@ -33,8 +33,7 @@ function CardCart({ item }: CardProdutosProps) {
       </div>
       <div className="flex flex-wrap">
         <button
-          className="flex w-full items-center justify-center 
-                                   bg-terra py-2 font-bold uppercase text-slate-100 hover:bg-[#ca8d50]"
+          className="flex w-full items-center justify-center rounded bg-terra py-2 font-bold uppercase text-slate-100 hover:bg-[#ca8d50]"
           onClick={() => removerProduto(item.id)}
         >
           Remover

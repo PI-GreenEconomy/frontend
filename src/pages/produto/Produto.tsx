@@ -57,7 +57,7 @@ export const Produto = () => {
 
   return (
     <div className="container py-12">
-      <div className="mb-12 flex rounded bg-[#E7F0ED] p-3 text-[#4A695E]">
+      <div className="mb-12 flex flex-wrap gap-y-1 rounded bg-[#E7F0ED] p-3 text-[#4A695E]">
         <div className="flex">
           <Link to={"/"}>Início</Link>
           <ChevronRightIcon className="size-6" />
@@ -69,7 +69,7 @@ export const Produto = () => {
         <div className="flex">
           <Link
             className="capitalize"
-            to={`/categoria/${produto.categoria?.tipo}`}
+            to={`/categoria/${produto.categoria?.slug}`}
           >
             {produto.categoria?.tipo}
           </Link>
@@ -80,17 +80,17 @@ export const Produto = () => {
         </span>
       </div>
 
-      <article className="grid grid-cols-2 items-center justify-between gap-14">
+      <article className="grid grid-cols-1 items-center justify-between gap-14 md:grid-cols-2">
         <div className="h-full rounded-md border border-border">
           <img
             src={produto.foto}
             alt={produto.nome}
-            className="h-[600px] w-full rounded-md object-contain"
+            className="h-80 w-full rounded-md object-contain md:h-[600px]"
           />
         </div>
-        <div className="flex max-w-[520px] flex-col gap-8">
+        <div className="flex flex-col gap-x-8 gap-y-6 sm:gap-y-8">
           <div>
-            <h1 className="mb-2 text-[28px] font-medium text-[#042419]">
+            <h1 className="mb-4 text-2xl font-medium text-[#042419] md:text-[28px]">
               {produto.nome}
             </h1>
             <div className="mb-2">
@@ -101,7 +101,7 @@ export const Produto = () => {
             </div>
 
             <Link
-              to={`/produto/${produto.categoria}/${produto.id}/${produto.slug}/avaliar`}
+              to={`/produto/${produto.id}/${produto.slug}/avaliar`}
               className="text-sm text-primary underline hover:text-primary/90"
             >
               Avaliar produto
@@ -143,17 +143,17 @@ export const Produto = () => {
               </span>
             )}
           </div>
-          <div className="flex items-center gap-8">
+          <div className="flex w-full flex-wrap items-center gap-3 lg:gap-8">
             <BotaoQuantidade />
             <button
-              className="flex items-center gap-4 rounded bg-[#DAE8E3] px-4 py-2 font-semibold uppercase text-primary hover:bg-[#9abeb2]"
+              className="flex items-center gap-4 rounded bg-[#DAE8E3] px-4 py-2 text-sm font-semibold uppercase text-primary hover:bg-[#9abeb2] sm:text-base md:text-base"
               onClick={() => adicionarProduto(produto)}
             >
               <ShoppingCartIcon />
               Adicionar ao carrinho
             </button>
           </div>
-          <div className="flex items-center gap-[10px]">
+          <div className="flex flex-wrap items-center gap-[10px]">
             <button
               className="flex-1 rounded bg-primary px-10 py-4 uppercase text-white hover:bg-primary/90 focus:bg-primary/90"
               onClick={() => handleCompraProduto()}
@@ -191,10 +191,12 @@ export const Produto = () => {
         </div>
       </article>
 
-      <section className="flex items-center justify-between gap-4 py-16">
+      <section className="flex flex-wrap items-center justify-between gap-x-4 gap-y-8 py-16">
         <div className="max-w-[800px] text-[#00100D]">
-          <h2 className="mb-8 text-4xl font-semibold">Descrição do produto</h2>
-          <p className="text-lg">{produto.descricao}</p>
+          <h2 className="mb-8 text-3xl font-semibold md:text-4xl">
+            Descrição do produto
+          </h2>
+          <p className="text-base leading-7 md:text-lg">{produto.descricao}</p>
         </div>
         <div>
           <img
@@ -204,10 +206,7 @@ export const Produto = () => {
         </div>
       </section>
 
-      <section>
-        <h2 className="mb-8 text-4xl font-semibold">Produtos Relacionados</h2>
-        <ListarProdutoCategoria produtos={produtos} />
-      </section>
+      <ListarProdutoCategoria titulo="Relacionados" produtos={produtos} />
     </div>
   );
 };

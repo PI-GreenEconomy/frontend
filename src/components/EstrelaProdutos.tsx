@@ -16,7 +16,7 @@ export const EstrelaProdutos = ({
   const novaNotaMedia = notaMedia ? notaMedia.toFixed(1) : "0.0";
 
   return (
-    <div className="flex items-center">
+    <div className="flex flex-wrap items-center">
       {[...Array(totalStars)].map((_, index) => {
         if (index < fullStars) {
           return (
@@ -38,8 +38,8 @@ export const EstrelaProdutos = ({
           );
         }
       })}
-      <div className="ml-1 text-sm text-muted-foreground">
-        <span className="mx-1">{novaNotaMedia}</span>
+      <div className="ml-1 flex flex-wrap gap-1 text-sm text-muted-foreground">
+        <span>{novaNotaMedia}</span>
         <span>({numeroDeAvaliacoes} avaliações)</span>
       </div>
     </div>

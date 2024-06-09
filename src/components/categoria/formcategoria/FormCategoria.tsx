@@ -39,7 +39,10 @@ function FormCategoria() {
         {id === undefined ? "Cadastrar categoria" : "Editar categoria"}
       </h1>
 
-      <form className="flex w-1/2 flex-col gap-4" onSubmit={gerarNovaCategoria}>
+      <form
+        className="flex w-full max-w-2xl flex-col gap-4"
+        onSubmit={gerarNovaCategoria}
+      >
         <div className="flex flex-col gap-2">
           <label htmlFor="tipo">Tipo da categoria</label>
           <input

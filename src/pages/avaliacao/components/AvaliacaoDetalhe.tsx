@@ -46,11 +46,11 @@ export const AvaliacaoDetalhe = ({
   }
 
   return (
-    <section className="mx-auto flex w-full max-w-96 flex-col gap-4 py-12">
+    <section className="container mx-auto flex w-full max-w-96 flex-col gap-4 py-12">
       <h1 className="fornt-bold text-2xl">Deixe sua avaliação</h1>
       <div className="flex items-center gap-2">
         <img
-          className="h-16 w-16 rounded-sm object-cover object-center"
+          className="h-16 w-16 rounded-sm object-contain object-center"
           src={produto.foto}
           alt={produto.nome}
         />

@@ -32,13 +32,7 @@ function Cart() {
   };
 
   return (
-    <div
-      className="
-                align-center 
-                my-8 
-                flex flex-col justify-center
-                "
-    >
+    <div className="align-center my-8 flex flex-col justify-center gap-4">
       <h1 className="my-8 text-center text-4xl">Carrinho de Compras</h1>
       <h2 className="text-center text-2xl">
         {items.length === 0 ? "O Carrinho está vazio!" : ""}
@@ -57,18 +51,18 @@ function Cart() {
           <DialogTrigger asChild>
             <button
               className="mx-auto my-10 flex 
-          w-1/4 cursor-pointer justify-center rounded bg-primary/90 py-2 font-bold uppercase text-slate-100 hover:bg-primary"
+          w-full max-w-[90%] cursor-pointer justify-center rounded bg-primary/90 py-2 font-bold uppercase text-slate-100 hover:bg-primary md:max-w-96"
               onClick={abrirComprarLogado}
             >
               Efetuar Pagamento
             </button>
           </DialogTrigger>
           <DialogContent className="flex flex-col items-center justify-between gap-8 py-10 sm:max-w-md">
-            <h2 className="text-4xl font-semibold text-primary">
+            <h2 className="text-3xl font-semibold text-primary md:text-4xl">
               Pagar com QRCode
             </h2>
             <img
-              src="https://media.discordapp.net/attachments/1220458281386901694/1248387538482106398/qrcode.jpg?ex=666423bf&is=6662d23f&hm=91f5394c92563e88f9e6e82519e846a937aee2ee4a0dabda74e93dd2ff7c2af6&=&format=webp&width=408&height=408"
+              src="https://api.qrserver.com/v1/create-qr-code/?size=408x408&data=https://linktr.ee/Greenconomy"
               alt="QRCode da nossas redes sociais"
               className="h-72 object-cover"
             />
