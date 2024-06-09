@@ -112,15 +112,27 @@ function Produtos() {
             <Link to={"/"}>Início</Link>
             <ChevronRightIcon className="size-6" />
           </div>
-          <span className="inline-block font-medium text-primary">
-            Produtos
-          </span>
+          {tipo || query ? (
+            <>
+              <div className="flex">
+                <Link to={"/produtos"}>Produtos</Link>
+                <ChevronRightIcon className="size-6" />
+              </div>
+              <span className="inline-block font-medium capitalize text-primary">
+                {tipo || query}
+              </span>
+            </>
+          ) : (
+            <span className="inline-block font-medium capitalize text-primary">
+              Produtos
+            </span>
+          )}
         </div>
       </div>
       <h2 className="mb-12 text-3xl">Todos os Produtos</h2>
-      <div className="mb-14 flex items-center justify-between">
+      <div className="mb-14 flex flex-wrap items-center justify-between gap-6">
         <p>Foram encontrados no total {produtosCategoria.length} produtos</p>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-4">
           <label htmlFor="filtro">Ordenar por</label>
           <select
             name="filtro"

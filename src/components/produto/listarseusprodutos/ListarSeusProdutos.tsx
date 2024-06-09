@@ -1,4 +1,4 @@
-import { DNA } from "react-loader-spinner";
+import { ThreeDots } from "react-loader-spinner";
 import { useProduto } from "../../../hooks/useProduto";
 import { useContext, useEffect } from "react";
 import { CardEditarProduto } from "./CardEditarProduto";
@@ -6,7 +6,7 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import { Link } from "react-router-dom";
 
 function ListarSeusProdutos() {
-  const { buscarProdutos, produtos } = useProduto();
+  const { buscarProdutos, produtos, isLoading } = useProduto();
 
   const { usuario } = useContext(AuthContext);
 
@@ -24,17 +24,19 @@ function ListarSeusProdutos() {
 
   return (
     <>
-      {produtosUsuario.length === 0 && (
-        <DNA
+      {isLoading && (
+        <ThreeDots
           visible={true}
-          height="200"
-          width="200"
-          ariaLabel="dna-loading"
+          height="80"
+          width="80"
+          color="#4fa94d"
+          radius="9"
+          ariaLabel="three-dots-loading"
           wrapperStyle={{}}
-          wrapperClass="dna-wrapper mx-auto"
+          wrapperClass=""
         />
       )}
-      {produtosUsuario.length === 0 && (
+      {!isLoading && produtosUsuario.length === 0 && (
         <div className="flex flex-col items-center justify-center gap-4 py-10">
           <h1 className="text-3xl">Nenhum produto foi encontrado</h1>
           <p className="text-base text-gray-600">Deseja cadastrar um agora?</p>

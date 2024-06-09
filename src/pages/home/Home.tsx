@@ -6,28 +6,30 @@ function Home() {
   const { produtos } = useProduto();
 
   return (
-    <div>
+    <div className="flex flex-col gap-10">
       <BemVindo />
-      <section className="container py-16 text-foreground">
-        <h1 className="mb-8 text-4xl">
-          Produtos de <span className="text-primary">Higiene</span>
-        </h1>
-        <ListarProdutoCategoria produtos={produtos} tipoCategoria="higiene" />
-      </section>
 
-      <section className="container py-16 text-foreground">
-        <h1 className="mb-8 text-4xl">
-          Produtos de <span className="text-primary">Casa</span>
-        </h1>
-        <ListarProdutoCategoria produtos={produtos} tipoCategoria="casa" />
-      </section>
+      {produtos.length > 0 && (
+        <div className="container">
+          <ListarProdutoCategoria
+            titulo="de Higiene"
+            produtos={produtos}
+            tipoCategoria="higiene"
+          />
 
-      <section className="container py-16 text-foreground">
-        <h1 className="mb-8 text-4xl">
-          Produtos de <span className="text-primary">Vestuário</span>
-        </h1>
-        <ListarProdutoCategoria produtos={produtos} tipoCategoria="vestuario" />
-      </section>
+          <ListarProdutoCategoria
+            titulo="de Casa"
+            produtos={produtos}
+            tipoCategoria="casa"
+          />
+
+          <ListarProdutoCategoria
+            titulo="de Vestuário"
+            produtos={produtos}
+            tipoCategoria="vestuario"
+          />
+        </div>
+      )}
     </div>
   );
 }

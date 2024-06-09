@@ -1,13 +1,18 @@
 import { SearchIcon } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useBusca } from "../../hooks/useBusca";
 
 export const InputBuscaProduto = () => {
   const { keyword, setKeyWord } = useBusca();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  const localkey = pathname.replace("/busca/", "");
 
   const searchHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (keyword.trim().length === 0 || localkey === keyword) return;
 
     if (keyword.trim()) {
       navigate(`/busca/${keyword}`);

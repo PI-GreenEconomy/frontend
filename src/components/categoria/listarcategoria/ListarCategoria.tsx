@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { DNA } from "react-loader-spinner";
 import CardCategoria from "../cardcategoria/CardCategoria";
 import { useCategoria } from "../../../hooks/useCategoria";
+import { ThreeDots } from "react-loader-spinner";
 
 function ListarCategorias() {
-  const { buscarCategorias, categorias } = useCategoria();
+  const { buscarCategorias, categorias, isLoading } = useCategoria();
 
   useEffect(() => {
     buscarCategorias();
@@ -12,15 +12,23 @@ function ListarCategorias() {
 
   return (
     <>
-      {categorias.length === 0 && (
-        <DNA
+      {isLoading && (
+        <ThreeDots
           visible={true}
-          height="200"
-          width="200"
-          ariaLabel="dna-loading"
+          height="80"
+          width="80"
+          color="#4fa94d"
+          radius="9"
+          ariaLabel="three-dots-loading"
           wrapperStyle={{}}
-          wrapperClass="dna-wrapper mx-auto"
+          wrapperClass=""
         />
+      )}
+
+      {!isLoading && categorias.length === 0 && (
+        <div className="py-8">
+          <h1 className="text-3xl">Nenhuma Categoria foi encontrada!</h1>
+        </div>
       )}
 
       <div className="flex w-full justify-center py-8">
