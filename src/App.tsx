@@ -89,13 +89,10 @@ export default function App() {
                   <Route path="/produtos" element={<Produtos />} />
                   <Route path="/produtos/:id" element={<Produtos />} />
                   <Route
-                    path="/produto/:categoria/:id/:slug"
+                    path="/produto/:id/:categoria/:slug"
                     element={<Produto />}
                   />
-                  <Route
-                    path="/produtos/categoria/:tipo"
-                    element={<Produtos />}
-                  />
+                  <Route path="/categoria/:tipo" element={<Produtos />} />
 
                   <Route path="/busca/:query" element={<Produtos />} />
 
@@ -109,7 +106,7 @@ export default function App() {
                   />
 
                   <Route
-                    path="/produto/:categoria/:id/:slug/avaliar"
+                    path="/produto/:id/:slug/avaliar"
                     element={
                       <ProtectedRouterUser>
                         <Avaliacao />

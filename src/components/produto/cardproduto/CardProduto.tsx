@@ -26,7 +26,7 @@ export const CardProduto = ({ produto }: CardProdutoProps) => {
   return (
     <div className="group relative flex w-full flex-col gap-2 rounded-md border border-border bg-white p-4 text-foreground outline-none transition-colors hover:border-border focus-visible:border-primary">
       <Link
-        to={`/produto/${produto.categoria?.slug}/${produto.id}/${produto.slug}`}
+        to={`/produto/${produto.id}/${produto.categoria?.slug}/${produto.slug}`}
         className="flex flex-1 flex-col gap-2"
       >
         <div>
@@ -87,13 +87,13 @@ export const CardProduto = ({ produto }: CardProdutoProps) => {
         </div>
       </Link>
 
-      <div className="z-20 flex w-full items-end justify-center gap-1 font-medium">
+      <div className="flex w-full flex-wrap items-end justify-start gap-2 font-medium">
         <BotaoQuantidade />
         <button
-          className="flex items-center justify-center gap-3 rounded-md bg-primary px-4 py-2 font-medium uppercase text-white hover:bg-[#084E35]"
+          className="flex flex-1 items-center justify-center gap-3 rounded-md bg-primary px-1 py-2 text-base font-medium uppercase text-white hover:bg-primary/90"
           onClick={() => adicionarProduto(produto)}
         >
-          <ShoppingCartIcon className="size-6" /> Adicionar
+          <ShoppingCartIcon className="size-5" /> Adicionar
         </button>
       </div>
     </div>

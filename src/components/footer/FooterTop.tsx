@@ -31,7 +31,7 @@ export const FooterTop = () => {
             {categorias.map((categoria) => (
               <li key={categoria.id}>
                 <Link
-                  to={`/produtos/categoria/${categoria.slug}`}
+                  to={`/categoria/${categoria.slug}`}
                   className="py-2 text-sm hover:text-primary focus-visible:text-primary"
                 >
                   {categoria.tipo}

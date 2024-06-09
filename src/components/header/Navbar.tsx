@@ -20,7 +20,7 @@ export const Navbar = () => {
           : categorias.map((categoria) => (
               <li key={categoria.id} className="w-fit">
                 <Link
-                  to={`produtos/categoria/${categoria.slug}`}
+                  to={`categoria/${categoria.slug}`}
                   className="flex flex-col items-center gap-1 rounded-md bg-[#E7F0ED] bg-transparent p-1 px-3 py-2 text-[#4A695E] text-current transition-colors hover:text-primary focus-visible:text-primary lg:px-4"
                 >
                   <div>{iconsCategoria[categoria.slug]}</div>
@@ -45,7 +45,7 @@ export const NavbarMobile = () => {
           <li key={categoria.id} className="w-full">
             <SheetClose asChild>
               <Link
-                to={`produtos/categoria/${categoria.slug}`}
+                to={`categoria/${categoria.slug}`}
                 className="flex w-full flex-row items-center gap-4 rounded-md bg-[#E7F0ED] px-6 py-3 font-normal transition-colors hover:text-primary focus-visible:text-primary"
               >
                 <div className="text-[#0A6847]">
