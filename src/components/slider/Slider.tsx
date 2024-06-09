@@ -30,13 +30,18 @@ export const Slider = () => {
       modules={[Autoplay, EffectFade, Pagination, Navigation]}
     >
       {slides.map((image) => (
-        <SwiperSlide key={image}>
+        <SwiperSlide key={image.desktop}>
           <Link to="/produtos">
-            <picture className="h-full w-full">
+            <picture className="w-full">
+              <source
+                media="(max-width: 640px)"
+                srcSet={image.mobile}
+                className="h-full"
+              />
               <img
-                src={image}
-                alt=""
-                className="block h-full w-full object-cover md:rounded-lg"
+                src={image.desktop}
+                alt={image.alt}
+                className="block h-full w-full object-cover sm:h-full md:rounded-lg"
               />
             </picture>
           </Link>

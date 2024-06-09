@@ -28,8 +28,10 @@ export default {
         newsreader: ["var(--font-newsreader)"],
       },
       backgroundImage: {
-        folhas: "url('../src/assets/home/banner.jpg')",
+        terra: "url('../src/assets/home/terra.jpeg')",
         bemvindo: "url('../src/assets/home/banner.jpg')",
+        terraMobile: "url('../src/assets/home/terra-mobile.jpg')",
+        bemvindoMobile: "url('../src/assets/home/banner-mobile.jpg')",
       },
     },
   },
