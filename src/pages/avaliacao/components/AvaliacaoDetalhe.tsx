@@ -5,6 +5,7 @@ import { avaliarProduto } from "../../../services/Service";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Produto from "../../../models/Produto";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
+import { RotatingLines } from "react-loader-spinner";
 
 interface AvaliacaoDetalheProps {
   produto: Produto;
@@ -16,12 +17,14 @@ export const AvaliacaoDetalhe = ({
   setProduto,
 }: AvaliacaoDetalheProps) => {
   const [novaAvaliacao, setNovaAvaliacao] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { usuario } = useContext(AuthContext);
   const token = usuario.token;
   const navigate = useNavigate();
 
   async function enviarAvaliacao(event: FormEvent<HTMLFormElement>) {
+    setIsLoading(true);
     event.preventDefault();
 
     if (novaAvaliacao === 0) return;
@@ -40,9 +43,11 @@ export const AvaliacaoDetalhe = ({
       ToastAlerta("Avaliação enviada!", "sucesso");
     } catch (error) {
       ToastAlerta("Erro ao enviar a avaliação!", "erro");
+    } finally {
+      setNovaAvaliacao(0);
+      navigate("/");
+      setIsLoading(false);
     }
-    setNovaAvaliacao(0);
-    navigate("/");
   }
 
   return (
@@ -74,10 +79,23 @@ export const AvaliacaoDetalhe = ({
         </div>
 
         <button
-          disabled={novaAvaliacao === 0}
+          disabled={novaAvaliacao === 0 || isLoading}
           className="w-full rounded border border-[#005514] bg-[#005514] px-4 py-2 font-bold text-white transition-colors hover:bg-[#013a0e] focus:bg-[#013a0e] disabled:cursor-not-allowed disabled:opacity-50"
         >
-          Enviar
+          {isLoading ? (
+            <div className="flex items-center justify-center gap-2">
+              Enviando
+              <RotatingLines
+                strokeColor="white"
+                strokeWidth="5"
+                animationDuration="0.75"
+                width="24"
+                visible={true}
+              />
+            </div>
+          ) : (
+            <>Enviar</>
+          )}
         </button>
       </form>
     </section>

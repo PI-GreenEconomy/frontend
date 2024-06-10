@@ -47,11 +47,16 @@ function Produtos() {
       )
     : produtos;
 
-  const produtosCategoria = tipo
-    ? produtosPorBusca.filter(
-        (produto: Produto) => tipo === produto.categoria?.slug,
-      )
-    : produtosPorBusca;
+  const produtosOfertas = produtos.filter(
+    (produto) => produto.porcentagemDesconto > 0,
+  );
+
+  const produtosCategoria =
+    tipo === "ofertas"
+      ? produtosOfertas
+      : tipo
+        ? produtosPorBusca.filter((produto) => tipo === produto.categoria?.slug)
+        : produtosPorBusca;
 
   const mudarPagina = (numeroPagina: number) => {
     setPaginaAtual(numeroPagina);
