@@ -106,13 +106,25 @@ export const FooterTop = () => {
                 >
                   <Github className="group-hover:text-primary group-focus-visible:text-primary" />
                 </Link>
-                <Link to={"https://linktr.ee/Greenconomy"} className="group">
+                <Link
+                  to={"https://linktr.ee/Greenconomy"}
+                  className="group"
+                  target="_blank"
+                >
                   <Figma className="group-hover:text-primary group-focus-visible:text-primary" />
                 </Link>
-                <Link to={"https://linktr.ee/Greenconomy"} className="group">
+                <Link
+                  to={"https://linktr.ee/Greenconomy"}
+                  className="group"
+                  target="_blank"
+                >
                   <Instagram className="group-hover:text-primary group-focus-visible:text-primary" />
                 </Link>
-                <Link to={"https://linktr.ee/Greenconomy"} className="group">
+                <Link
+                  to={"https://linktr.ee/Greenconomy"}
+                  className="group"
+                  target="_blank"
+                >
                   <Facebook className="group-hover:text-primary group-focus-visible:text-primary" />
                 </Link>
               </div>

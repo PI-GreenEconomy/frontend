@@ -170,12 +170,14 @@ export const Produto = () => {
               <Link
                 className="ml-1 mr-2 text-slate-500"
                 to={"https://linktr.ee/Greenconomy"}
+                target="_blank"
               >
                 <Facebook />
               </Link>
               <Link
                 className="ml-1 mr-2 text-slate-500"
                 to={"https://linktr.ee/Greenconomy"}
+                target="_blank"
               >
                 <Instagram />
               </Link>
