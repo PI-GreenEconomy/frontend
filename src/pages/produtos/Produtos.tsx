@@ -42,15 +42,18 @@ function Produtos() {
 
   const { produtos } = useProduto();
 
-  const produtosPorBusca = query
-    ? produtos.filter((produto: Produto) =>
-        produto.nome.toLowerCase().includes(query.toLowerCase()),
-      )
-    : produtos;
-
   const produtosOfertas = produtos.filter(
     (produto) => produto.porcentagemDesconto > 0,
   );
+
+  const produtosPorBusca = query
+    ? produtos.filter(
+        (produto: Produto) =>
+          produto.nome.toLowerCase().includes(query.toLowerCase()) ||
+          (query === "ofertas" && produtosOfertas) ||
+          produto.categoria?.tipo.toLowerCase().includes(query.toLowerCase()),
+      )
+    : produtos;
 
   const produtosCategoria =
     tipo === "ofertas"
