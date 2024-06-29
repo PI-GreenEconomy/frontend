@@ -1,5 +1,4 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Link } from "react-router-dom";
 
 // Definição das propriedades do componente Paginacao
 interface PaginacaoProps {
@@ -50,13 +49,12 @@ const Paginacao: React.FC<PaginacaoProps> = ({
               key={pagina}
               className={`page-item ${pagina === paginaAtual ? "active" : ""}`}
             >
-              <Link
-                to={`/produtos/${pagina}`}
+              <button
                 onClick={() => irPaginaAtual(pagina)}
                 className={`inline-flex size-8 cursor-pointer items-center justify-center rounded-full border border-[#F1F1F1] px-3 py-1 ${pagina === paginaAtual ? "bg-[#085339] text-white" : "border bg-white text-[#252A29]"}`}
               >
                 {pagina}
-              </Link>
+              </button>
             </li>
           ))}
           <li>

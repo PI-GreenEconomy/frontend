@@ -1,7 +1,7 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { ListarProduto } from "../../components/produto/listarproduto/ListarProduto";
 import Paginacao from "./components/Paginacao";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useProduto } from "../../hooks/useProduto";
 import { calcularValorTotalProduto } from "../../utils/preco";
 import { ChevronRightIcon } from "lucide-react";
@@ -32,6 +32,7 @@ const tiposDeFiltros = [
 
 function Produtos() {
   const { id, tipo, query } = useParams();
+  const { pathname } = useLocation();
 
   const idAtual = id ? Number(id) : 1;
 
@@ -103,6 +104,10 @@ function Produtos() {
       }
     },
   );
+
+  useEffect(() => {
+    setPaginaAtual(1);
+  }, [pathname]);
 
   const indiceUltimoItem = paginaAtual * itensPorPagina;
   const indicePrimeiroItem = indiceUltimoItem - itensPorPagina;
