@@ -1,18 +1,15 @@
-import { ThreeDots } from "react-loader-spinner";
 import { useProduto } from "../../../hooks/useProduto";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CardEditarProduto } from "./CardEditarProduto";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { Link } from "react-router-dom";
+import { Loading } from "../../ui/Loading";
 
 function ListarSeusProdutos() {
-  const { buscarProdutos, produtos, isLoading } = useProduto();
+  const { produtos, buscarProdutos } = useProduto();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { usuario } = useContext(AuthContext);
-
-  useEffect(() => {
-    buscarProdutos();
-  }, [produtos.length]);
 
   const usuarioAdmin = usuario.funcao === "ADMIN";
 
@@ -22,23 +19,29 @@ function ListarSeusProdutos() {
         (produto) => produto.usuario?.usuario === usuario.usuario,
       );
 
+  useEffect(() => {
+    const handleBuscarProdutos = async () => {
+      setIsLoading(true);
+      try {
+        await buscarProdutos();
+      } catch (error) {
+        console.log(error);
+      }
+      setIsLoading(false);
+    };
+
+    handleBuscarProdutos();
+  }, [produtos.length]);
+
   return (
     <>
-      {isLoading && (
-        <ThreeDots
-          visible={true}
-          height="80"
-          width="80"
-          color="#4fa94d"
-          radius="9"
-          ariaLabel="three-dots-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-        />
+      {isLoading && produtosUsuario.length === 0 && (
+        <Loading height="80" width="80" color="#4fa94d" />
       )}
+
       {!isLoading && produtosUsuario.length === 0 && (
         <div className="flex flex-col items-center justify-center gap-4 py-10">
-          <h1 className="text-3xl">Nenhum produto foi encontrado</h1>
+          <h2 className="text-3xl">Nenhum produto foi encontrado</h2>
           <p className="text-base text-gray-600">Deseja cadastrar um agora?</p>
           <Link
             className="rounded bg-primary px-4 py-2 text-lg text-white hover:bg-primary/90"
