@@ -41,9 +41,9 @@ export default function Contact() {
     <div className="container mx-auto px-4 py-8  md:py-16">
       <div className="mx-auto flex flex-col overflow-hidden rounded-xl bg-white md:flex-row">
         <div className="w-full bg-[#085439] p-8 text-white md:w-1/3 md:p-12">
-          <h1 className="-mb-2 text-start text-2xl font-bold md:text-3xl">
+          <h2 className="-mb-2 text-start text-2xl font-bold md:text-3xl">
             GREEN
-          </h1>
+          </h2>
           <p className="mt-0 md:text-sm">economy</p>
           <div className="mt-10 text-start">
             <p>Rua nova Esperança, 700</p>

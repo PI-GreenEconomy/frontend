@@ -24,7 +24,7 @@ export const HeaderBottom = () => {
         <div className="flex w-full flex-wrap items-center justify-between gap-x-10 gap-y-6 md:w-fit md:justify-normal">
           <div className="md:hidden">
             <Sheet>
-              <SheetTrigger>
+              <SheetTrigger aria-label="Abrir menu">
                 <MenuIcon />
               </SheetTrigger>
               <SheetContent
@@ -89,7 +89,7 @@ export const HeaderBottom = () => {
             </Sheet>
           </div>
           <Link to={"/"}>
-            <img src={Logo} alt="Green Economy" />
+            <img src={Logo} alt="Green Economy" width={74} height={60} />
           </Link>
           <Link
             to={"/cart"}

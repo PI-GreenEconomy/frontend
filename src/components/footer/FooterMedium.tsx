@@ -9,32 +9,84 @@ export const FooterMedium = () => {
           <p className="text-lg font-bold">Formas de Pagamento</p>
           <ul className="flex gap-1">
             <li>
-              <img className="h-7" src={IMAGES.Visa} alt="Visa" />
+              <img
+                className="h-7"
+                src={IMAGES.Visa}
+                alt="Visa"
+                width={36}
+                height={24}
+                loading="lazy"
+              />
             </li>
             <li>
-              <img className="h-7" src={IMAGES.MasterCard} alt="Mastercard" />
+              <img
+                className="h-7"
+                src={IMAGES.MasterCard}
+                alt="Mastercard"
+                width={36}
+                height={24}
+                loading="lazy"
+              />
             </li>
             <li>
-              <img className="h-7" src={IMAGES.Elo} alt="Elo" />
+              <img
+                className="h-7"
+                src={IMAGES.Elo}
+                alt="Elo"
+                width={36}
+                height={24}
+                loading="lazy"
+              />
             </li>
             <li>
-              <img className="h-7" src={IMAGES.Caixa} alt="Caixa" />
+              <img
+                className="h-7"
+                src={IMAGES.Caixa}
+                alt="Caixa"
+                width={36}
+                height={24}
+                loading="lazy"
+              />
             </li>
             <li>
               <img
                 className="h-7"
                 src={IMAGES.BancoDoBrasil}
                 alt="Banco do Brasil"
+                width={36}
+                height={24}
+                loading="lazy"
               />
             </li>
             <li>
-              <img className="h-7" src={IMAGES.Bradesco} alt="Bradesco" />
+              <img
+                className="h-7"
+                src={IMAGES.Bradesco}
+                alt="Bradesco"
+                width={36}
+                height={24}
+                loading="lazy"
+              />
             </li>
             <li>
-              <img className="h-7" src={IMAGES.Boleto} alt="Boleto" />
+              <img
+                className="h-7"
+                src={IMAGES.Boleto}
+                alt="Boleto"
+                width={36}
+                height={24}
+                loading="lazy"
+              />
             </li>
             <li>
-              <img className="h-7" src={IMAGES.Pix} alt="Pix" />
+              <img
+                className="h-7"
+                src={IMAGES.Pix}
+                alt="Pix"
+                width={24}
+                height={24}
+                loading="lazy"
+              />
             </li>
           </ul>
         </div>
@@ -44,13 +96,31 @@ export const FooterMedium = () => {
           <p className="text-lg font-bold">Formas de Entrega</p>
           <ul className="flex items-center gap-3">
             <li>
-              <img src={IMAGES.Correios} alt="Correios" />
+              <img
+                src={IMAGES.Correios}
+                alt="Correios"
+                width={111}
+                height={33}
+                loading="lazy"
+              />
             </li>
             <li>
-              <img src={IMAGES.Sedex} alt="Sedex" />
+              <img
+                src={IMAGES.Sedex}
+                alt="Sedex"
+                width={109}
+                height={27}
+                loading="lazy"
+              />
             </li>
             <li>
-              <img src={IMAGES.RetireLoja} alt="Retire na loja" />
+              <img
+                src={IMAGES.RetireLoja}
+                alt="Retire na loja"
+                width={72}
+                height={50}
+                loading="lazy"
+              />
             </li>
           </ul>
         </div>
@@ -60,10 +130,22 @@ export const FooterMedium = () => {
           <p className="text-lg font-bold">Selos de Segurança</p>
           <ul className="flex flex-col gap-3">
             <li>
-              <img src={IMAGES.GoogleSeguro} alt="Loja Segura com Google" />
+              <img
+                src={IMAGES.GoogleSeguro}
+                alt="Loja Segura com Google"
+                width={118}
+                height={42}
+                loading="lazy"
+              />
             </li>
             <li>
-              <img src={IMAGES.SSLSecurity} alt="SSL Seguro" />
+              <img
+                src={IMAGES.SSLSecurity}
+                alt="SSL Seguro"
+                width={80}
+                height={42}
+                loading="lazy"
+              />
             </li>
           </ul>
         </div>

@@ -1,11 +1,11 @@
 export const NewsLetter = () => {
   return (
-    <article className="w-full bg-[#0A6847] py-12 text-white">
+    <article className="w-full bg-[#0A6847] py-5 text-white md:py-12">
       <div className="container flex flex-wrap items-center  justify-between">
         <div className="mb-6 flex flex-col gap-6">
-          <h4 className="text-3xl font-semibold sm:text-4xl">
+          <p className="text-3xl font-semibold sm:text-4xl">
             Inscreva-se na nossa Newsletter 💚
-          </h4>
+          </p>
           <p className="max-w-[60ch] text-sm text-[#E7F0ED] sm:text-base">
             Receba dicas de sustentabilidade, lançamentos eco-friendly e ofertas
             especiais. Seja parte da mudança!

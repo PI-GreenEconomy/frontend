@@ -7,7 +7,7 @@ function NotFound() {
       <div className="container mx-auto my-8 flex flex-col items-center justify-center px-5">
         <div className="w-full max-w-md text-center">
           <div>
-            <img src={NotFound404} alt="Erro 404" />
+            <img src={NotFound404} alt="Erro 404" width={584} height={355} />
           </div>
           <p className="text-2xl font-semibold md:text-3xl">
             Desculpe, não conseguimos encontrar esta página.

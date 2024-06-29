@@ -23,8 +23,8 @@ export default function QuemSomosBody2() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         <div className="col-span-1">
           <img
-            src="https://s3-alpha-sig.figma.com/img/6944/aabd/efee0823a7432c9f61adcd019f14e196?Expires=1718582400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=nyrB3ACnZb0bPyDQF6xWnUHq5lKNL--q926DoMlSzYpJSL4GzCeyrPFaZuvrPaP~Kc3fgDCSeL3qg1w1N9E3bFY1N8yTzBM1X6y52fTGtRzekyFT32-d1AUygLUw~hHwi9LyawRzEfvGUiTR8W~vhiaeF890gN6JKn750lGSjcicIZJf~lXorPgrHVr2Du0~3KkRhjT5aD-S14Xvo4MXaEzIlTb5R-eEjjxR4pY7HTEFKyShn44oq8H1J77i78AT2IIp-5M86aW0~DkUr4B1XWKiau3UVZ8uDdhldzIjPUfWRScDDaFaSyW8duSttWqldoXmYsUEC7K8Y~qEpUCvQA__"
-            alt="Foto 1"
+            src="https://ik.imagekit.io/GreenEconomy/Quem_Somos/plantando.jpg?updatedAt=1719671457115"
+            alt="Duas pessoas num campo examinando uma planta jovem. Um segura um tablet e o outro usa luvas e manuseia a planta"
             className="h-auto w-full"
           />
         </div>
@@ -41,8 +41,8 @@ export default function QuemSomosBody2() {
         </div>
         <div className="col-span-1">
           <img
-            src="https://ik.imagekit.io/fxpct4486/ImgLinks/mulher%20(1).png?updatedAt=1717636806793"
-            alt="Foto 3"
+            src="https://ik.imagekit.io/GreenEconomy/Quem_Somos/mulher.jpg?updatedAt=1719671456556"
+            alt="Uma mulher usando chapéu de palha e macacão segurando um tablet enquanto está em uma estufa com várias plantas"
             className="h-auto w-full"
           />
         </div>
@@ -62,8 +62,8 @@ export default function QuemSomosBody2() {
         </div>
         <div className="col-span-1">
           <img
-            src="https://ik.imagekit.io/fxpct4486/ImgLinks/mao%20(1).png?updatedAt=1717638558779"
-            alt="Foto 5"
+            src="https://ik.imagekit.io/GreenEconomy/Quem_Somos/mao.jpg?updatedAt=1719671457034"
+            alt="Mãos formando formato de coração no tronco de árvore coberto de musgo"
             className="h-auto w-full"
           />
         </div>

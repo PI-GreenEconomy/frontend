@@ -21,17 +21,21 @@ export default {
         border: "hsl(var(--border))",
         "muted-foreground": "hsl(var(--muted-foreground))",
         link: "hsl(var(--link))",
-        terra: "hsl(var(--terra))",
+        earth: "hsl(var(--earth))",
       },
       fontFamily: {
         poppins: ["var(--font-poppins)"],
         newsreader: ["var(--font-newsreader)"],
       },
       backgroundImage: {
-        terra: "url('../src/assets/home/terra.jpeg')",
-        bemvindo: "url('../src/assets/home/banner.jpg')",
-        terraMobile: "url('../src/assets/home/terra-mobile.jpg')",
-        bemvindoMobile: "url('../src/assets/home/banner-mobile.jpg')",
+        terra:
+          "url('https://ik.imagekit.io/GreenEconomy/Home/terra.webp?updatedAt=1719091888531')",
+        bemvindo:
+          "url('https://ik.imagekit.io/GreenEconomy/Home/banner.webp?updatedAt=1719091889061')",
+        terraMobile:
+          "url('https://ik.imagekit.io/GreenEconomy/Home/terra-mobile.webp?updatedAt=1719091887954')",
+        bemvindoMobile:
+          "url('https://ik.imagekit.io/GreenEconomy/Home/banner-mobile.webp?updatedAt=1719091888470')",
       },
     },
   },

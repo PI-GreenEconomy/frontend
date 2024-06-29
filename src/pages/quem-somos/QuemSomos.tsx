@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
 import QuemSomosBody2 from "./QuemSomosBody2";
+import { Icon } from "../../components/icons";
 
 interface Participante {
   id: number;
@@ -119,9 +119,9 @@ function QuemSomos() {
           href={participante.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="mr-7 text-green-900 hover:text-gray-900"
+          className="mr-7 text-green-900 hover:text-gray-900 focus:text-gray-900"
         >
-          <FaGithub size={50} />
+          <Icon.Github className="size-[50px]" />
         </a>
       )}
       {participante.linkedin && (
@@ -129,9 +129,9 @@ function QuemSomos() {
           href={participante.linkedin}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-green-900 hover:text-gray-900"
+          className="text-green-900 hover:text-gray-900 focus:text-gray-900"
         >
-          <FaLinkedin size={50} />
+          <Icon.Linkedin className="size-[50px]" />
         </a>
       )}
     </div>

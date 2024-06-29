@@ -11,7 +11,7 @@ import "./Slider.css";
 // import required modules
 import { Pagination, Navigation, EffectFade, Autoplay } from "swiper/modules";
 import { Link } from "react-router-dom";
-import { slides } from "../../data/imageData";
+import { slides } from "../../data/imageSlides";
 
 export const Slider = () => {
   return (
@@ -37,11 +37,16 @@ export const Slider = () => {
                 media="(max-width: 640px)"
                 srcSet={image.mobile}
                 className="h-full"
+                width={1840}
+                height={1200}
               />
               <img
+                className="block h-full w-full object-cover sm:h-full md:rounded-lg"
                 src={image.desktop}
                 alt={image.alt}
-                className="block h-full w-full object-cover sm:h-full md:rounded-lg"
+                loading="lazy"
+                width={3840}
+                height={1300}
               />
             </picture>
           </Link>

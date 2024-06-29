@@ -62,9 +62,11 @@ function Cart() {
               Pagar com QRCode
             </h2>
             <img
-              src="https://api.qrserver.com/v1/create-qr-code/?size=408x408&data=https://linktr.ee/Greenconomy"
+              src="https://ik.imagekit.io/GreenEconomy/Avatar/qrcode-three.svg?updatedAt=1718110091802"
               alt="QRCode da nossas redes sociais"
               className="h-72 object-cover"
+              width={500}
+              height={500}
             />
             <button
               onClick={finalizarCompra}

@@ -6,11 +6,11 @@ export default function QuemSomosBody() {
       <div>
         {/* TESTE INICIO */}
         <div className="absolute left-0 top-20 z-20 mx-5 my-20 rounded-lg md:p-20 ">
-          <h1 className="my-8 font-poppins font-bold  md:text-6xl">
+          <h2 className="my-8 font-poppins font-bold  md:text-6xl">
             Compre com Consciência,
             <br />
             Viva com Propósito
-          </h1>
+          </h2>
           <p className="mb-8 max-w-md text-2xl leading-7">
             Explore nossa seleção de produtos que respeitam o meio ambiente e
             ajudam a reduzir seu impacto ecológico. Vamos juntos construir um
@@ -29,14 +29,14 @@ export default function QuemSomosBody() {
       <div className="grid grid-cols-3">
         <div className="col-span-1">
           <img
-            src="https://s3-alpha-sig.figma.com/img/6944/aabd/efee0823a7432c9f61adcd019f14e196?Expires=1718582400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=nyrB3ACnZb0bPyDQF6xWnUHq5lKNL--q926DoMlSzYpJSL4GzCeyrPFaZuvrPaP~Kc3fgDCSeL3qg1w1N9E3bFY1N8yTzBM1X6y52fTGtRzekyFT32-d1AUygLUw~hHwi9LyawRzEfvGUiTR8W~vhiaeF890gN6JKn750lGSjcicIZJf~lXorPgrHVr2Du0~3KkRhjT5aD-S14Xvo4MXaEzIlTb5R-eEjjxR4pY7HTEFKyShn44oq8H1J77i78AT2IIp-5M86aW0~DkUr4B1XWKiau3UVZ8uDdhldzIjPUfWRScDDaFaSyW8duSttWqldoXmYsUEC7K8Y~qEpUCvQA__"
+            src="https://s3-alpha-sig.figma.com/img/6944/aabd/efee0823a7432c9f61adcd019f14e196?Expires=1718582400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=nyrB3ACnZb0bPyDQF6xWnUHq5lKNL--q926DoMlSzYpJSL4GzCeyrPFaZuvrPaP~Kc3fgDCSeL3qg1w1N9E3bFY1N8yTzBM1X6y52fTGtRzekyFT32-d1AUygLUw~hHwi9LyawRzEfvGUiTR8W~vhiaeF890gN6JKn750lGSjcicIZJf~lXorPgrHVr2Du0~3KkRhjT5aD-S14Xvo4MXaEzIlTb5R-eEjjxR4pY7HTEFKyShn44oq8h2J77i78AT2IIp-5M86aW0~DkUr4B1XWKiau3UVZ8uDdhldzIjPUfWRScDDaFaSyW8duSttWqldoXmYsUEC7K8Y~qEpUCvQA__"
             alt="Foto 1"
             className="h-auto w-full"
           />
         </div>
         <div className="mx-auto flex flex-col overflow-hidden bg-[#b27538] text-center text-white">
           <div className="align-center font-poppins">
-            <h1 className="my-8 text-2xl font-bold  md:text-5xl">Visão</h1>
+            <h2 className="my-8 text-2xl font-bold  md:text-5xl">Visão</h2>
             <p className="mx-8 text-xl">
               Ser uma plataforma de e-commerce sustentável em promover práticas
               de consumo e impulsionar a economia verde
@@ -45,17 +45,17 @@ export default function QuemSomosBody() {
         </div>
         <div className="col-span-1">
           <img
-            src="https://ik.imagekit.io/fxpct4486/ImgLinks/mulher%20(1).png?updatedAt=1717636806793"
-            alt="Foto 3"
+            src="https://ik.imagekit.io/GreenEconomy/Quem_Somos/mulher.jpg?updatedAt=1719671456556"
+            alt="Uma mulher usando chapéu de palha e macacão segurando um tablet enquanto está em uma estufa com várias plantas"
             className="h-auto w-full"
           />
         </div>
         {/* Fotos na parte inferior */}
         <div className="mx-auto flex flex-col overflow-hidden bg-[#b27538] text-center text-white">
           <div className="align-center">
-            <h1 className="my-8 font-poppins text-2xl font-bold md:text-5xl">
+            <h2 className="my-8 font-poppins text-2xl font-bold md:text-5xl">
               Missão
-            </h1>
+            </h2>
             <p className="mx-8 text-xl">
               Oferecer aos consumidores acesso a produtos ecológicos e
               sustentáveis, educando e inspirando mudanças nos hábitos de
@@ -66,16 +66,16 @@ export default function QuemSomosBody() {
         </div>
         <div className="col-span-1">
           <img
-            src="https://ik.imagekit.io/fxpct4486/ImgLinks/mao%20(1).png?updatedAt=1717638558779"
-            alt="Foto 5"
+            src="https://ik.imagekit.io/GreenEconomy/Quem_Somos/mao.jpg?updatedAt=1719671457034"
+            alt="Mãos formando formato de coração no tronco de árvore coberto de musgo"
             className="h-auto w-full"
           />
         </div>
         <div className="mx-auto flex flex-col overflow-hidden bg-[#b27538] text-center text-white">
           <div className="align-center">
-            <h1 className="my-8 font-poppins text-3xl font-bold md:text-5xl">
+            <h2 className="my-8 font-poppins text-3xl font-bold md:text-5xl">
               Valores
-            </h1>
+            </h2>
             <p className="mx-8 text-xl">
               Sustentabilidade, Transparência, Inovação, Educação,
               Responsabilidade Social, Qualidade, Integridade, Colaboração.
@@ -88,8 +88,8 @@ export default function QuemSomosBody() {
       <div className="relative text-white">
         <img
           className="absolute left-0 top-0 z-10 h-auto w-full"
-          src="https://s3-alpha-sig.figma.com/img/29b7/546f/0ceffa3e73a9d5404679fa684dfc3dbe?Expires=1718582400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=li-9XLUpJgZA1OGLBraBSkYMPdhAtPw67qmIWQixpbTsCSud5eOsaNfh4HGBvcCboisR0h3miJO78~oVjvikPGcW0gkvcixaVRVPbCXuobJaP6fqA0P~KNnwRK0fi6YTNfhe3nayWtkbThMWvMfOePpV3z8DFrcgFaxfRjXzAh~BaNbtcNJawq1-oJ52adDzeM8ugWyA-66-fF~qntJ0CiYF3m6jkCdNaULNUzzxIoyQcEeDx9gz0p6vn~zHb5N20eDyVIqu7PZUXCCj0LZakXcyS02m1Pl84bvvOwP5T5HL2D0HBGFFhSihMya6qNpu1A4ojMZ3zyQvlj7861EU0w__"
-          alt=""
+          src="https://ik.imagekit.io/GreenEconomy/Quem_Somos/plantando.jpg?updatedAt=1719671457115"
+          alt="Duas pessoas num campo examinando uma planta jovem. Um segura um tablet e o outro usa luvas e manuseia a planta"
         />
 
         <img
@@ -102,9 +102,9 @@ export default function QuemSomosBody() {
 
           {/* </div> */}
           <div className="absolute left-0 top-20 z-30 mx-5 my-20 h-auto rounded-lg font-poppins md:p-20 ">
-            <h1 className="mx-12 mb-10 max-w-2xl whitespace-nowrap text-5xl font-bold">
+            <h2 className="mx-12 mb-10 max-w-2xl whitespace-nowrap text-5xl font-bold">
               Sobre Nós
-            </h1>
+            </h2>
 
             <p className="ml-10 max-w-80 text-left text-2xl">
               Na GreenEconomy, nosso objetivo é criar um mundo onde o consumo

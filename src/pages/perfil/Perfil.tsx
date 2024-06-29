@@ -2,7 +2,6 @@ import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { ToastAlerta } from "../../utils/ToastAlerta";
-import home from "../../assets/home/banner.jpg";
 
 function Perfil() {
   const navigate = useNavigate();
@@ -19,12 +18,18 @@ function Perfil() {
     }
   }, [usuario.token]);
 
+  const usuarioAdministradorVendedor =
+    usuario.funcao === "ADMIN" || usuario.funcao === "VENDEDOR";
+
   return (
     <div className="overflow-hidden bg-primary">
       <img
         className=" h-full max-h-64 w-full object-cover "
-        src={home}
+        src="https://ik.imagekit.io/GreenEconomy/Home/banner.webp?updatedAt=1719091889061"
         alt="Capa do Perfil"
+        loading="lazy"
+        width={3000}
+        height={2000}
       />
       <img
         src={fotoUsuario}
@@ -43,15 +48,14 @@ function Perfil() {
             <p>
               Email: <span className="ml-1 font-medium">{usuario.usuario}</span>
             </p>
-            {usuario.funcao === "ADMIN" ||
-              (usuario.funcao === "VENDEDOR" && (
-                <p>
-                  Função:{" "}
-                  <span className="ml-1 font-medium lowercase">
-                    {usuario.funcao}
-                  </span>
-                </p>
-              ))}
+            {usuarioAdministradorVendedor && (
+              <p>
+                Função:{" "}
+                <span className="ml-1 font-medium lowercase">
+                  {usuario.funcao}
+                </span>
+              </p>
+            )}
           </div>
         </div>
       </div>

@@ -10,7 +10,7 @@ export const ListarProduto = ({ produtos }: ListarProdutoProps) => {
     <>
       {produtos.length === 0 && (
         <div className="py-8">
-          <h1 className="text-3xl">Nenhum produto foi encontrado!</h1>
+          <h2 className="text-3xl">Nenhum produto foi encontrado!</h2>
         </div>
       )}
       <div className="my-4 grid grid-cols-1 gap-6 sm:grid-cols-[repeat(auto-fill,minmax(270px,1fr))]">

@@ -25,8 +25,7 @@ function CardCategoria({ categoria }: CardCategoriaProps) {
 
         <Link
           to={`/deletarcategoria/${categoria.id}`}
-          className="flex h-full w-full justify-center rounded-b-lg bg-terra
-          py-4 hover:bg-[#d17b26]"
+          className="flex h-full w-full justify-center rounded-b-lg bg-earth py-4 hover:bg-[#d17b26]"
         >
           <button>Deletar</button>
         </Link>

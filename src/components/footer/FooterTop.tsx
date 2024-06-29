@@ -15,6 +15,8 @@ export const FooterTop = () => {
           <img
             src={IMAGES.Logo}
             alt="Green Economy Logo"
+            width={74}
+            height={60}
             className="mb-3 h-16"
           />
           <p className="text-white-600 w-full max-w-[90%] text-base leading-6 sm:max-w-72">
@@ -103,6 +105,7 @@ export const FooterTop = () => {
                   to={"https://github.com/PI-GreenEconomy"}
                   className="group"
                   target="_blank"
+                  aria-label="Github"
                 >
                   <Github className="group-hover:text-primary group-focus-visible:text-primary" />
                 </Link>
@@ -110,6 +113,7 @@ export const FooterTop = () => {
                   to={"https://linktr.ee/Greenconomy"}
                   className="group"
                   target="_blank"
+                  aria-label="Figma"
                 >
                   <Figma className="group-hover:text-primary group-focus-visible:text-primary" />
                 </Link>
@@ -117,6 +121,7 @@ export const FooterTop = () => {
                   to={"https://linktr.ee/Greenconomy"}
                   className="group"
                   target="_blank"
+                  aria-label="Instagram"
                 >
                   <Instagram className="group-hover:text-primary group-focus-visible:text-primary" />
                 </Link>
@@ -124,6 +129,7 @@ export const FooterTop = () => {
                   to={"https://linktr.ee/Greenconomy"}
                   className="group"
                   target="_blank"
+                  aria-label="Facebook"
                 >
                   <Facebook className="group-hover:text-primary group-focus-visible:text-primary" />
                 </Link>

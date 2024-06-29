@@ -32,7 +32,10 @@ export const InputBuscaProduto = () => {
         placeholder="Buscar Produto"
         onChange={(e) => setKeyWord(e.target.value)}
       />
-      <button className="group absolute right-0 top-0 flex rounded-xl px-3 py-2 text-muted-foreground outline-none">
+      <button
+        className="group absolute right-0 top-0 flex rounded-xl px-3 py-2 text-muted-foreground outline-none"
+        aria-label="Buscar"
+      >
         <SearchIcon className="group-focus-visible:text-gray-500" />
       </button>
     </form>
