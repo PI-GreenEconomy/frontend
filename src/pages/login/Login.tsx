@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { RotatingLines } from "react-loader-spinner";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -8,6 +7,7 @@ import UsuarioLogin from "../../models/UsuarioLogin";
 import { formSchema } from "./validacaoLogin";
 import { useLogin } from "../../hooks/useLogin";
 import InputField from "../../components/ui/InputField";
+import { Spinner } from "../../components/ui/Spinner";
 
 function Login() {
   const {
@@ -61,12 +61,11 @@ function Login() {
             className="flex justify-center rounded-lg bg-primary py-2 text-white hover:bg-primary/90 focus:bg-primary/90"
           >
             {isLoading ? (
-              <RotatingLines
+              <Spinner
                 strokeColor="white"
                 strokeWidth="5"
                 animationDuration="0.75"
                 width="24"
-                visible={true}
               />
             ) : (
               <span className="font-medium capitalize">Entrar</span>

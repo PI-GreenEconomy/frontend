@@ -1,0 +1,43 @@
+.opacity-8 {
+  stroke-opacity: 0.08;
+}
+.opacity-17 {
+  stroke-opacity: 0.17;
+}
+.opacity-25 {
+  stroke-opacity: 0.25;
+}
+.opacity-33 {
+  stroke-opacity: 0.33;
+}
+.opacity-42 {
+  stroke-opacity: 0.42;
+}
+.opacity-50 {
+  stroke-opacity: 0.5;
+}
+.opacity-58 {
+  stroke-opacity: 0.58;
+}
+.opacity-66 {
+  stroke-opacity: 0.66;
+}
+.opacity-75 {
+  stroke-opacity: 0.75;
+}
+.opacity-83 {
+  stroke-opacity: 0.83;
+}
+.opacity-92 {
+  stroke-opacity: 0.92;
+}
+
+.animate-spin {
+  animation: spin 0.75s steps(12, end) infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

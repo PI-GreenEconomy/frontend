@@ -1,9 +1,9 @@
 import { useContext, ChangeEvent, useEffect } from "react";
-import { RotatingLines } from "react-loader-spinner";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { useCategoria } from "../../../hooks/useCategoria";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
+import { Spinner } from "../../ui/Spinner";
 
 function FormCategoria() {
   const { usuario } = useContext(AuthContext);
@@ -70,16 +70,16 @@ function FormCategoria() {
           />
         </div>
         <button
-          className=" flex justify-center rounded-lg bg-primary py-2 text-white hover:bg-primary/90 focus:bg-primary/90"
+          disabled={isLoading}
+          className=" flex justify-center rounded-lg bg-primary py-2 text-white hover:bg-primary/90 focus:bg-primary/90 disabled:cursor-default disabled:bg-primary/50"
           type="submit"
         >
           {isLoading ? (
-            <RotatingLines
+            <Spinner
               strokeColor="white"
               strokeWidth="5"
               animationDuration="0.75"
               width="24"
-              visible={true}
             />
           ) : (
             <span>{id === undefined ? "Cadastrar" : "Atualizar"}</span>

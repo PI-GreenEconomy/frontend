@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { EstrelaProdutos } from "../../EstrelaProdutos";
 import { ArrowDownIcon, ShoppingCartIcon } from "lucide-react";
 import { BotaoQuantidade } from "../../BotaoQuantidade";
+import { transformarFotoProduto } from "../../../utils/fotoProduto";
 interface CardProdutoProps {
   produto: Produto;
 }
@@ -18,11 +19,6 @@ export const CardProduto = ({ produto }: CardProdutoProps) => {
   const precoAtual = calcularValorTotalProduto(produto);
   const podeParcelar = produto.basePreco >= 50;
 
-  const fotoProduto =
-    produto.foto.length > 30
-      ? produto.foto
-      : "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png";
-
   return (
     <div className="group relative flex w-full flex-col gap-2 rounded-md border border-border bg-white p-4 text-foreground outline-none transition-colors hover:border-border focus-visible:border-primary">
       <Link
@@ -31,9 +27,12 @@ export const CardProduto = ({ produto }: CardProdutoProps) => {
       >
         <div>
           <img
-            src={fotoProduto}
+            src={transformarFotoProduto(produto.foto)}
             alt={produto.nome}
             className="h-64 w-full rounded object-contain"
+            width={263}
+            height={256}
+            loading="lazy"
           />
         </div>
 

@@ -9,6 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../../ui/Dialog";
+import { transformarFotoProduto } from "../../../utils/fotoProduto";
 
 interface CardEditarProdutoProps {
   produto: Produto;
@@ -18,17 +19,12 @@ export function CardEditarProduto({ produto }: CardEditarProdutoProps) {
   const existeDesconto = produto.porcentagemDesconto > 0;
   const precoAtual = calcularValorTotalProduto(produto);
 
-  const fotoProduto =
-    produto.foto.length > 30
-      ? produto.foto
-      : "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png";
-
   return (
     <div className="group relative flex w-full flex-col gap-2 rounded-md border border-border bg-white p-4 text-foreground outline-none transition-colors hover:border-border focus-visible:border-primary">
       <div className="mb-4 flex flex-1 flex-col gap-2">
         <div>
           <img
-            src={fotoProduto}
+            src={transformarFotoProduto(produto.foto)}
             alt={produto.nome}
             className="h-64 w-full rounded object-contain"
           />
@@ -80,7 +76,7 @@ export function CardEditarProduto({ produto }: CardEditarProdutoProps) {
                 </div>
               </div>
               <img
-                src={fotoProduto}
+                src={transformarFotoProduto(produto.foto)}
                 alt={produto.nome}
                 className="h-48 w-full rounded object-contain"
               />

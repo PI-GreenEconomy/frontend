@@ -1,10 +1,10 @@
 import { useContext, useEffect, ChangeEvent } from "react";
-import { RotatingLines } from "react-loader-spinner";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { useProduto } from "../../../hooks/useProduto";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
 import { useCategoria } from "../../../hooks/useCategoria";
+import { Spinner } from "../../ui/Spinner";
 
 function FormProduto() {
   const { usuario } = useContext(AuthContext);
@@ -33,6 +33,10 @@ function FormProduto() {
     }
   }, [id]);
 
+  const categoriasOrdenadas = categorias.sort((categoriaA, categoriaB) => {
+    return categoriaA.tipo.localeCompare(categoriaB.tipo);
+  });
+
   useEffect(() => {
     setProduto({
       ...produto,
@@ -53,9 +57,9 @@ function FormProduto() {
 
   return (
     <div className="container mx-auto flex flex-col items-center pb-16 pt-4">
-      <h1 className="my-8 text-center text-4xl">
+      <h2 className="my-8 text-center text-4xl">
         {id !== undefined ? "Editar Produto" : "Cadastrar Produto"}
-      </h1>
+      </h2>
 
       <form
         className="flex w-full max-w-2xl flex-col gap-4"
@@ -172,7 +176,7 @@ function FormProduto() {
             <option value="" selected disabled>
               Selecione uma Categoria
             </option>
-            {categorias.map((categoria) => (
+            {categoriasOrdenadas.map((categoria) => (
               <option key={categoria.id} value={categoria.id}>
                 {categoria.tipo}
               </option>
@@ -181,16 +185,15 @@ function FormProduto() {
         </div>
         <button
           type="submit"
-          disabled={carregandoCategoria}
+          disabled={carregandoCategoria || isLoading}
           className=" flex cursor-pointer justify-center rounded-lg bg-primary py-2 text-white hover:bg-primary/90 focus:bg-primary/90 disabled:cursor-default disabled:bg-primary/50"
         >
           {isLoading ? (
-            <RotatingLines
+            <Spinner
               strokeColor="white"
               strokeWidth="5"
               animationDuration="0.75"
               width="24"
-              visible={true}
             />
           ) : (
             <span>{id !== undefined ? "Atualizar" : "Cadastrar"}</span>

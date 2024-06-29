@@ -5,7 +5,8 @@ import { avaliarProduto } from "../../../services/Service";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Produto from "../../../models/Produto";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
-import { RotatingLines } from "react-loader-spinner";
+import { Spinner } from "../../../components/ui/Spinner";
+import { transformarFotoProduto } from "../../../utils/fotoProduto";
 
 interface AvaliacaoDetalheProps {
   produto: Produto;
@@ -56,7 +57,7 @@ export const AvaliacaoDetalhe = ({
       <div className="flex items-center gap-2">
         <img
           className="h-16 w-16 rounded-sm object-contain object-center"
-          src={produto.foto}
+          src={transformarFotoProduto(produto.foto)}
           alt={produto.nome}
         />
         <p>{produto.nome}</p>
@@ -85,12 +86,11 @@ export const AvaliacaoDetalhe = ({
           {isLoading ? (
             <div className="flex items-center justify-center gap-2">
               Enviando
-              <RotatingLines
+              <Spinner
                 strokeColor="white"
                 strokeWidth="5"
                 animationDuration="0.75"
                 width="24"
-                visible={true}
               />
             </div>
           ) : (

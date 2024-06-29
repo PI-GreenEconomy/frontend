@@ -14,9 +14,9 @@ import { calcularValorTotalProduto, formatarMoeda } from "../../utils/preco";
 import { BotaoQuantidade } from "../../components/BotaoQuantidade";
 import { CartContext } from "../../contexts/CartContext";
 import { IMAGES } from "../../data/imageIcons";
-import ImagemDescricao from "../../assets/descricao/save-nature.svg";
 import { ListarProdutoCategoria } from "../../components/produto/listarprodutocategoria/ListarProdutoCategoria";
 import { ProdutoMock } from "./components/ProdutoMock";
+import { transformarFotoProduto } from "../../utils/fotoProduto";
 
 const pagamentos = [
   IMAGES.Visa,
@@ -83,7 +83,7 @@ export const Produto = () => {
       <article className="grid grid-cols-1 items-center justify-between gap-14 md:grid-cols-2">
         <div className="h-full rounded-md border border-border">
           <img
-            src={produto.foto}
+            src={transformarFotoProduto(produto.foto)}
             alt={produto.nome}
             className="h-80 w-full rounded-md object-contain md:h-[600px]"
           />
@@ -202,8 +202,10 @@ export const Produto = () => {
         </div>
         <div>
           <img
-            src={ImagemDescricao}
+            src="https://ik.imagekit.io/GreenEconomy/Avatar/save-nature.svg?updatedAt=1719670532346"
             alt="Planeta sendo reconstruido com um consumo consciente"
+            width={360}
+            height={360}
           />
         </div>
       </section>

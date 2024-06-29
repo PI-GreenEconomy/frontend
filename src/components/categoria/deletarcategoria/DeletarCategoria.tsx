@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { RotatingLines } from "react-loader-spinner";
 import { useCategoria } from "../../../hooks/useCategoria";
+import { Spinner } from "../../ui/Spinner";
 
 export const DeletarCategoria = () => {
   const navigate = useNavigate();
@@ -37,16 +37,16 @@ export const DeletarCategoria = () => {
             Não
           </button>
           <button
-            className="flex w-full items-center justify-center bg-green-700 py-2 text-slate-100 hover:bg-green-600 sm:flex-1"
+            disabled={isLoading}
+            className="flex w-full items-center justify-center bg-green-700 py-2 text-slate-100 hover:bg-green-600 disabled:cursor-default disabled:bg-primary/50 sm:flex-1"
             onClick={() => deletarCategoria(id)}
           >
             {isLoading ? (
-              <RotatingLines
+              <Spinner
                 strokeColor="white"
                 strokeWidth="5"
                 animationDuration="0.75"
                 width="24"
-                visible={true}
               />
             ) : (
               <span>Sim</span>

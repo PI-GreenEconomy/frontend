@@ -1,8 +1,9 @@
 import { useEffect } from "react";
-import { RotatingLines } from "react-loader-spinner";
 import { useNavigate, useParams } from "react-router-dom";
 import { useProduto } from "../../../hooks/useProduto";
 import { calcularValorTotalProduto, formatarMoeda } from "../../../utils/preco";
+import { Spinner } from "../../ui/Spinner";
+import { transformarFotoProduto } from "../../../utils/fotoProduto";
 
 function DeletarProduto() {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ function DeletarProduto() {
 
           <div className="mb-4">
             <img
-              src={produto.foto}
+              src={transformarFotoProduto(produto.foto)}
               alt={produto.nome}
               className="max-h-[200px] rounded object-contain"
             />
@@ -67,16 +68,16 @@ function DeletarProduto() {
             Não
           </button>
           <button
-            className="flex w-full flex-none items-center justify-center bg-primary py-2 text-slate-100 hover:bg-green-700 sm:flex-1"
+            disabled={isLoading}
+            className="flex w-full flex-none items-center justify-center bg-primary py-2 text-slate-100 hover:bg-green-700 disabled:cursor-default disabled:bg-primary/50 sm:flex-1"
             onClick={() => deletarProduto(id)}
           >
             {isLoading ? (
-              <RotatingLines
+              <Spinner
                 strokeColor="white"
                 strokeWidth="5"
                 animationDuration="0.75"
                 width="24"
-                visible={true}
               />
             ) : (
               <span>Sim</span>
