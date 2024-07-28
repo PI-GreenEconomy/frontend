@@ -1,14 +1,18 @@
-import { useContext, useEffect, ChangeEvent } from "react";
+import { useContext, useEffect, ChangeEvent, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { useProduto } from "../../../hooks/useProduto";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
 import { useCategoria } from "../../../hooks/useCategoria";
 import { Spinner } from "../../ui/Spinner";
+import useUploadImagem from "../../../hooks/useUploadImage";
+import { transformarFotoProduto } from "../../../utils/fotoProduto";
 
 function FormProduto() {
   const { usuario } = useContext(AuthContext);
   const token = usuario.token;
+
+  const fileInputRef = useRef(null);
 
   const navigate = useNavigate();
 
@@ -25,6 +29,10 @@ function FormProduto() {
   const { categorias, categoria, buscarCategoriaPorId, buscarCategorias } =
     useCategoria();
 
+  const { progresso, erroUpload, enviarImagem } = useUploadImagem();
+  const [imagem, setImagem] = useState<File | null>(null);
+  const [previewImage, setPreviewImage] = useState<string>("");
+
   useEffect(() => {
     buscarCategorias();
 
@@ -32,10 +40,6 @@ function FormProduto() {
       buscarProdutoPorId(id);
     }
   }, [id]);
-
-  const categoriasOrdenadas = categorias.sort((categoriaA, categoriaB) => {
-    return categoriaA.tipo.localeCompare(categoriaB.tipo);
-  });
 
   useEffect(() => {
     setProduto({
@@ -53,7 +57,58 @@ function FormProduto() {
 
   const carregandoCategoria = !categoria.tipo;
 
-  // console.log(JSON.stringify(produto));
+  const categoriasOrdenadas = categorias.sort((categoriaA, categoriaB) => {
+    return categoriaA.tipo.localeCompare(categoriaB.tipo);
+  });
+
+  const isFileTypeAccepted = (fileType: string) => {
+    const acceptedTypes = [
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+      "image/webp",
+    ];
+    return acceptedTypes.includes(fileType);
+  };
+
+  const handleImagemChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const imageFile = e.target.files[0];
+
+      if (!isFileTypeAccepted(imageFile.type)) {
+        alert(
+          "Por favor, selecione apenas arquivos do tipo .jpg, .jpeg, .png ou .webp.",
+        );
+        return;
+      }
+
+      setImagem(imageFile);
+      setPreviewImage(URL.createObjectURL(imageFile));
+    }
+  };
+
+  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      let urlImagem = "";
+
+      if (imagem) {
+        urlImagem = await enviarImagem("/images/upload", imagem, "produtos");
+      }
+
+      const produtoAtualizado = {
+        ...produto,
+        foto: transformarFotoProduto(urlImagem || produto.foto || ""),
+      };
+
+      setProduto(produtoAtualizado);
+
+      await gerarNovoProduto(e, produtoAtualizado);
+    } catch (error) {
+      console.error("Ocorreu um erro ao enviar a imagem:", error);
+    }
+  };
 
   return (
     <div className="container mx-auto flex flex-col items-center pb-16 pt-4">
@@ -63,7 +118,7 @@ function FormProduto() {
 
       <form
         className="flex w-full max-w-2xl flex-col gap-4"
-        onSubmit={gerarNovoProduto}
+        onSubmit={handleSubmit}
       >
         <div className="flex flex-col gap-2">
           <label htmlFor="titulo">Nome do Produto</label>
@@ -149,20 +204,29 @@ function FormProduto() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="titulo">Foto do Produto</label>
+          <p>Foto do Produto</p>
+          <label htmlFor="fileInput" className="cursor-pointer">
+            <input
+              type="file"
+              ref={fileInputRef}
+              id="fileInput"
+              onChange={handleImagemChange}
+              className="hidden"
+              accept=".jpg, .jpeg, .png, .webp"
+              multiple={false}
+            />
+            <div>
+              <img
+                src={transformarFotoProduto(
+                  previewImage || produto.foto || previewImage || "",
+                )}
+                className="h-64  rounded object-contain"
+                height="256px"
+              />
+            </div>
+          </label>
 
-          <input
-            value={produto.foto}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              atualizarEstado(e, categoria)
-            }
-            type="text"
-            placeholder="Adicione aqui a foto do Produto"
-            name="foto"
-            maxLength={2000}
-            required
-            className="rounded-md border border-[#CBD5E1] p-2 outline-none placeholder:text-[#94A3B8] focus:border-primary"
-          />
+          {erroUpload && <p className="text-red-500">{erroUpload}</p>}
         </div>
 
         <div className="flex flex-col gap-2">
@@ -185,10 +249,10 @@ function FormProduto() {
         </div>
         <button
           type="submit"
-          disabled={carregandoCategoria || isLoading}
+          disabled={carregandoCategoria || isLoading || progresso < 0}
           className=" flex cursor-pointer justify-center rounded-lg bg-primary py-2 text-white hover:bg-primary/90 focus:bg-primary/90 disabled:cursor-default disabled:bg-primary/50"
         >
-          {isLoading ? (
+          {isLoading || progresso ? (
             <Spinner
               strokeColor="white"
               strokeWidth="5"

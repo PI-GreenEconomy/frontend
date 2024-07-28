@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosProgressEvent, AxiosRequestConfig } from "axios";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -68,6 +68,41 @@ export const avaliarProduto = async (
   } catch (error) {
     // Trate os erros aqui, se necessário
     console.error("Erro ao avaliar o produto:", error);
+    throw error;
+  }
+};
+
+export const uploadImage = async (
+  url: string,
+  image: File,
+  folder: string,
+  setProgresso: Function,
+  token: string,
+) => {
+  try {
+    const formData = new FormData();
+    formData.append("file", image);
+    formData.append("folder", folder);
+
+    const config: AxiosRequestConfig = {
+      headers: {
+        Authorization: token,
+        "Content-Type": "multipart/form-data",
+      },
+      onUploadProgress: (progressEvent: AxiosProgressEvent) => {
+        if (progressEvent.lengthComputable) {
+          const progresso = Math.round(
+            (progressEvent.loaded / progressEvent.total!) * 100,
+          );
+          setProgresso(progresso);
+        }
+      },
+    };
+
+    const resposta = await api.post(url, formData, config);
+    return resposta.data;
+  } catch (error) {
+    console.error("Erro ao fazer upload da imagem:", error);
     throw error;
   }
 };

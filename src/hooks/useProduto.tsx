@@ -15,7 +15,10 @@ interface UseProdutoProps {
     e: ChangeEvent<HTMLInputElement>,
     categoria: Categoria,
   ) => void;
-  gerarNovoProduto(e: ChangeEvent<HTMLFormElement>): Promise<void>;
+  gerarNovoProduto(
+    e: ChangeEvent<HTMLFormElement>,
+    produtoAtualizado: Produto,
+  ): Promise<void>;
   produtos: Produto[];
   produto: Produto;
   isLoading: boolean;
@@ -76,13 +79,16 @@ export const useProduto = (): UseProdutoProps => {
     }
   }
 
-  async function gerarNovoProduto(e: ChangeEvent<HTMLFormElement>) {
+  async function gerarNovoProduto(
+    e: ChangeEvent<HTMLFormElement>,
+    produtoAtualizado: Produto,
+  ) {
     e.preventDefault();
     setIsLoading(true);
 
-    if (id != undefined) {
+    if (id !== undefined) {
       try {
-        await atualizar(`/produtos`, produto, setProduto, {
+        await atualizar(`/produtos`, produtoAtualizado, setProduto, {
           headers: { Authorization: token },
         });
 
@@ -96,7 +102,7 @@ export const useProduto = (): UseProdutoProps => {
       }
     } else {
       try {
-        await cadastrar(`/produtos`, produto, setProduto, {
+        await cadastrar(`/produtos`, produtoAtualizado, setProduto, {
           headers: { Authorization: token },
         });
         ToastAlerta("Produto cadastrado com sucesso", "sucesso");
@@ -104,7 +110,7 @@ export const useProduto = (): UseProdutoProps => {
         if (error.toString().includes("403")) {
           navigate("/");
         } else {
-          ToastAlerta("Erro ao cadastrar o Produto", "erro");
+          ToastAlerta("Erro ao cadastrar o Produto:", "erro");
         }
       }
     }
@@ -112,7 +118,6 @@ export const useProduto = (): UseProdutoProps => {
     setIsLoading(false);
     navigate("/seusprodutos");
   }
-
   const atualizarEstado = (
     e: ChangeEvent<HTMLInputElement>,
     categoria: Categoria,
