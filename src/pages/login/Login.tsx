@@ -57,8 +57,9 @@ function Login() {
             errors={errors}
           />
           <button
+            disabled={isLoading}
             type="submit"
-            className="flex justify-center rounded-lg bg-primary py-2 text-white hover:bg-primary/90 focus:bg-primary/90"
+            className="flex justify-center rounded-lg bg-primary py-2 text-white hover:bg-primary/90 focus:bg-primary/90 disabled:cursor-default disabled:bg-primary/50"
           >
             {isLoading ? (
               <Spinner
