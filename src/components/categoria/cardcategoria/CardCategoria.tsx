@@ -11,7 +11,7 @@ function CardCategoria({ categoria }: CardCategoriaProps) {
     <div className="container max-w-60 items-center justify-center">
       <div className="flex w-full flex-col rounded-lg border border-slate-300">
         <div className="align-center flex h-full flex-col items-center justify-center py-8">
-          {iconsCategoria[categoria.slug] || iconsCategoria["default"]}
+          {iconsCategoria[categoria.icone]}
           <p className="text-xl font-bold">{categoria.tipo}</p>
         </div>
       </div>

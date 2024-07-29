@@ -10,6 +10,22 @@ import {
   PercentIcon,
   BoxIcon,
   PawPrintIcon,
+  AppleIcon,
+  ArmchairIcon,
+  AccessibilityIcon,
+  BabyIcon,
+  BananaIcon,
+  BedIcon,
+  BikeIcon,
+  CakeIcon,
+  CatIcon,
+  ChefHatIcon,
+  CroissantIcon,
+  DumbbellIcon,
+  FishIcon,
+  Flower2Icon,
+  SproutIcon,
+  GiftIcon,
 } from "lucide-react";
 
 export const iconsCategoria: any = {
@@ -23,4 +39,24 @@ export const iconsCategoria: any = {
   utensilios: <UtensilsIcon className="size-7" />,
   artesanal: <LeafIcon className="size-7" />,
   ofertas: <PercentIcon className="size-7" />,
+  maca: <AppleIcon className="size-7" />,
+  sofa: <ArmchairIcon className="size-7" />,
+  acessibilidade: <AccessibilityIcon className="size-7" />,
+  bebe: <BabyIcon className="size-7" />,
+  banana: <BananaIcon className="size-7" />,
+  cama: <BedIcon className="size-7" />,
+  bike: <BikeIcon className="size-7" />,
+  bolo: <CakeIcon className="size-7" />,
+  gato: <CatIcon className="size-7" />,
+  chef: <ChefHatIcon className="size-7" />,
+  croissant: <CroissantIcon className="size-7" />,
+  musculacao: <DumbbellIcon className="size-7" />,
+  peixe: <FishIcon className="size-7" />,
+  flor: <Flower2Icon className="size-7" />,
+  presente: <GiftIcon className="size-7" />,
+  planta: <SproutIcon className="size-7" />,
 };
+
+export const iconsArray = Object.entries(iconsCategoria).map(
+  ([key, value]) => ({ key, icon: value }),
+);

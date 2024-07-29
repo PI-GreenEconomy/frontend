@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCategoria } from "../../../hooks/useCategoria";
 import { Spinner } from "../../ui/Spinner";
+import { iconsCategoria } from "../../../data/iconCategorias";
 
 export const DeletarCategoria = () => {
   const navigate = useNavigate();
@@ -28,7 +29,13 @@ export const DeletarCategoria = () => {
         <header className="bg-green-600 px-6 py-2 text-2xl font-bold text-white">
           Categoria
         </header>
-        <p className="h-full bg-slate-200 p-8 text-3xl">{categoria.tipo}</p>
+        <div className="flex h-full flex-wrap items-center gap-4  bg-slate-200 p-8">
+          <span className="*:size-9">
+            {iconsCategoria[categoria.slug] || iconsCategoria["default"]}
+          </span>
+          <p className="text-3xl">{categoria.tipo}</p>
+        </div>
+
         <div className="flex flex-wrap">
           <button
             className="w-full bg-red-700 py-2 text-slate-100 hover:bg-red-600 sm:flex-1"
