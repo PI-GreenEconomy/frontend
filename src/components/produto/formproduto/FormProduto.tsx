@@ -7,6 +7,7 @@ import { useCategoria } from "../../../hooks/useCategoria";
 import { Spinner } from "../../ui/Spinner";
 import useUploadImagem from "../../../hooks/useUploadImage";
 import { transformarFotoProduto } from "../../../utils/fotoProduto";
+import { CameraIcon } from "lucide-react";
 
 function FormProduto() {
   const { usuario } = useContext(AuthContext);
@@ -205,7 +206,11 @@ function FormProduto() {
 
         <div className="flex flex-col gap-2">
           <p>Foto do Produto</p>
-          <label htmlFor="fileInput" className="cursor-pointer">
+          <label
+            htmlFor="fileInput"
+            className="w-fit cursor-pointer"
+            aria-label="Mudar Foto"
+          >
             <input
               type="file"
               ref={fileInputRef}
@@ -215,14 +220,18 @@ function FormProduto() {
               accept=".jpg, .jpeg, .png, .webp"
               multiple={false}
             />
-            <div>
+            <div className="relative h-64">
               <img
                 src={transformarFotoProduto(
                   previewImage || produto.foto || previewImage || "",
                 )}
-                className="h-64  rounded object-contain"
-                height="256px"
+                className="h-full rounded object-contain"
+                width={263}
+                height={256}
               />
+              <div className="absolute inset-0 flex cursor-pointer flex-col items-center justify-center bg-black/60 transition-colors hover:bg-black/20">
+                <CameraIcon className="text-white" />
+              </div>
             </div>
           </label>
 
@@ -249,7 +258,7 @@ function FormProduto() {
         </div>
         <button
           type="submit"
-          disabled={carregandoCategoria || isLoading || progresso < 0}
+          disabled={carregandoCategoria || isLoading || progresso !== 0}
           className=" flex cursor-pointer justify-center rounded-lg bg-primary py-2 text-white hover:bg-primary/90 focus:bg-primary/90 disabled:cursor-default disabled:bg-primary/50"
         >
           {isLoading || progresso ? (
