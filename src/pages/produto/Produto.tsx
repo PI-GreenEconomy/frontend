@@ -23,6 +23,7 @@ import { IMAGES } from "../../data/imageIcons";
 import { ListarProdutoCategoria } from "../../components/produto/listarprodutocategoria/ListarProdutoCategoria";
 import { ProdutoMock } from "./components/ProdutoMock";
 import { transformarFotoProduto } from "../../utils/fotoProduto";
+import { CalculaCep } from "../../components/cep/CalculaCep";
 
 const pagamentos = [
   IMAGES.Visa,
@@ -171,6 +172,7 @@ export const Produto = () => {
               <HeartIcon className="group-hover:bg-border-primary/80 text-primary group-hover:text-white" />
             </button>
           </div>
+          <CalculaCep precoProduto={precoAtual} />
           <div className="flex flex-col gap-8">
             <div className="my-3 mt-6 flex font-poppins">
               <p className="mr-2 font-semibold">Compartilhe:</p>
