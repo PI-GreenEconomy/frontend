@@ -10,7 +10,13 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useProduto } from "../../hooks/useProduto";
 import { useContext, useEffect } from "react";
 import { EstrelaProdutos } from "../../components/EstrelaProdutos";
-import { calcularValorTotalProduto, formatarMoeda } from "../../utils/preco";
+import {
+  calcularValorTotalProduto,
+  formatarMoeda,
+  verificaDesconto,
+  verificaFreteGratuito,
+  verificaParcela,
+} from "../../utils/preco";
 import { BotaoQuantidade } from "../../components/BotaoQuantidade";
 import { CartContext } from "../../contexts/CartContext";
 import { IMAGES } from "../../data/imageIcons";
@@ -48,10 +54,10 @@ export const Produto = () => {
     buscarProdutoPorId(id!);
   }, [id]);
 
-  const existeDesconto = produto.porcentagemDesconto > 0;
-  const frete = produto.basePreco >= 100;
+  const existeDesconto = verificaDesconto(produto.porcentagemDesconto);
   const precoAtual = calcularValorTotalProduto(produto);
-  const podeParcelar = produto.basePreco >= 50;
+  const frete = verificaFreteGratuito(precoAtual);
+  const podeParcelar = verificaParcela(precoAtual);
 
   if (!produtos.length || produto.basePreco < 0) return <ProdutoMock />;
 
@@ -80,8 +86,8 @@ export const Produto = () => {
         </span>
       </div>
 
-      <article className="grid grid-cols-1 items-center justify-between gap-14 md:grid-cols-2">
-        <div className="h-full rounded-md border border-border">
+      <article className="grid grid-cols-1 items-start justify-between gap-14 md:grid-cols-2">
+        <div className="rounded-md border border-border">
           <img
             src={transformarFotoProduto(produto.foto)}
             alt={produto.nome}
@@ -138,7 +144,7 @@ export const Produto = () => {
               </p>
             )}
             {frete && (
-              <span className="rounded bg-[#B3D0C6] px-2 py-1 text-[10px] font-semibold uppercase text-[#042419]">
+              <span className="mt-2 inline-block rounded bg-[#B3D0C6] px-2 py-1 text-[10px] font-semibold uppercase text-[#042419]">
                 frete grátis!
               </span>
             )}

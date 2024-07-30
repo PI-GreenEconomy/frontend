@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import Produto from "../../../models/Produto";
-import { calcularValorTotalProduto, formatarMoeda } from "../../../utils/preco";
+import {
+  calcularValorTotalProduto,
+  formatarMoeda,
+  verificaDesconto,
+} from "../../../utils/preco";
 import { ArrowDownIcon } from "lucide-react";
 import {
   Dialog,
@@ -16,7 +20,7 @@ interface CardEditarProdutoProps {
 }
 
 export function CardEditarProduto({ produto }: CardEditarProdutoProps) {
-  const existeDesconto = produto.porcentagemDesconto > 0;
+  const existeDesconto = verificaDesconto(produto.porcentagemDesconto);
   const precoAtual = calcularValorTotalProduto(produto);
 
   return (

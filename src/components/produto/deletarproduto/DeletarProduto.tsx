@@ -1,7 +1,11 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useProduto } from "../../../hooks/useProduto";
-import { calcularValorTotalProduto, formatarMoeda } from "../../../utils/preco";
+import {
+  calcularValorTotalProduto,
+  formatarMoeda,
+  verificaDesconto,
+} from "../../../utils/preco";
 import { Spinner } from "../../ui/Spinner";
 import { transformarFotoProduto } from "../../../utils/fotoProduto";
 
@@ -13,7 +17,7 @@ function DeletarProduto() {
 
   const { id } = useParams<{ id: string }>();
 
-  const existeDesconto = produto.porcentagemDesconto > 0;
+  const existeDesconto = verificaDesconto(produto.porcentagemDesconto);
   const precoAtual = calcularValorTotalProduto(produto);
 
   useEffect(() => {

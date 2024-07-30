@@ -1,7 +1,13 @@
 import { useContext } from "react";
 import Produto from "../../../models/Produto";
 import { CartContext } from "../../../contexts/CartContext";
-import { calcularValorTotalProduto, formatarMoeda } from "../../../utils/preco";
+import {
+  calcularValorTotalProduto,
+  formatarMoeda,
+  verificaDesconto,
+  verificaFreteGratuito,
+  verificaParcela,
+} from "../../../utils/preco";
 import { Link } from "react-router-dom";
 import { EstrelaProdutos } from "../../EstrelaProdutos";
 import { ArrowDownIcon, ShoppingCartIcon } from "lucide-react";
@@ -14,10 +20,10 @@ interface CardProdutoProps {
 export const CardProduto = ({ produto }: CardProdutoProps) => {
   const { adicionarProduto } = useContext(CartContext);
 
-  const existeDesconto = produto.porcentagemDesconto > 0;
-  const frete = produto.basePreco >= 100;
+  const existeDesconto = verificaDesconto(produto.porcentagemDesconto);
   const precoAtual = calcularValorTotalProduto(produto);
-  const podeParcelar = produto.basePreco >= 50;
+  const frete = verificaFreteGratuito(precoAtual);
+  const podeParcelar = verificaParcela(precoAtual);
 
   return (
     <div className="group relative flex w-full flex-col gap-2 rounded-md border border-border bg-white p-4 text-foreground outline-none transition-colors hover:border-border focus-visible:border-primary">

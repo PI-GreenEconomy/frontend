@@ -19,3 +19,15 @@ export function formatarMoeda(value: number) {
     minimumFractionDigits: 2,
   }).format(value);
 }
+
+export const verificaDesconto = (porcentagemDesconto: number): boolean => {
+  return porcentagemDesconto > 0;
+};
+
+export const verificaFreteGratuito = (precoAtual: number): boolean => {
+  return precoAtual >= 100;
+};
+
+export const verificaParcela = (precoAtual: number): boolean => {
+  return precoAtual >= 50;
+};
