@@ -30,9 +30,7 @@ export const DeletarCategoria = () => {
           Categoria
         </header>
         <div className="flex h-full flex-wrap items-center gap-4  bg-slate-200 p-8">
-          <span className="*:size-9">
-            {iconsCategoria[categoria.slug] || iconsCategoria["default"]}
-          </span>
+          <span className="*:size-9">{iconsCategoria[categoria.icone]}</span>
           <p className="text-3xl">{categoria.tipo}</p>
         </div>
 
