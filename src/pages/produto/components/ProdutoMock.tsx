@@ -52,8 +52,8 @@ export const ProdutoMock = () => {
               <Skeleton className="h-[40px] w-full rounded-xl" />
             </div>
             <ul className="flex gap-2">
-              {Array.from({ length: 9 }).map(() => (
-                <li>
+              {Array.from({ length: 9 }).map((_, id) => (
+                <li key={id}>
                   <Skeleton className="h-[40px] w-full rounded-xl" />
                 </li>
               ))}

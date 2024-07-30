@@ -25,7 +25,7 @@ export const verificaDesconto = (porcentagemDesconto: number): boolean => {
 };
 
 export const verificaFreteGratuito = (precoAtual: number): boolean => {
-  return precoAtual >= 100;
+  return precoAtual >= 99;
 };
 
 export const verificaParcela = (precoAtual: number): boolean => {

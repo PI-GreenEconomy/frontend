@@ -59,7 +59,8 @@ export const Produto = () => {
   const frete = verificaFreteGratuito(precoAtual);
   const podeParcelar = verificaParcela(precoAtual);
 
-  if (!produtos.length || produto.basePreco < 0) return <ProdutoMock />;
+  if (!produtos.length || produto.basePreco < 0 || !produto.basePreco)
+    return <ProdutoMock />;
 
   return (
     <div className="container py-12">
