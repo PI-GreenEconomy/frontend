@@ -106,8 +106,8 @@ export const FooterMedium = () => {
             </li>
             <li>
               <img
-                src={IMAGES.Sedex}
-                alt="Sedex"
+                src={IMAGES.Jadlog}
+                alt="Jadlog"
                 width={109}
                 height={27}
                 loading="lazy"

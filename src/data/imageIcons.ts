@@ -1,6 +1,6 @@
 // FORMAS DE ENTREGA
 import Correios from "../assets/formasentregas/correios.svg";
-import Sedex from "../assets/formasentregas/sedex.svg";
+import Jadlog from "../assets/formasentregas/jadlog.svg";
 import RetireLoja from "../assets/formasentregas/loja.svg";
 
 // FORMAS DE PAGAMENTO
@@ -22,7 +22,7 @@ import Logo from "../assets/Logo.svg";
 
 export const IMAGES = {
   Correios,
-  Sedex,
+  Jadlog,
   RetireLoja,
   BancoDoBrasil,
   Boleto,
