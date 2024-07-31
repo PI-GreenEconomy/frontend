@@ -1,6 +1,5 @@
-import { useContext } from "react";
+import { useState } from "react";
 import Produto from "../../../models/Produto";
-import { CartContext } from "../../../contexts/CartContext";
 import {
   calcularValorTotalProduto,
   formatarMoeda,
@@ -13,17 +12,29 @@ import { EstrelaProdutos } from "../../EstrelaProdutos";
 import { ArrowDownIcon, ShoppingCartIcon } from "lucide-react";
 import { BotaoQuantidade } from "../../BotaoQuantidade";
 import { transformarFotoProduto } from "../../../utils/fotoProduto";
+import { useCart } from "../../../hooks/useCart";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 interface CardProdutoProps {
   produto: Produto;
 }
 
 export const CardProduto = ({ produto }: CardProdutoProps) => {
-  const { adicionarProduto } = useContext(CartContext);
+  const { adicionarProdutoAoCarrinho } = useCart();
 
   const existeDesconto = verificaDesconto(produto.porcentagemDesconto);
   const precoAtual = calcularValorTotalProduto(produto);
   const frete = verificaFreteGratuito(precoAtual);
   const podeParcelar = verificaParcela(precoAtual);
+
+  const [quantidade, setQuantidade] = useState(1);
+
+  const adicionarAoCarrinho = () => {
+    adicionarProdutoAoCarrinho({
+      produto: { ...produto, quantidade },
+    });
+    setQuantidade(1);
+    ToastAlerta("Produto Adicionado!", "sucesso");
+  };
 
   return (
     <div className="group relative flex w-full flex-col gap-2 rounded-md border border-border bg-white p-4 text-foreground outline-none transition-colors hover:border-border focus-visible:border-primary">
@@ -93,10 +104,13 @@ export const CardProduto = ({ produto }: CardProdutoProps) => {
       </Link>
 
       <div className="flex w-full flex-wrap items-end justify-start gap-2 font-medium">
-        <BotaoQuantidade />
+        <BotaoQuantidade
+          quantidade={quantidade}
+          setQuantidade={setQuantidade}
+        />
         <button
           className="flex flex-1 items-center justify-center gap-3 rounded-md bg-primary px-1 py-2 text-base font-medium uppercase text-white hover:bg-primary/90"
-          onClick={() => adicionarProduto(produto)}
+          onClick={adicionarAoCarrinho}
         >
           <ShoppingCartIcon className="size-5" /> Adicionar
         </button>

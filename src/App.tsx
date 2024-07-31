@@ -21,11 +21,11 @@ import Cadastro from "./pages/cadastro/Cadastro";
 import QuemSomos from "./pages/quem-somos/QuemSomos";
 import Produtos from "./pages/produtos/Produtos";
 import { CartProvider } from "./contexts/CartContext";
-import Cart from "./components/carrinho/cart/Cart";
 import { Avaliacao } from "./pages/avaliacao/Avaliacao";
 import { Produto } from "./pages/produto/Produto";
 import { NewsLetter } from "./components/newsletter/NewsLetter";
 import ListarSeusProdutos from "./components/produto/listarseusprodutos/ListarSeusProdutos";
+import CartPage from "./pages/cart/Cart";
 
 export default function App() {
   return (
@@ -138,7 +138,7 @@ export default function App() {
                       </ProtectedRouterUser>
                     }
                   />
-                  <Route path="/cart" element={<Cart />} />
+                  <Route path="/cart" element={<CartPage />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </div>

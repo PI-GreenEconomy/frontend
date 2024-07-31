@@ -1,14 +1,32 @@
 import { MinusIcon, PlusIcon } from "lucide-react";
-import { useState } from "react";
+import { useCart } from "../hooks/useCart";
 
-export const BotaoQuantidade = () => {
-  const [quantidade, setQuantidade] = useState(1);
+interface BotaoQuantidadeProps {
+  quantidade: number;
+  produtoId?: number;
+  setQuantidade: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export const BotaoQuantidade = ({
+  quantidade,
+  setQuantidade,
+  produtoId,
+}: BotaoQuantidadeProps) => {
+  const { aumentarQuantidadeProduto, diminuirQuantidadeProduto } = useCart();
 
   const aumentarQuantidade = () => {
+    if (produtoId) {
+      aumentarQuantidadeProduto(produtoId);
+      return;
+    }
     setQuantidade((quantidade) => (quantidade += 1));
   };
 
   const diminuirQuantidade = () => {
+    if (produtoId) {
+      diminuirQuantidadeProduto(produtoId);
+      return;
+    }
     if (quantidade === 1) return;
     setQuantidade((quantidade) => (quantidade -= 1));
   };

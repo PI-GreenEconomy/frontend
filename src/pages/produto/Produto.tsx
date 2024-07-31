@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useProduto } from "../../hooks/useProduto";
-import { useContext, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { EstrelaProdutos } from "../../components/EstrelaProdutos";
 import {
   calcularValorTotalProduto,
@@ -18,12 +18,13 @@ import {
   verificaParcela,
 } from "../../utils/preco";
 import { BotaoQuantidade } from "../../components/BotaoQuantidade";
-import { CartContext } from "../../contexts/CartContext";
 import { IMAGES } from "../../data/imageIcons";
 import { ListarProdutoCategoria } from "../../components/produto/listarprodutocategoria/ListarProdutoCategoria";
 import { ProdutoMock } from "./components/ProdutoMock";
 import { transformarFotoProduto } from "../../utils/fotoProduto";
 import { CalculaCep } from "../../components/cep/CalculaCep";
+import { useCart } from "../../hooks/useCart";
+import { ToastAlerta } from "../../utils/ToastAlerta";
 
 const pagamentos = [
   IMAGES.Visa,
@@ -40,10 +41,19 @@ export const Produto = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const { adicionarProduto } = useContext(CartContext);
+  const { adicionarProdutoAoCarrinho } = useCart();
+  const [quantidade, setQuantidade] = useState(1);
+
+  const adicionarAoCarrinho = () => {
+    adicionarProdutoAoCarrinho({
+      produto: { ...produto, quantidade },
+    });
+    setQuantidade(1);
+    ToastAlerta("Produto Adicionado!", "sucesso");
+  };
 
   const handleCompraProduto = () => {
-    adicionarProduto(produto);
+    adicionarAoCarrinho();
     navigate("/cart");
   };
 
@@ -152,10 +162,13 @@ export const Produto = () => {
             )}
           </div>
           <div className="flex w-full flex-wrap items-center gap-3 lg:gap-8">
-            <BotaoQuantidade />
+            <BotaoQuantidade
+              quantidade={quantidade}
+              setQuantidade={setQuantidade}
+            />
             <button
               className="flex items-center gap-4 rounded bg-[#DAE8E3] px-4 py-2 text-sm font-semibold uppercase text-primary hover:bg-[#9abeb2] sm:text-base md:text-base"
-              onClick={() => adicionarProduto(produto)}
+              onClick={adicionarAoCarrinho}
             >
               <ShoppingCartIcon />
               Adicionar ao carrinho
@@ -172,7 +185,9 @@ export const Produto = () => {
               <HeartIcon className="group-hover:bg-border-primary/80 text-primary group-hover:text-white" />
             </button>
           </div>
-          <CalculaCep precoProduto={precoAtual} />
+          <div>
+            <CalculaCep precoProduto={precoAtual} titulo="Calcule o frete" />
+          </div>
           <div className="flex flex-col gap-8">
             <div className="my-3 mt-6 flex font-poppins">
               <p className="mr-2 font-semibold">Compartilhe:</p>

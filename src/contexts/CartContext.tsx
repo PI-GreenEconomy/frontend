@@ -1,67 +1,156 @@
 import { createContext, ReactNode, useState } from "react";
 import Produto from "../models/Produto";
-import { ToastAlerta } from "../utils/ToastAlerta";
+import { calcularValorTotalProduto } from "../utils/preco";
+import useLocalStorage from "../hooks/useLocalStorage";
 
-interface CartContextProps {
-  adicionarProduto: (produto: Produto) => void;
-  removerProduto: (produtoId: number) => void;
-  limparCart: () => void;
-  items: Produto[];
+export interface CartProduto extends Produto {
+  quantidade: number;
+}
+
+interface ICartContext {
+  produtos: CartProduto[];
+  subtotal: number;
+  precoTotal: number;
+  totalDescontos: number;
   quantidadeItems: number;
+  adicionarProdutoAoCarrinho: ({
+    produto,
+    carrinhoVazio,
+  }: {
+    produto: CartProduto;
+    carrinhoVazio?: boolean;
+  }) => void;
+  aumentarQuantidadeProduto: (produtoId: number) => void;
+  diminuirQuantidadeProduto: (produtoId: number) => void;
+  removerProdutoDoCarrinho: (produtoId: number) => void;
+  limparCarrinho: () => void;
 }
 
-interface CartProviderProps {
-  children: ReactNode;
-}
+export const CartContext = createContext<ICartContext>({
+  produtos: [],
+  subtotal: 0,
+  precoTotal: 0,
+  totalDescontos: 0,
+  quantidadeItems: 0,
+  adicionarProdutoAoCarrinho: () => {},
+  aumentarQuantidadeProduto: () => {},
+  diminuirQuantidadeProduto: () => {},
+  removerProdutoDoCarrinho: () => {},
+  limparCarrinho: () => {},
+});
 
-export const CartContext = createContext({} as CartContextProps);
+export const CartProvider = ({ children }: { children: ReactNode }) => {
+  const [produtos, setProdutos] = useLocalStorage<CartProduto[]>(
+    "productsCart",
+    [],
+  );
 
-export function CartProvider({ children }: CartProviderProps) {
-  // Estado que armazenará os Produtos do Carrinho
-  const [items, setItems] = useState<Produto[]>([]);
+  const subtotal = produtos.reduce((acc, produto) => {
+    return acc + Number(produto.basePreco) * produto.quantidade;
+  }, 0);
 
-  // Estadoque retorna o número de itens do Carrinho
-  const quantidadeItems = items.length;
+  const precoTotal = produtos.reduce((acc, produto) => {
+    return acc + calcularValorTotalProduto(produto) * produto.quantidade;
+  }, 0);
 
-  // Função para adicionar Produtos no Carrinho
-  function adicionarProduto(produto: Produto) {
-    const indice = items.find((items) => items.id === produto.id);
-    if (indice !== undefined) {
-      ToastAlerta("Este Produto já foi Adicionado!", "info");
-    } else {
-      setItems((state) => [...state, produto]);
-      ToastAlerta("Produto Adicionado!", "sucesso");
-    }
-  }
+  const quantidadeItems = produtos.reduce((acc, produto) => {
+    return acc + produto.quantidade;
+  }, 0);
 
-  // Função para Remover um produto especifico do Carrinho
-  function removerProduto(produtoId: number) {
-    const indice = items.findIndex((items) => items.id === produtoId);
-    const novoCart = [...items];
+  const totalDescontos = subtotal - precoTotal;
 
-    if (indice >= 0) {
-      novoCart.splice(indice, 1);
-      setItems(novoCart);
-    }
-  }
+  const limparCarrinho = () => {
+    return setProdutos([]);
+  };
+  const diminuirQuantidadeProduto: ICartContext["diminuirQuantidadeProduto"] = (
+    produtoId: number,
+  ) => {
+    return setProdutos((prev) =>
+      prev.map((cartProduto) => {
+        if (cartProduto.id === produtoId) {
+          if (cartProduto.quantidade === 1) {
+            return cartProduto;
+          }
 
-  // Função para Limpar o Carrinho
-  function limparCart() {
-    ToastAlerta("Compra Efetuada com Sucesso", "sucesso");
-    setItems([]);
-  }
+          return {
+            ...cartProduto,
+            quantidade: cartProduto.quantidade - 1,
+          };
+        }
+
+        return cartProduto;
+      }),
+    );
+  };
+
+  const aumentarQuantidadeProduto: ICartContext["aumentarQuantidadeProduto"] = (
+    produtoId: number,
+  ) => {
+    return setProdutos((prev) =>
+      prev.map((cartProduto) => {
+        if (cartProduto.id === produtoId) {
+          return {
+            ...cartProduto,
+            quantidade: cartProduto.quantidade + 1,
+          };
+        }
+
+        return cartProduto;
+      }),
+    );
+  };
+
+  const removerProdutoDoCarrinho: ICartContext["removerProdutoDoCarrinho"] = (
+    produtoId: number,
+  ) => {
+    return setProdutos((prev) =>
+      prev.filter((produto) => produto.id !== produtoId),
+    );
+  };
+
+  const adicionarProdutoAoCarrinho: ICartContext["adicionarProdutoAoCarrinho"] =
+    ({ produto, carrinhoVazio }) => {
+      if (carrinhoVazio) {
+        setProdutos([]);
+      }
+
+      const produtoJaExisteNoCarrinho = produtos.some(
+        (cartProduto) => cartProduto.id === produto.id,
+      );
+
+      if (produtoJaExisteNoCarrinho) {
+        return setProdutos((prev) =>
+          prev.map((cartProduct) => {
+            if (cartProduct.id === produto.id) {
+              return {
+                ...cartProduct,
+                quantidade: cartProduct.quantidade + produto.quantidade,
+              };
+            }
+            return cartProduct;
+          }),
+        );
+      }
+
+      setProdutos((prev) => [...prev, produto]);
+    };
 
   return (
     <CartContext.Provider
       value={{
-        adicionarProduto,
-        removerProduto,
-        limparCart,
-        items,
+        produtos,
+        subtotal,
+        precoTotal,
+        totalDescontos,
         quantidadeItems,
+        limparCarrinho,
+        adicionarProdutoAoCarrinho,
+        diminuirQuantidadeProduto,
+        aumentarQuantidadeProduto,
+        removerProdutoDoCarrinho,
       }}
     >
       {children}
     </CartContext.Provider>
   );
-}
+};

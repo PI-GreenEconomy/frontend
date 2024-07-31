@@ -9,12 +9,12 @@ import { NavbarMobile } from "./Navbar";
 import { links } from "../../data/linksMenu";
 import NavTabs from "./NavTabs";
 import { InputBuscaProduto } from "./InputBuscaProduto";
-import { CartContext } from "../../contexts/CartContext";
+import { useCart } from "../../hooks/useCart";
 
 export const HeaderBottom = () => {
   const { pathname } = useLocation();
   const { usuario } = useContext(AuthContext);
-  const { quantidadeItems } = useContext(CartContext);
+  const { quantidadeItems } = useCart();
 
   return (
     <div className="border-b border-b-border py-5">
@@ -159,7 +159,7 @@ export const HeaderBottom = () => {
           <Link to={"/cart"} className="flex items-center justify-center gap-2">
             <div className="relative">
               <ShoppingCart className="z-10 size-7" />
-              <span className="absolute bottom-[21px] left-4 right-0 flex size-4 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
+              <span className="absolute bottom-[21px] left-4 right-0 flex size-5 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
                 {quantidadeItems}
               </span>
             </div>
