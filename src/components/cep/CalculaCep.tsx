@@ -21,7 +21,12 @@ const formCepSchema = z.object({
 
 type FormCepValues = z.infer<typeof formCepSchema>;
 
-export const CalculaCep = ({ precoProduto }: { precoProduto: number }) => {
+interface CalculaCepProps {
+  precoProduto: number;
+  titulo?: string;
+}
+
+export const CalculaCep = ({ precoProduto, titulo }: CalculaCepProps) => {
   const { calcularFrete, resultadoFrete, setResultadoFrete, error } =
     useFrete();
   const [cep, setCep] = useState<ICep | null>(null);
@@ -60,7 +65,7 @@ export const CalculaCep = ({ precoProduto }: { precoProduto: number }) => {
   return (
     <div className="bg-green-50 pb-2 pt-4">
       <div className="relative flex w-full flex-wrap items-center justify-between gap-6 px-4">
-        <p className="text-lg font-medium lg:flex-1">Calcule o frete</p>
+        {titulo && <p className="text-lg font-medium lg:flex-1">{titulo}</p>}
 
         <div className="flex w-full flex-col gap-2 lg:flex-[2]">
           <form
