@@ -12,6 +12,7 @@ import Elo from "../assets/formaspagamento/icon-elo.svg";
 import MasterCard from "../assets/formaspagamento/icon-mastercard.svg";
 import Pix from "../assets/formaspagamento/icon-pix.svg";
 import Visa from "../assets/formaspagamento/icon-visa.svg";
+import Cartao from "../assets/formaspagamento/cartao.svg";
 
 // SELOS DE SEGURANÇA
 import GoogleSeguro from "../assets/selosseguranca/google-loja-segura.svg";
@@ -35,4 +36,5 @@ export const IMAGES = {
   GoogleSeguro,
   SSLSecurity,
   Logo,
+  Cartao,
 };
