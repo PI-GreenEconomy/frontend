@@ -26,6 +26,7 @@ import { Produto } from "./pages/produto/Produto";
 import { NewsLetter } from "./components/newsletter/NewsLetter";
 import ListarSeusProdutos from "./components/produto/listarseusprodutos/ListarSeusProdutos";
 import CartPage from "./pages/cart/Cart";
+import CheckoutPage from "./pages/checkout/Checkout";
 
 export default function App() {
   return (
@@ -139,6 +140,7 @@ export default function App() {
                     }
                   />
                   <Route path="/cart" element={<CartPage />} />
+                  <Route path="/checkout" element={<CheckoutPage />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </div>

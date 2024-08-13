@@ -6,6 +6,7 @@ import TableCart from "./components/TableCart";
 
 export default function CartPage() {
   const { produtos } = useCart();
+
   const navigate = useNavigate();
 
   if (produtos.length === 0)
@@ -33,7 +34,7 @@ export default function CartPage() {
       </div>
 
       <div className="flex flex-wrap items-start justify-between gap-4 lg:flex-row-reverse">
-        <div className="flex w-full flex-col flex-wrap items-start gap-6 md:flex-row lg:flex-1">
+        <div className="flex w-full flex-col flex-wrap items-start gap-6 md:flex-row lg:sticky lg:top-9 lg:flex-1">
           <InfoCart />
         </div>
         <section className="w-full rounded border border-border py-5 lg:flex-[2]">
