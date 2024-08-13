@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import axios from "axios";
+import useLocalStorage from "./useLocalStorage";
 
 interface IResultadoFrete {
   id: string;
@@ -18,37 +19,21 @@ interface IResultadoFrete {
 }
 
 const useFrete = () => {
-  const [resultadoFrete, setResultadoFrete] = useState<
+  const [resultadoFrete, setResultadoFrete] = useLocalStorage<
     IResultadoFrete[] | null
-  >(null);
+  >("resultadoFrete", null);
   const [error, setError] = useState<boolean>(false);
 
   const calcularFrete = async (cepValues: { cepOrigem: string }) => {
     const { cepOrigem } = cepValues;
 
-    const data = {
-      from: {
-        postal_code: cepOrigem,
-      },
-      to: {
-        postal_code: "90570020",
-      },
-      package: {
-        height: 4,
-        width: 12,
-        length: 17,
-        weight: 0.3,
-      },
-      services: "1,3",
-    };
-
     try {
-      const response = await axios.post("/apiFrete", data, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: import.meta.env.VITE_API_FRETE_KEY,
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/frete/calcular`,
+        {
+          cepOrigem,
         },
-      });
+      );
 
       setResultadoFrete(response.data);
       setError(false);

@@ -25,6 +25,7 @@ import { transformarFotoProduto } from "../../utils/fotoProduto";
 import { CalculaCep } from "../../components/cep/CalculaCep";
 import { useCart } from "../../hooks/useCart";
 import { ToastAlerta } from "../../utils/ToastAlerta";
+import { useCep } from "../../hooks/useCep";
 
 const pagamentos = [
   IMAGES.Visa,
@@ -58,6 +59,7 @@ export const Produto = () => {
   };
 
   const { produtos, produto, buscarProdutoPorId } = useProduto();
+  const { cep, setCep } = useCep();
 
   if (!id) navigate("/");
 
@@ -186,7 +188,12 @@ export const Produto = () => {
             </button>
           </div>
           <div>
-            <CalculaCep precoProduto={precoAtual} titulo="Calcule o frete" />
+            <CalculaCep
+              precoProduto={precoAtual}
+              titulo="Calcule o frete"
+              cep={cep}
+              setCep={setCep}
+            />
           </div>
           <div className="flex flex-col gap-8">
             <div className="my-3 mt-6 flex font-poppins">

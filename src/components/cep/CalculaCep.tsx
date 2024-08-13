@@ -7,7 +7,6 @@ import { PatternFormat } from "react-number-format";
 
 import useFrete from "../../hooks/useFrete";
 import { formataCep, ICep, pegarDadosCep, validaCep } from "../../utils/cep";
-import { useState } from "react";
 import { MapPinIcon } from "lucide-react";
 import { calcularIntervaloEntrega } from "../../utils/formataDataEntrega";
 import { formatarMoeda } from "../../utils/preco";
@@ -24,12 +23,18 @@ type FormCepValues = z.infer<typeof formCepSchema>;
 interface CalculaCepProps {
   precoProduto: number;
   titulo?: string;
+  cep: ICep | null;
+  setCep: React.Dispatch<React.SetStateAction<ICep | null>>;
 }
 
-export const CalculaCep = ({ precoProduto, titulo }: CalculaCepProps) => {
+export const CalculaCep = ({
+  precoProduto,
+  titulo,
+  cep,
+  setCep,
+}: CalculaCepProps) => {
   const { calcularFrete, resultadoFrete, setResultadoFrete, error } =
     useFrete();
-  const [cep, setCep] = useState<ICep | null>(null);
 
   const {
     control,
@@ -40,7 +45,7 @@ export const CalculaCep = ({ precoProduto, titulo }: CalculaCepProps) => {
   } = useForm<FormCepValues>({
     resolver: zodResolver(formCepSchema),
     defaultValues: {
-      cepOrigem: "",
+      cepOrigem: cep?.cep || "",
     },
   });
 
@@ -75,16 +80,18 @@ export const CalculaCep = ({ precoProduto, titulo }: CalculaCepProps) => {
             <Controller
               name="cepOrigem"
               control={control}
-              render={({ field }) => (
-                <PatternFormat
-                  format="#####-###"
-                  mask="_"
-                  placeholder="Digite o CEP"
-                  className="w-full  rounded-md border border-[#CBD5E1] p-2 outline-none placeholder:text-[#94A3B8] focus:border-primary"
-                  onValueChange={(values) => field.onChange(values.value)}
-                  value={field.value}
-                />
-              )}
+              render={({ field }) => {
+                return (
+                  <PatternFormat
+                    format="#####-###"
+                    mask="_"
+                    placeholder="Digite o CEP"
+                    className="w-full  rounded-md border border-[#CBD5E1] p-2 outline-none placeholder:text-[#94A3B8] focus:border-primary"
+                    onValueChange={(values) => field.onChange(values.value)}
+                    value={field.value}
+                  />
+                );
+              }}
             />
             {errors.cepOrigem && (
               <span className="text-xs text-destructive">
@@ -123,6 +130,7 @@ export const CalculaCep = ({ precoProduto, titulo }: CalculaCepProps) => {
           <div className="mt-4 flex flex-col gap-4  bg-white px-4 py-4">
             {resultadoFrete.map(
               (resultado) =>
+                resultado.delivery_range &&
                 resultado.delivery_range.max && (
                   <div key={resultado.id}>
                     <div className="flex w-full flex-wrap items-center justify-between gap-2">
@@ -134,7 +142,7 @@ export const CalculaCep = ({ precoProduto, titulo }: CalculaCepProps) => {
                       />
                       {precoProduto >= 100 ? (
                         <p className="text-sm font-medium text-primary">
-                          Frete grátis
+                          Grátis
                         </p>
                       ) : (
                         <p>{formatarMoeda(+resultado.price)}</p>
