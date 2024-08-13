@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode } from "react";
 import Produto from "../models/Produto";
 import { calcularValorTotalProduto } from "../utils/preco";
 import useLocalStorage from "../hooks/useLocalStorage";

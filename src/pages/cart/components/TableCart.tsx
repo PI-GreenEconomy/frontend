@@ -2,8 +2,6 @@ import {
   calcularValorTotalProduto,
   formatarMoeda,
   verificaDesconto,
-  verificaFreteGratuito,
-  verificaParcela,
 } from "../../../utils/preco";
 import { useCart } from "../../../hooks/useCart";
 import { useState } from "react";
@@ -12,7 +10,7 @@ import { BotaoQuantidade } from "../../../components/BotaoQuantidade";
 
 export default function TableCart() {
   const { produtos, removerProdutoDoCarrinho } = useCart();
-  const [quantidade, setQuantidade] = useState(1);
+  const [_, setQuantidade] = useState(1);
 
   return (
     <section className="w-full">
@@ -42,8 +40,6 @@ export default function TableCart() {
               const existeDesconto = verificaDesconto(
                 produto.porcentagemDesconto,
               );
-              const frete = verificaFreteGratuito(precoAtual);
-              const podeParcelar = verificaParcela(precoAtual);
 
               const subtotalProduto = precoAtual * produto.quantidade;
 
