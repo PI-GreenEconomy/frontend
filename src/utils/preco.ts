@@ -1,4 +1,6 @@
+import { CartProduto } from "../contexts/CartContext";
 import Produto from "../models/Produto";
+import { VALOR_FRETE_GRATIS } from "./frete";
 
 export function calcularValorTotalProduto(produto: Produto): number {
   if (produto.porcentagemDesconto === 0) {
@@ -25,9 +27,15 @@ export const verificaDesconto = (porcentagemDesconto: number): boolean => {
 };
 
 export const verificaFreteGratuito = (precoAtual: number): boolean => {
-  return precoAtual >= 99;
+  return precoAtual >= VALOR_FRETE_GRATIS;
 };
 
 export const verificaParcela = (precoAtual: number): boolean => {
   return precoAtual >= 50;
+};
+
+export const calcularSubtotalProduto = (produto: CartProduto): number => {
+  const precoAtual = calcularValorTotalProduto(produto);
+
+  return precoAtual * produto.quantidade;
 };

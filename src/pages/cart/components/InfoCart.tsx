@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { useCart } from "../../../hooks/useCart";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -6,35 +6,52 @@ import { ToastAlerta } from "../../../utils/ToastAlerta";
 import { formatarMoeda, verificaFreteGratuito } from "../../../utils/preco";
 import { ArrowRightIcon } from "lucide-react";
 import { CalculaCep } from "../../../components/cep/CalculaCep";
-import { useCep } from "../../../hooks/useCep";
 import useFrete from "../../../hooks/useFrete";
+import {
+  calculaTotalComFrete,
+  calculaValorTransportadora,
+  exibeFrete,
+  formataValorTransportadora,
+  selecionaFrete,
+} from "../../../utils/frete";
 
 export default function InfoCart() {
   const { subtotal, precoTotal, totalDescontos } = useCart();
   const { usuario } = useContext(AuthContext);
-  const { cep, setCep } = useCep();
-  const { resultadoFrete } = useFrete();
-
-  useEffect(() => {
-    console.log(resultadoFrete && resultadoFrete[0].price);
-  }, [cep, resultadoFrete]);
+  const { resultadoFrete, cep, setCep, indexFreteSelecionado } = useFrete();
 
   const freteGratuito = verificaFreteGratuito(precoTotal);
-  const valorTransportadora = resultadoFrete ? +resultadoFrete[0].price : 0;
 
-  const formataValorTransportadora =
-    cep?.cep && resultadoFrete ? formatarMoeda(valorTransportadora) : "---";
+  const freteSelecionado = selecionaFrete(
+    resultadoFrete,
+    indexFreteSelecionado,
+  );
 
-  const frete = freteGratuito ? "Grátis" : formataValorTransportadora;
+  const valorTransportadora = freteSelecionado
+    ? calculaValorTransportadora(freteSelecionado, precoTotal)
+    : 0;
 
-  const precoTotalComFrete = freteGratuito
-    ? precoTotal
-    : precoTotal + valorTransportadora;
+  const valorTransportadoraFormatado = formataValorTransportadora(
+    resultadoFrete,
+    freteSelecionado,
+    precoTotal,
+  );
+
+  const frete = exibeFrete(precoTotal, valorTransportadoraFormatado);
+
+  const precoTotalComFrete = calculaTotalComFrete(
+    precoTotal,
+    valorTransportadora,
+  );
 
   const token = usuario.token;
   const navigate = useNavigate();
 
   const finalizarCompra = () => {
+    // if (!cep) {
+    //   ToastAlerta("Por favor, calcule o frete antes de continuar", "erro");
+    //   return;
+    // }
     if (token === "") {
       ToastAlerta("Você precisa estar logado", "erro");
       navigate("/login");
@@ -54,21 +71,23 @@ export default function InfoCart() {
               {formatarMoeda(subtotal)}
             </span>
           </div>
-          {}
-          <div className="flex items-center justify-between gap-2">
-            <span className="text-sm text-[#575757]">Frete</span>
-            <span
-              className={`w-32 text-sm font-medium ${freteGratuito && "text-primary"}`}
-            >
-              {frete}
-            </span>
-          </div>
+          {cep && resultadoFrete && (
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-sm text-[#575757]">Frete</span>
+              <span
+                className={`w-32 text-sm font-medium ${freteGratuito && "text-primary"}`}
+              >
+                {frete}
+              </span>
+            </div>
+          )}
+
           {totalDescontos > 0 && (
             <div className="flex items-center justify-between gap-2">
               <span className="text-sm text-[#575757]">Desconto</span>
-              <span className="w-32 text-sm font-medium">
-                {formatarMoeda(totalDescontos)}
-              </span>
+              <div className="w-32 text-sm font-medium text-destructive ">
+                <span className="-ml-2">-</span> {formatarMoeda(totalDescontos)}
+              </div>
             </div>
           )}
         </div>
@@ -90,7 +109,12 @@ export default function InfoCart() {
       <section className="w-full rounded border border-border bg-white py-5 md:flex-1 lg:flex-auto">
         <h2 className="mb-5 px-4 text-lg font-medium">Calcule o frete</h2>
         <div className="my-5 border-t border-t-border"></div>
-        <CalculaCep precoProduto={precoTotal} cep={cep} setCep={setCep} />
+        <CalculaCep
+          selecaoAtivada={true}
+          precoProduto={precoTotal}
+          cep={cep}
+          setCep={setCep}
+        />
       </section>
     </>
   );

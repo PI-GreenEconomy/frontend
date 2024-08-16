@@ -23,7 +23,7 @@ export const CardProduto = ({ produto }: CardProdutoProps) => {
 
   const existeDesconto = verificaDesconto(produto.porcentagemDesconto);
   const precoAtual = calcularValorTotalProduto(produto);
-  const frete = verificaFreteGratuito(precoAtual);
+  const freteGratuito = verificaFreteGratuito(precoAtual);
   const podeParcelar = verificaParcela(precoAtual);
 
   const [quantidade, setQuantidade] = useState(1);
@@ -95,7 +95,7 @@ export const CardProduto = ({ produto }: CardProdutoProps) => {
             )}
           </div>
 
-          {frete && (
+          {freteGratuito && (
             <span className="rounded bg-[#B3D0C6] px-2 py-1 text-[10px] font-semibold uppercase text-[#042419]">
               frete grátis!
             </span>

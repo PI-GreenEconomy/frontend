@@ -1,4 +1,5 @@
 import {
+  calcularSubtotalProduto,
   calcularValorTotalProduto,
   formatarMoeda,
   verificaDesconto,
@@ -40,8 +41,7 @@ export default function TableCart() {
               const existeDesconto = verificaDesconto(
                 produto.porcentagemDesconto,
               );
-
-              const subtotalProduto = precoAtual * produto.quantidade;
+              const subtotalProduto = calcularSubtotalProduto(produto);
 
               return (
                 <tbody key={produto.id}>

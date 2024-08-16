@@ -1,15 +1,22 @@
+import { z } from "zod";
+
 import { Link } from "react-router-dom";
 
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { PatternFormat } from "react-number-format";
 
 import useFrete from "../../hooks/useFrete";
 import { formataCep, ICep, pegarDadosCep, validaCep } from "../../utils/cep";
-import { MapPinIcon } from "lucide-react";
-import { calcularIntervaloEntrega } from "../../utils/formataDataEntrega";
-import { formatarMoeda } from "../../utils/preco";
+import { ResultadoFrete } from "./ResultadoFrete";
+
+interface CalculaCepProps {
+  precoProduto: number;
+  titulo?: string;
+  cep: ICep | null;
+  setCep: React.Dispatch<React.SetStateAction<ICep | null>>;
+  selecaoAtivada?: boolean;
+}
 
 const formCepSchema = z.object({
   cepOrigem: z
@@ -20,18 +27,12 @@ const formCepSchema = z.object({
 
 type FormCepValues = z.infer<typeof formCepSchema>;
 
-interface CalculaCepProps {
-  precoProduto: number;
-  titulo?: string;
-  cep: ICep | null;
-  setCep: React.Dispatch<React.SetStateAction<ICep | null>>;
-}
-
 export const CalculaCep = ({
   precoProduto,
   titulo,
   cep,
   setCep,
+  selecaoAtivada,
 }: CalculaCepProps) => {
   const { calcularFrete, resultadoFrete, setResultadoFrete, error } =
     useFrete();
@@ -68,7 +69,7 @@ export const CalculaCep = ({
   };
 
   return (
-    <div className="bg-green-50 pb-2 pt-4">
+    <div className="bg-green-50 pt-2">
       <div className="relative flex w-full flex-wrap items-center justify-between gap-6 px-4">
         {titulo && <p className="text-lg font-medium lg:flex-1">{titulo}</p>}
 
@@ -119,45 +120,10 @@ export const CalculaCep = ({
       </div>
 
       {!error && cep && resultadoFrete?.length && (
-        <div className="mt-4 border-t border-t-green-200 py-4">
-          <div className="flex items-center gap-2 px-4 text-green-800">
-            <MapPinIcon />
-            <span>
-              {cep.logradouro}, {cep.bairro} - {cep.localidade} - {cep.uf}
-            </span>
-          </div>
-
-          <div className="mt-4 flex flex-col gap-4  bg-white px-4 py-4">
-            {resultadoFrete.map(
-              (resultado) =>
-                resultado.delivery_range &&
-                resultado.delivery_range.max && (
-                  <div key={resultado.id}>
-                    <div className="flex w-full flex-wrap items-center justify-between gap-2">
-                      <img
-                        width={85}
-                        height={85}
-                        src={resultado.company.picture}
-                        alt={resultado.company.name}
-                      />
-                      {precoProduto >= 100 ? (
-                        <p className="text-sm font-medium text-primary">
-                          Grátis
-                        </p>
-                      ) : (
-                        <p>{formatarMoeda(+resultado.price)}</p>
-                      )}
-                      <span className="w-52 text-sm">
-                        até{" "}
-                        {calcularIntervaloEntrega(resultado.delivery_range.max)}
-                      </span>
-                    </div>
-                    <div className="mt-4 border-t border-t-primary/20 "></div>
-                  </div>
-                ),
-            )}
-          </div>
-        </div>
+        <ResultadoFrete
+          selecaoAtivada={selecaoAtivada}
+          precoProduto={precoProduto}
+        />
       )}
       {error && (
         <span className="block max-w-96 px-4 text-sm font-medium text-destructive">

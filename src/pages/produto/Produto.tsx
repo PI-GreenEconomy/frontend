@@ -24,14 +24,12 @@ import { ProdutoMock } from "./components/ProdutoMock";
 import { transformarFotoProduto } from "../../utils/fotoProduto";
 import { CalculaCep } from "../../components/cep/CalculaCep";
 import { useCart } from "../../hooks/useCart";
-import { ToastAlerta } from "../../utils/ToastAlerta";
-import { useCep } from "../../hooks/useCep";
+import useFrete from "../../hooks/useFrete";
 
 const pagamentos = [
   IMAGES.Visa,
   IMAGES.MasterCard,
   IMAGES.Elo,
-  IMAGES.Caixa,
   IMAGES.BancoDoBrasil,
   IMAGES.Bradesco,
   IMAGES.Boleto,
@@ -42,7 +40,8 @@ export const Produto = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const { adicionarProdutoAoCarrinho } = useCart();
+  const { adicionarProdutoAoCarrinho, precoTotal } = useCart();
+
   const [quantidade, setQuantidade] = useState(1);
 
   const adicionarAoCarrinho = () => {
@@ -50,7 +49,6 @@ export const Produto = () => {
       produto: { ...produto, quantidade },
     });
     setQuantidade(1);
-    ToastAlerta("Produto Adicionado!", "sucesso");
   };
 
   const handleCompraProduto = () => {
@@ -59,7 +57,7 @@ export const Produto = () => {
   };
 
   const { produtos, produto, buscarProdutoPorId } = useProduto();
-  const { cep, setCep } = useCep();
+  const { cep, setCep } = useFrete();
 
   if (!id) navigate("/");
 
@@ -69,7 +67,7 @@ export const Produto = () => {
 
   const existeDesconto = verificaDesconto(produto.porcentagemDesconto);
   const precoAtual = calcularValorTotalProduto(produto);
-  const frete = verificaFreteGratuito(precoAtual);
+  const freteGratuito = verificaFreteGratuito(precoTotal);
   const podeParcelar = verificaParcela(precoAtual);
 
   if (!produtos.length || produto.basePreco < 0 || !produto.basePreco)
@@ -157,7 +155,7 @@ export const Produto = () => {
                 sem juros
               </p>
             )}
-            {frete && (
+            {freteGratuito && (
               <span className="mt-2 inline-block rounded bg-[#B3D0C6] px-2 py-1 text-[10px] font-semibold uppercase text-[#042419]">
                 frete grátis!
               </span>
@@ -189,7 +187,7 @@ export const Produto = () => {
           </div>
           <div>
             <CalculaCep
-              precoProduto={precoAtual}
+              precoProduto={precoTotal || precoAtual}
               titulo="Calcule o frete"
               cep={cep}
               setCep={setCep}
