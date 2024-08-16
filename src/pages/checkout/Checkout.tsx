@@ -1,43 +1,93 @@
 import { ChevronRightIcon } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IMAGES } from "../../data/imageIcons";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { getFormCheckoutSchema, FormCheckoutValues } from "./validacaoCheckout";
 import { zodResolver } from "@hookform/resolvers/zod";
 import InputField from "../../components/ui/InputField";
 import { PatternFormat } from "react-number-format";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FormCartao } from "./components/FormCartao";
-import { FormPix } from "./components/FormPix";
-import { ToastAlerta } from "../../utils/ToastAlerta";
 import { EstadoSelect } from "./components/EstadoSelect";
 import { CidadeSelect } from "./components/CidadeSelect";
 import { CardPedido } from "./components/CardPedido";
+import { PaginaPix } from "./components/PaginaPix";
+import { useCart } from "../../hooks/useCart";
+import { PaginaBoleto } from "./components/PaginaBoleto";
+import { ToastAlerta } from "../../utils/ToastAlerta";
+import useFrete from "../../hooks/useFrete";
+import { ResultadoFrete } from "../../components/cep/ResultadoFrete";
+import { verificaFreteGratuito } from "../../utils/preco";
+import {
+  calculaTotalComFrete,
+  calculaValorTransportadora,
+  selecionaFrete,
+} from "../../utils/frete";
+import { formataCep, pegarDadosCep } from "../../utils/cep";
+import { CartProduto } from "../../contexts/CartContext";
+import { IResultadoFrete } from "../../contexts/FreteContext";
 
-type tiposPagamento = "boleto" | "pix" | "cartao";
+export type Checkout = {
+  data: FormCheckoutValues;
+  tipoPagamento: tiposPagamento;
+  paginaPagamento?: boolean;
+  subtotal: number;
+  frete: number;
+  total: number;
+  cart: CartProduto[];
+  precoTotal: number;
+  freteSelecionado: IResultadoFrete | null;
+};
+
+export type tiposPagamento = "boleto" | "pix" | "cartao";
 
 export default function CheckoutPage() {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
+  const { limparCarrinho, quantidadeItems, precoTotal, produtos } = useCart();
+  const { cep, setCep, resultadoFrete, calcularFrete, indexFreteSelecionado } =
+    useFrete();
+
+  const initialValues = {
+    endereco: "",
+    cidade: "",
+    estado: "",
+    cep: cep?.cep || "",
+    nomeCartao: "",
+    numeroCartao: "",
+    validadeCartao: "",
+    cvvCartao: "",
+    informacao: "",
+  };
+
   const [atualEstadoId, setAtualEstadoId] = useState("");
   const [cidades, setCidades] = useState([]);
   const [cidadeAtual, setCidadeAtual] = useState("");
   const [selecaoDesabilitada, setSelecaoDesabilitada] = useState(false);
 
   const checkCEP = async (e: React.FocusEvent<HTMLInputElement>) => {
-    const cep = e.target.value.replace(/\D/g, "");
+    const cepAtual = e.target.value.replace(/\D/g, "");
 
-    if (cep.length === 0) {
+    if (cepAtual.length === 0) {
       setCidadeAtual("");
       setSelecaoDesabilitada(false);
     }
-    if (cep.length === 8) {
+    if (cepAtual.length === 8) {
       try {
-        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const response = await fetch(
+          `https://viacep.com.br/ws/${cepAtual}/json/`,
+        );
         const data = await response.json();
         if (data.erro) {
           throw new Error("CEP não encontrado");
         }
 
-        console.log(data);
+        const cepAnterior = formataCep(cep?.cep || "");
+
+        if (!resultadoFrete || cepAnterior !== formataCep(cepAtual)) {
+          await pegarDadosCep(cepAtual, setCep);
+          await calcularFrete({ cepOrigem: cepAtual });
+        }
 
         setValue("endereco", data.logradouro);
         setValue("cidade", data.localidade);
@@ -51,13 +101,14 @@ export default function CheckoutPage() {
         setSelecaoDesabilitada(true);
       } catch (error) {
         console.error("Erro ao buscar CEP:", error);
-        setValue("endereco", "");
-        setValue("cidade", "");
-        setValue("estado", "");
         setSelecaoDesabilitada(false);
       }
     }
   };
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
 
   const [pagamentoSelecionado, setPagamentoSelecionado] =
     useState<tiposPagamento>("boleto");
@@ -82,6 +133,18 @@ export default function CheckoutPage() {
 
   const formCheckoutSchema = getFormCheckoutSchema(pagamentoSelecionado);
 
+  const [infoCheckout, setInfoCheckout] = useState<Checkout>({
+    data: initialValues,
+    tipoPagamento: "boleto",
+    paginaPagamento: false,
+    subtotal: 0,
+    frete: 0,
+    total: 0,
+    cart: [],
+    freteSelecionado: null,
+    precoTotal: 0,
+  });
+
   const {
     control,
     handleSubmit,
@@ -90,27 +153,87 @@ export default function CheckoutPage() {
     formState: { errors },
   } = useForm<FormCheckoutValues>({
     resolver: zodResolver(formCheckoutSchema),
-    defaultValues: {
-      endereco: "",
-      cidade: "",
-      estado: "",
-      cep: "",
-      nomeCartao: "",
-      numeroCartao: "",
-      validadeCartao: "",
-      cvvCartao: "",
-      informacao: "",
-    },
+    defaultValues: initialValues,
   });
 
   const onSubmit: SubmitHandler<FormCheckoutValues> = async (data) => {
-    console.log(data);
-    ToastAlerta("efetuou o pagamento", "sucesso");
+    if (
+      !resultadoFrete ||
+      resultadoFrete.length === 0 ||
+      !indexFreteSelecionado
+    ) {
+      ToastAlerta(
+        "Por favor, selecione uma opção de frete antes de continuar",
+        "erro",
+      );
+      return;
+    }
+
+    setInfoCheckout({
+      data,
+      tipoPagamento: pagamentoSelecionado,
+      paginaPagamento: true,
+      subtotal: oldSubtotal,
+      frete: oldFrete,
+      total: oldTotal,
+      cart: oldCart,
+      freteSelecionado: oldFreteSelecionado,
+      precoTotal: oldPrecoTotal,
+    });
+    limparCarrinho();
   };
+
+  const freteGratuito = verificaFreteGratuito(precoTotal);
+
+  const freteSelecionado = selecionaFrete(
+    resultadoFrete,
+    indexFreteSelecionado,
+  );
+
+  const valorTransportadora = freteSelecionado
+    ? calculaValorTransportadora(freteSelecionado, precoTotal)
+    : 0;
+
+  const precoTotalComFrete = calculaTotalComFrete(
+    precoTotal,
+    valorTransportadora,
+  );
+
+  const [oldPrecoTotal] = useState(precoTotalComFrete);
+  const [oldCart] = useState(produtos);
+  const [oldFreteSelecionado] = useState(freteSelecionado);
+  const [oldSubtotal] = useState(precoTotal);
+  const [oldFrete] = useState(valorTransportadora);
+  const [oldTotal] = useState(precoTotalComFrete);
+
+  useEffect(() => {
+    if (
+      infoCheckout.tipoPagamento === "boleto" ||
+      infoCheckout.tipoPagamento === "pix" ||
+      infoCheckout.tipoPagamento === "cartao"
+    )
+      return;
+
+    if (quantidadeItems === 0) navigate("/");
+  }, [quantidadeItems]);
+
+  if (infoCheckout.paginaPagamento && infoCheckout.tipoPagamento === "pix") {
+    return <PaginaPix infoCheckout={infoCheckout} />;
+  }
+
+  if (infoCheckout.paginaPagamento && infoCheckout.tipoPagamento === "boleto") {
+    return <PaginaBoleto />;
+  }
+
+  if (infoCheckout.paginaPagamento && infoCheckout.tipoPagamento === "cartao") {
+    navigate("/");
+    ToastAlerta("compra finalizada com sucesso!", "sucesso");
+    return;
+  }
 
   return (
     <div className="container relative py-12 text-foreground">
-      <div className="mb-12 flex flex-wrap gap-y-1 rounded bg-[#E7F0ED] p-3 text-[#4A695E]">
+      <div className="mb-12 flex flex-wrap gap-y-1 rounded bg-[#E7F0ED] p-3 text-[#314840]">
         <div className="flex">
           <Link to={"/"}>Início</Link>
           <ChevronRightIcon className="size-6" />
@@ -144,6 +267,7 @@ export default function CheckoutPage() {
                             Cep
                           </label>
                           <PatternFormat
+                            getInputRef={inputRef}
                             format="#####-###"
                             mask="_"
                             placeholder="Digite o CEP"
@@ -285,7 +409,9 @@ export default function CheckoutPage() {
                   Seu boleto será gerado ao efetuar o pagamento.
                 </p>
               )}
-              {pagamentoSelecionado === "pix" && <FormPix />}
+              {pagamentoSelecionado === "pix" && (
+                <p className="px-8">O pix será gerado no final do pagamento.</p>
+              )}
               {pagamentoSelecionado === "cartao" && (
                 <FormCartao
                   register={register}
@@ -312,7 +438,14 @@ export default function CheckoutPage() {
               </label>
             </div>
           </div>
-          <CardPedido />
+          <div className="w-full lg:sticky lg:top-10 lg:w-fit">
+            <CardPedido
+              freteGratuito={freteGratuito}
+              precoTotal={precoTotal}
+              valorTransportadora={valorTransportadora}
+            />
+            <ResultadoFrete precoProduto={precoTotal} selecaoAtivada={true} />
+          </div>
         </form>
       </section>
     </div>

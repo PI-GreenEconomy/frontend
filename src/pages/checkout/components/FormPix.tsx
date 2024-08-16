@@ -1,16 +1,16 @@
 import { useRef, useState } from "react";
 import { Icon } from "../../../components/icons";
-import { IMAGES } from "../../../data/imageIcons";
 
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { CheckIcon } from "lucide-react";
+import { formatarMoeda } from "../../../utils/preco";
+import { useTimer } from "../../../hooks/useTimer";
 
-export const FormPix = () => {
+export const FormPix = ({ precoTotal }: { precoTotal: number }) => {
   const textToCopy =
     "654984984848.651.894.891.564894.BB.Gov.8hayyYYdua.BCentral";
 
   const [isCopied, setIsCopied] = useState(false);
-
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const onCopyText = () => {
@@ -21,24 +21,40 @@ export const FormPix = () => {
     timerRef.current = setTimeout(() => setIsCopied(false), 2000);
   };
 
+  const { timeLeft, formatTime } = useTimer();
+
   return (
     <div className="flex flex-col gap-4 pl-8 pr-16">
-      <header className="mb-2 flex gap-2">
-        <img src={IMAGES.Pix} alt="Pix" />
-        <p className="text-gray-400">Pague com Pix</p>
+      <header className="mb-2 flex flex-col items-center justify-center gap-4 text-center">
+        <h2 className="text-base font-medium text-primary md:text-lg lg:text-xl">
+          Use o QR Code para pagar o PIX
+        </h2>
+        <div>
+          <p className="mb-2 text-sm text-gray-600 md:text-base">
+            Valor da compra:
+          </p>
+          <span className="text-lg font-medium text-gray-800 md:text-xl lg:text-2xl">
+            {formatarMoeda(precoTotal)}
+          </span>
+        </div>
       </header>
-      <div className="flex flex-col gap-2">
-        <div className="mx-auto h-44 w-44 rounded-lg border border-gray-400">
+      <div className="flex flex-col items-center justify-center gap-4">
+        <div className="mx-auto h-52 w-52 rounded-lg border border-gray-400">
           <img
             src="https://ik.imagekit.io/GreenEconomy/Avatar/qrcode-three.svg?updatedAt=1718110091802"
             alt="QR Code"
             className="w-full rounded-lg"
           />
         </div>
+        <p className="text-base">
+          Expira em{" "}
+          <span className="text-lg font-medium text-[#32BCAD]">
+            {formatTime(timeLeft)}
+          </span>{" "}
+        </p>
         <p className="text-center">
           Escaneie o QR Code ou copie o código abaixo, cole em seu banco
         </p>
-
         <CopyToClipboard text={textToCopy} onCopy={onCopyText}>
           <button
             type="button"
@@ -48,7 +64,6 @@ export const FormPix = () => {
             <Icon.Copy className="text-current transition-all group-hover:translate-y-1" />
           </button>
         </CopyToClipboard>
-
         {isCopied && (
           <div className="flex items-center gap-2">
             <CheckIcon className="size-4 rounded-full bg-[#32BCAD] text-white" />
@@ -57,14 +72,13 @@ export const FormPix = () => {
             </span>
           </div>
         )}
-
         <div className="flex flex-col gap-2 rounded-lg bg-[#FAF9E9] p-4">
           <strong>
             Antes de efetuar o pagamento, leia atentamente as regras:
           </strong>
-          <p>
+          <p className="max-w-[90%]">
             Não aceitamos depósitos de terceiros, ou seja, o valor depositado
-            deve vir de uma conta com o seu CPF/CN PJ.
+            deve vir de uma conta com o seu CPF/CNPJ.
           </p>
           <p>
             O valor do depositado não pode ultrapassar o seu limite disponível
