@@ -41,16 +41,6 @@ export const FooterMedium = () => {
             <li>
               <img
                 className="h-7"
-                src={IMAGES.Caixa}
-                alt="Caixa"
-                width={36}
-                height={24}
-                loading="lazy"
-              />
-            </li>
-            <li>
-              <img
-                className="h-7"
                 src={IMAGES.BancoDoBrasil}
                 alt="Banco do Brasil"
                 width={36}

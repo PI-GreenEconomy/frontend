@@ -54,7 +54,7 @@ const InputField: React.FC<InputFieldProps> = ({
         type={type}
         id={id}
         placeholder={placeholder}
-        className="rounded-md border border-[#CBD5E1] p-2 outline-none placeholder:text-[#94A3B8] focus:border-primary"
+        className={`rounded-md border border-[#CBD5E1] p-2 outline-none placeholder:text-[#94A3B8] focus:border-primary ${id === "nomeCartao" && "uppercase"}`}
         disabled={disabled}
         {...register(id)}
       />
