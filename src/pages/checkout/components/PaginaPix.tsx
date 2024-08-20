@@ -15,9 +15,9 @@ interface PaginaPixProps {
   infoCheckout: Checkout;
 }
 
-const numeroPedido = Math.floor(Math.random() * (770 - 1 + 1)) + 1;
-
 export const PaginaPix = ({ infoCheckout }: PaginaPixProps) => {
+  const numeroPedido = Math.floor(Math.random() * (770 - 1 + 1)) + 1;
+
   const {
     data,
     tipoPagamento,
@@ -46,8 +46,8 @@ export const PaginaPix = ({ infoCheckout }: PaginaPixProps) => {
       <ScrollToTop />
       <div className="container py-10">
         <div className="flex flex-wrap justify-between gap-4 md:gap-10">
-          <div className="flex flex-col gap-4">
-            <div className="flex flex-col  gap-1 rounded border border-green-100 bg-green-50 p-4 shadow-sm">
+          <div className="flex w-full flex-col gap-4 sm:w-fit">
+            <div className="flex flex-col gap-1 rounded border border-green-100 bg-green-50 p-4 shadow-sm">
               <p className="text-base font-medium text-gray-600 md:text-lg">
                 Número do pedido:
               </p>
@@ -65,7 +65,7 @@ export const PaginaPix = ({ infoCheckout }: PaginaPixProps) => {
             </div>
           </div>
 
-          <div className="rounded border border-border py-4 lg:flex-1">
+          <div className="w-full rounded border border-border py-4 lg:flex-1">
             <FormPix precoTotal={precoTotal} />
           </div>
         </div>
@@ -105,7 +105,7 @@ export const PaginaPix = ({ infoCheckout }: PaginaPixProps) => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col gap-4">
+            <div className="flex w-full flex-col gap-4 sm:w-fit">
               <p className="flex flex-wrap gap-2 text-gray-700">
                 <BanknoteIcon />
                 <span>Dados cadastrais</span>
@@ -127,8 +127,8 @@ export const PaginaPix = ({ infoCheckout }: PaginaPixProps) => {
             </div>
           </div>
           {/* INFO PRODUTO */}
-          <div className="block overflow-auto px-2 lg:flex-1 lg:overflow-hidden">
-            <table className="mx-4 w-full border-collapse items-center overflow-auto overflow-x-auto rounded border border-border bg-transparent">
+          <div className="block overflow-auto md:px-2 lg:flex-1 lg:overflow-hidden">
+            <table className="w-full border-collapse items-center overflow-auto overflow-x-auto rounded border border-border bg-transparent md:mx-4">
               <thead className="border-b border-t border-b-[#B3D0C6] border-t-[#B3D0C6] bg-[#E7F0ED]">
                 <tr>
                   <th className="whitespace-nowrap border border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-semibold uppercase text-[#4A695E]">

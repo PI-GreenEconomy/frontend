@@ -5,13 +5,14 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { CheckIcon } from "lucide-react";
 import { formatarMoeda } from "../../../utils/preco";
 import { useTimer } from "../../../hooks/useTimer";
+import { Timeout } from "react-number-format/types/types";
 
 export const FormPix = ({ precoTotal }: { precoTotal: number }) => {
   const textToCopy =
     "654984984848.651.894.891.564894.BB.Gov.8hayyYYdua.BCentral";
 
   const [isCopied, setIsCopied] = useState(false);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<Timeout | null>(null);
 
   const onCopyText = () => {
     setIsCopied(true);
@@ -24,7 +25,7 @@ export const FormPix = ({ precoTotal }: { precoTotal: number }) => {
   const { timeLeft, formatTime } = useTimer();
 
   return (
-    <div className="flex flex-col gap-4 pl-8 pr-16">
+    <div className="flex w-full flex-col gap-4 px-2 md:px-0 md:pl-8 md:pr-16">
       <header className="mb-2 flex flex-col items-center justify-center gap-4 text-center">
         <h2 className="text-base font-medium text-primary md:text-lg lg:text-xl">
           Use o QR Code para pagar o PIX
@@ -72,7 +73,7 @@ export const FormPix = ({ precoTotal }: { precoTotal: number }) => {
             </span>
           </div>
         )}
-        <div className="flex flex-col gap-2 rounded-lg bg-[#FAF9E9] p-4">
+        <div className="flex flex-col gap-2 rounded-lg bg-[#FAF9E9] p-2 md:p-4">
           <strong>
             Antes de efetuar o pagamento, leia atentamente as regras:
           </strong>

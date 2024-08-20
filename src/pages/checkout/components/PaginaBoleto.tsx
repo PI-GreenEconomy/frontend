@@ -4,25 +4,26 @@ import ScrollToTop from "../../../components/ScrollToTop";
 export const PaginaBoleto = () => {
   const currentDate = new Date();
   const boletoDueDate = addDays(currentDate, 2);
+  const numeroPedido = Math.floor(Math.random() * (770 - 1 + 1)) + 1;
 
   return (
     <>
       <ScrollToTop />
       <div className="container flex flex-col items-center justify-center gap-4 py-10">
-        <h1 className="text-lg font-medium text-primary sm:text-xl md:text-2xl lg:text-4xl">
+        <h1 className="text-2xl font-medium text-primary sm:text-2xl md:text-3xl lg:text-4xl">
           Recebemos seu Pedido
         </h1>
         <div>
           Nº do pedido:{" "}
-          <span className="text-base font-medium text-primary sm:text-lg md:text-xl lg:text-3xl">
+          <span className="text-lg font-medium text-primary sm:text-xl md:text-2xl lg:text-3xl">
             {numeroPedido}
           </span>
         </div>
-        <p>
+        <p className="text-sm sm:text-base">
           Você receberá uma cópia do seu pedido com detalhes por e-mail e um
           link para acompanhamento.
         </p>
-        <p>
+        <p className="text-sm sm:text-base">
           Esse boleto vence em <strong>{formatDateTime(boletoDueDate)}</strong>.
           Após o vencimento o pedido será cancelado.
         </p>
@@ -36,8 +37,6 @@ export const PaginaBoleto = () => {
     </>
   );
 };
-
-const numeroPedido = Math.floor(Math.random() * (770 - 1 + 1)) + 1;
 
 const addDays = (date: Date, days: number) => {
   const result = new Date(date);
