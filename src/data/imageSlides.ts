@@ -15,9 +15,9 @@ export const slides = [
   },
   {
     desktop:
-      "https://ik.imagekit.io/GreenEconomy/Slides/slider3.webp?updatedAt=1719091482856",
+      "https://ik.imagekit.io/GreenEconomy/Slides/slider3.webp?updatedAt=1724173981544",
     mobile:
-      "https://ik.imagekit.io/GreenEconomy/Slides/slider3-mobile.webp?updatedAt=1719091482302",
+      "https://ik.imagekit.io/GreenEconomy/Slides/slider3-mobile.webp?updatedAt=1724174541880",
     alt: "Slider3",
   },
 ];
