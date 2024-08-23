@@ -222,7 +222,7 @@ export default function CheckoutPage() {
   }
 
   if (infoCheckout.paginaPagamento && infoCheckout.tipoPagamento === "boleto") {
-    return <PaginaBoleto />;
+    return <PaginaBoleto infoCheckout={infoCheckout} />;
   }
 
   if (infoCheckout.paginaPagamento && infoCheckout.tipoPagamento === "cartao") {

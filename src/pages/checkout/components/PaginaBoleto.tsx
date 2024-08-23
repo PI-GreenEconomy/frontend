@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import ScrollToTop from "../../../components/ScrollToTop";
+import { InformacaoPedido } from "./InformacaoPedido";
+import { Checkout } from "../Checkout";
 
-export const PaginaBoleto = () => {
+export const PaginaBoleto = ({ infoCheckout }: { infoCheckout: Checkout }) => {
   const currentDate = new Date();
   const boletoDueDate = addDays(currentDate, 2);
   const numeroPedido = Math.floor(Math.random() * (770 - 1 + 1)) + 1;
@@ -33,6 +35,8 @@ export const PaginaBoleto = () => {
         >
           Continuar Comprando
         </Link>
+
+        <InformacaoPedido infoCheckout={infoCheckout} />
       </div>
     </>
   );

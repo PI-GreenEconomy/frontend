@@ -22,16 +22,16 @@ export const ResultadoFrete = ({
 
   return (
     <div
-      className={`${selecaoAtivada ? "" : "mt-4 border-t border-t-green-200 py-4"}`}
+      className={`mt-4 ${selecaoAtivada ? "" : "border-t border-t-green-200 py-4"}`}
     >
-      {!selecaoAtivada && (
+      {
         <div className="flex items-center gap-2 px-4 text-green-800">
           <MapPinIcon />
           <span>
             {cep?.logradouro}, {cep?.bairro} - {cep?.localidade} - {cep?.uf}
           </span>
         </div>
-      )}
+      }
 
       <div
         className={`mt-4  flex flex-col gap-4 bg-white  px-4 ${selecaoAtivada ? "" : "py-4"}`}
